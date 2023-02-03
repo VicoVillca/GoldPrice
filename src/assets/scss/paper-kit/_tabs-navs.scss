@@ -32,7 +32,7 @@
                 color: $font-color;
             }
             .nav-link.active{
-                color: $font-color;
+                color: #ffffff;
             }
         }
 
@@ -44,7 +44,7 @@
             .nav-link.active,
             .nav-link.active:hover,
             .nav-link.active:focus{
-                background-color: transparent;
+                background-color: #1a73e8;
                 border: 0 none;
                 //height: 50px;
                 &:after{

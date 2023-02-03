@@ -1,33 +1,29 @@
-
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 // reactstrap components
 import {
   Button,
-  Label,
-  FormGroup,
-  Input,
   NavItem,
   NavLink,
   Nav,
   TabContent,
   TabPane,
   Container,
-  Row,
-  Col,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
+  CardTitle,
+  Spinner,
 } from "reactstrap";
-
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
+import Joyas from "components/Utils/Joyas";
+import Pepa from "components/Utils/Pepa";
+import Ley from "components/Utils/Ley";
 
 function ProfilePage() {
   const [activeTab, setActiveTab] = React.useState("1");
-
+  const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
+  const [precioGrBol, setPrecioGrBol] = useState(0);
   const toggle = (tab) => {
     if (activeTab !== tab) {
       setActiveTab(tab);
@@ -41,6 +37,51 @@ function ProfilePage() {
       document.body.classList.remove("landing-page");
     };
   });
+
+  const getAllPrecio = useCallback(async () => {
+    const valor_Onza = -1;
+    setPrecioOnzaDol(valor_Onza);
+    setPrecioGrBol(valor_Onza * 6.97 * 0.03215);
+    console.log("Obtenemso Precio");
+    /*await axios
+      .get(baseUrl, JSON.stringify({}), header)
+      .then((response) => {
+        console.log(response?.data?.olimpiadas);
+        setResultado(response?.data?.olimpiadas);
+        setResultado2(response?.data?.olimpiadas);
+      })
+      .catch((error) => {
+        //alert(error+"");
+        setResultado([]);
+        setResultado2([]);
+        enqueueSnackbar(error + "", { variant: "error" });
+      });*/
+  }, []);
+
+  const getAllPrecioAgain = useCallback(async () => {
+    setPrecioOnzaDol(0);
+    const valor_Onza = 1913.80;
+    setPrecioOnzaDol(valor_Onza);
+    setPrecioGrBol(valor_Onza * 6.97 * 0.03215);
+    console.log("Obtenemso Precio");
+    /*await axios
+      .get(baseUrl, JSON.stringify({}), header)
+      .then((response) => {
+        console.log(response?.data?.olimpiadas);
+        setResultado(response?.data?.olimpiadas);
+        setResultado2(response?.data?.olimpiadas);
+      })
+      .catch((error) => {
+        //alert(error+"");
+        setResultado([]);
+        setResultado2([]);
+        enqueueSnackbar(error + "", { variant: "error" });
+      });*/
+  }, []);
+
+  useEffect(() => {
+    getAllPrecio();
+  }, []);
   return (
     <>
       <ExamplesNavbar />
@@ -55,131 +96,107 @@ function ProfilePage() {
                 src={require("assets/img/imgloginedit.png")}
               />
             </div>
-            <div className="name">
-              <h3 className="title">
-                Precio del oro
-              </h3>
-              <h1 className="description">1915.80$</h1>
-              
-            </div>
+            {precioOnzaDol === 0 ? (
+              <div className="author">
+                <CardTitle>
+                  <Spinner />
+                </CardTitle>
+                <h6 className="card-category">consultando precio...</h6>
+              </div>
+            ) : (
+              <>
+                {precioOnzaDol > 0 ? (
+                  <div className="author">
+                    <CardTitle tag="h1">
+                      <b>{precioOnzaDol}$</b>
+                    </CardTitle>
+                    <h6 className="card-category">Precio del oro</h6>
+                  </div>
+                ) : (
+                  <div className="author">
+                    <h6 className="card-category">
+                      Error al consultar la onza....
+                    </h6>
+                    <Button
+                      className="btn-round mr-1"
+                      color="info"
+                      outline
+                      type="button"
+                      onClick={getAllPrecioAgain}
+                    >
+                      Intentar Otra ves
+                    </Button>
+                    <Button
+                      className="btn-round mr-1"
+                      color="success"
+                      
+                      type="button"
+                     
+                    >
+                      Colocar Manualmente
+                    </Button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-          
-          
-          
-          <div className="nav-tabs-navigation">
-            <div className="nav-tabs-wrapper">
-              <Nav role="tablist" tabs>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "1" ? "active" : ""}
-                    onClick={() => {
-                      toggle("1");
-                    }}
-                  >
-                    En joya
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "2" ? "active" : ""}
-                    onClick={() => {
-                      toggle("2");
-                    }}
-                  >
-                    En pepa
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    className={activeTab === "3" ? "active" : ""}
-                    onClick={() => {
-                      toggle("3");
-                    }}
-                  >
-                    por Ley
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </div>
-          </div>
-          {/* Tab panes */}
-          <TabContent className="following" activeTab={activeTab}>
-            <TabPane tabId="1" id="follows">
-              <Row>
-                <Col className="ml-auto mr-auto" md="6">
-                  <ul className="list-unstyled follows">
-                    <li>
-                      <Row>
-                        <Col className="ml-auto mr-auto" lg="2" md="4" xs="4">
-                          <img
-                            alt="..."
-                            className="img-circle img-no-padding img-responsive"
-                            src={require("assets/img/faces/clem-onojeghuo-2.jpg")}
-                          />
-                        </Col>
-                        <Col className="ml-auto mr-auto" lg="7" md="4" xs="4">
-                          <h6>
-                            Flume <br />
-                            <small>Musical Producer</small>
-                          </h6>
-                        </Col>
-                        <Col className="ml-auto mr-auto" lg="3" md="4" xs="4">
-                          <FormGroup check>
-                            <Label check>
-                              <Input
-                                defaultChecked
-                                defaultValue=""
-                                type="checkbox"
-                              />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </li>
-                    <hr />
-                    <li>
-                      <Row>
-                        <Col className="mx-auto" lg="2" md="4" xs="4">
-                          <img
-                            alt="..."
-                            className="img-circle img-no-padding img-responsive"
-                            src={require("assets/img/faces/ayo-ogunseinde-2.jpg")}
-                          />
-                        </Col>
-                        <Col lg="7" md="4" xs="4">
-                          <h6>
-                            Banks <br />
-                            <small>Singer</small>
-                          </h6>
-                        </Col>
-                        <Col lg="3" md="4" xs="4">
-                          <FormGroup check>
-                            <Label check>
-                              <Input defaultValue="" type="checkbox" />
-                              <span className="form-check-sign" />
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </li>
-                  </ul>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane className="text-center" tabId="2" id="following">
-              <h3 className="text-muted">Not following anyone yet :(</h3>
-              <Button className="btn-round" color="warning">
-                Find artists
-              </Button>
-            </TabPane>
-            <TabPane className="text-center" tabId="3" id="following">
-              <h3 className="text-muted">Estamos trabajando :(</h3>
-              <Button className="btn-round" color="warning">
-                Ayudar
-              </Button>
-            </TabPane>
-          </TabContent>
+          {precioOnzaDol > 0 ? (
+            <>
+              <div className="nav-tabs-navigation">
+                <div className="nav-tabs-wrapper">
+                  <Nav role="tablist" tabs>
+                    <NavItem>
+                      <NavLink
+                        className={activeTab === "1" ? "active" : ""}
+                        onClick={() => {
+                          toggle("1");
+                        }}
+                      >
+                        En joya
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={activeTab === "2" ? "active" : ""}
+                        onClick={() => {
+                          toggle("2");
+                        }}
+                      >
+                        En pepa
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                        className={activeTab === "3" ? "active" : ""}
+                        onClick={() => {
+                          toggle("3");
+                        }}
+                      >
+                        Por Ley
+                      </NavLink>
+                    </NavItem>
+                  </Nav>
+                </div>
+              </div>
+              {/* Tab panes */}
+              <TabContent className="following" activeTab={activeTab}>
+                <TabPane tabId="1" id="follows">
+                  {/** Cotizacion de joyas */}
+                  <Joyas precio={precioGrBol} />
+                </TabPane>
+                <TabPane className="text-center" tabId="2" id="following">
+                  {/** Cotizacion de pepa */}
+                  <Pepa precio={precioGrBol} />
+                </TabPane>
+                <TabPane className="text-center" tabId="3" id="following">
+                  {/** Cotizacion por ley */}
+                  <Ley precio={precioGrBol} />
+                </TabPane>
+              </TabContent>
+            </>
+          ) : (
+            <></>
+          )}
         </Container>
       </div>
       <DemoFooter />
