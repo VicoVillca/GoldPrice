@@ -1,21 +1,4 @@
-/*!
 
-=========================================================
-* Paper Kit React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
 // reactstrap components
@@ -31,7 +14,10 @@ import {
   TabPane,
   Container,
   Row,
-  Col
+  Col,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
 } from "reactstrap";
 
 // core components
@@ -66,31 +52,20 @@ function ProfilePage() {
               <img
                 alt="..."
                 className="img-circle img-no-padding img-responsive"
-                src={require("assets/img/faces/joe-gardner-2.jpg")}
+                src={require("assets/img/imgloginedit.png")}
               />
             </div>
             <div className="name">
-              <h4 className="title">
-                Jane Faker <br />
-              </h4>
-              <h6 className="description">Music Producer</h6>
+              <h3 className="title">
+                Precio del oro
+              </h3>
+              <h1 className="description">1915.80$</h1>
+              
             </div>
           </div>
-          <Row>
-            <Col className="ml-auto mr-auto text-center" md="6">
-              <p>
-                An artist of considerable range, Jane Faker — the name taken by
-                Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                and records all of his own music, giving it a warm, intimate
-                feel with a solid groove structure.
-              </p>
-              <br />
-              <Button className="btn-round" color="default" outline>
-                <i className="fa fa-cog" /> Settings
-              </Button>
-            </Col>
-          </Row>
-          <br />
+          
+          
+          
           <div className="nav-tabs-navigation">
             <div className="nav-tabs-wrapper">
               <Nav role="tablist" tabs>
@@ -101,7 +76,7 @@ function ProfilePage() {
                       toggle("1");
                     }}
                   >
-                    Follows
+                    En joya
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -111,7 +86,17 @@ function ProfilePage() {
                       toggle("2");
                     }}
                   >
-                    Following
+                    En pepa
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={activeTab === "3" ? "active" : ""}
+                    onClick={() => {
+                      toggle("3");
+                    }}
+                  >
+                    por Ley
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -186,6 +171,12 @@ function ProfilePage() {
               <h3 className="text-muted">Not following anyone yet :(</h3>
               <Button className="btn-round" color="warning">
                 Find artists
+              </Button>
+            </TabPane>
+            <TabPane className="text-center" tabId="3" id="following">
+              <h3 className="text-muted">Estamos trabajando :(</h3>
+              <Button className="btn-round" color="warning">
+                Ayudar
               </Button>
             </TabPane>
           </TabContent>
