@@ -1,16 +1,15 @@
 
-import React , { useState } from "react";
+import React  from "react";
 
-import HOST from "../../variables/general";
+
 // reactstrap components
-import { Button, Card, Form, Input, Container, Row, Col } from "reactstrap";
+import { Button, Card,  Input, Container, Row, Col } from "reactstrap";
 
-// core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
+
 
 function RegisterPage() {
-  const [user, setUser] = useState(false);
-  const [password, setPassword] = useState(false);
+  //const [user, setUser] = useState(false);
+  //const [password, setPassword] = useState(false);
   document.documentElement.classList.remove("nav-open");
 
   const handleSubmit = async (event) => {

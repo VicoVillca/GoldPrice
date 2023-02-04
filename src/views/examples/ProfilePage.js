@@ -81,7 +81,7 @@ function ProfilePage() {
 
   useEffect(() => {
     getAllPrecio();
-  }, []);
+  }, [getAllPrecio]);
   return (
     <>
       <ExamplesNavbar />
