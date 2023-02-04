@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/paper-kit-react/static/css/main.e5c835db.css",
+    "main.js": "/paper-kit-react/static/js/main.e2068994.js",
+    "static/media/clouds.png": "/paper-kit-react/static/media/clouds.3c700c1313cc1cd3d3c5.png",
+    "static/media/antoine-barres.jpg": "/paper-kit-react/static/media/antoine-barres.bc3299c239c25e5bf937.jpg",
+    "static/media/login-image.jpg": "/paper-kit-react/static/media/login-image.21e8ba3f9dca3c346851.jpg",
+    "static/media/joshua-stannard.jpg": "/paper-kit-react/static/media/joshua-stannard.a16f281cc99a02795dd7.jpg",
+    "static/media/soroush-karimi.jpg": "/paper-kit-react/static/media/soroush-karimi.620dc9e92af6bac885fe.jpg",
+    "static/media/ilya-yakover.jpg": "/paper-kit-react/static/media/ilya-yakover.751c23c0dc4ff39577cf.jpg",
+    "static/media/federico-beccari.jpg": "/paper-kit-react/static/media/federico-beccari.ab3a31e7758f490adca7.jpg",
+    "static/media/uriel-soberanes.jpg": "/paper-kit-react/static/media/uriel-soberanes.b741f54e9ccbd071a751.jpg",
+    "static/media/fog-low.png": "/paper-kit-react/static/media/fog-low.965eab52c95e117d1d45.png",
+    "static/media/daniel-olahh.jpg": "/paper-kit-react/static/media/daniel-olahh.77c0ffac60f9218de675.jpg",
+    "static/media/profile-page.png": "/paper-kit-react/static/media/profile-page.3a626caf205d1143f192.png",
+    "static/media/landing-page.png": "/paper-kit-react/static/media/landing-page.80158096b63fb4a837e1.png",
+    "static/media/joe-gardner-2.jpg": "/paper-kit-react/static/media/joe-gardner-2.09841708956117e93a7b.jpg",
+    "static/media/clem-onojeghuo-3.jpg": "/paper-kit-react/static/media/clem-onojeghuo-3.83003f446b7372176b72.jpg",
+    "static/media/kaci-baum-2.jpg": "/paper-kit-react/static/media/kaci-baum-2.9b929eea6c1ef2b4dbb4.jpg",
+    "static/media/erik-lucatero-2.jpg": "/paper-kit-react/static/media/erik-lucatero-2.d09715abe0463c58d6be.jpg",
+    "static/media/imgloginedit.png": "/paper-kit-react/static/media/imgloginedit.218ccb4374aa556184e3.png",
+    "static/media/nucleo-icons.eot": "/paper-kit-react/static/media/nucleo-icons.bd42d77b9672555647d1.eot",
+    "static/media/nucleo-icons.ttf": "/paper-kit-react/static/media/nucleo-icons.4466aeec3386b965a232.ttf",
+    "static/media/creative-tim-white-slim2.png": "/paper-kit-react/static/media/creative-tim-white-slim2.dbb52a5d5ace9953ba5f.png",
+    "static/media/nucleo-icons.woff": "/paper-kit-react/static/media/nucleo-icons.8e954b749f951b654fc6.woff",
+    "static/media/nucleo-icons.woff2": "/paper-kit-react/static/media/nucleo-icons.ec16bc4cc4526801004d.woff2",
+    "index.html": "/paper-kit-react/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.e5c835db.css",
+    "static/js/main.e2068994.js"
+  ]
+}
