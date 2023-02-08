@@ -30,13 +30,12 @@ function Pepa() {
         <Container>
           <Row>
             <Col lg="6" md="12">
-              <h2 className="title">Nucleo Icons</h2>
+              <h2 className="title">En desarrollo</h2>
               <br />
               <p className="description">
-                Paper Kit comes with 100 custom icons made by our friends from
-                NucleoApp. The official package contains over 2.100 thin icons
-                which are looking great in combination with Paper Kit Make sure
-                you check all of them and use those that you like the most.
+                Este modulo no se encuentra habilitado por el momento 
+                nos encontramos trabajando constantemente para presentar el area
+                muy pronto.
               </p>
               <br />
               <Button

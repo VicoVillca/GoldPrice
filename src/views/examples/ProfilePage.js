@@ -11,6 +11,19 @@ import {
   Container,
   CardTitle,
   Spinner,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Label,
+  FormGroup,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Row,
+  Col,
+  CustomInput,
 } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
@@ -24,6 +37,9 @@ function ProfilePage() {
   const [activeTab, setActiveTab] = React.useState("1");
   const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
   const [precioGrBol, setPrecioGrBol] = useState(0);
+  const [modal, setModal] = useState(false);
+
+  const actionModal = () => setModal(!modal);
   const toggle = (tab) => {
     if (activeTab !== tab) {
       setActiveTab(tab);
@@ -60,7 +76,7 @@ function ProfilePage() {
 
   const getAllPrecioAgain = useCallback(async () => {
     setPrecioOnzaDol(0);
-    const valor_Onza = 1913.80;
+    const valor_Onza = 1871;
     setPrecioOnzaDol(valor_Onza);
     setPrecioGrBol(valor_Onza * 6.97 * 0.03215);
     console.log("Obtenemso Precio");
@@ -80,6 +96,7 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
+    console.log("hola chiquitas");
     getAllPrecio();
   }, [getAllPrecio]);
   return (
@@ -108,7 +125,19 @@ function ProfilePage() {
                 {precioOnzaDol > 0 ? (
                   <div className="author">
                     <CardTitle tag="h1">
-                      <b>{precioOnzaDol}$</b>
+                      <b>
+                        {precioOnzaDol}$
+                        <Button
+                          className="btn-just-icon ml-1"
+                          color="info"
+                          type="button"
+
+                          
+                          onClick={actionModal}
+                        >
+                          <i className="fa fa-refresh" />
+                        </Button>
+                      </b>
                     </CardTitle>
                     <h6 className="card-category">Precio del oro</h6>
                   </div>
@@ -129,9 +158,7 @@ function ProfilePage() {
                     <Button
                       className="btn-round mr-1"
                       color="success"
-                      
                       type="button"
-                     
                     >
                       Colocar Manualmente
                     </Button>
@@ -179,10 +206,13 @@ function ProfilePage() {
                 </div>
               </div>
               {/* Tab panes */}
+
               <TabContent className="following" activeTab={activeTab}>
                 <TabPane tabId="1" id="follows">
                   {/** Cotizacion de joyas */}
-                  <Joyas precio={precioGrBol} />
+                  <div className="p-1">
+                    <Joyas precio={precioGrBol} />
+                  </div>
                 </TabPane>
                 <TabPane className="text-center" tabId="2" id="following">
                   {/** Cotizacion de pepa */}
@@ -190,7 +220,9 @@ function ProfilePage() {
                 </TabPane>
                 <TabPane className="text-center" tabId="3" id="following">
                   {/** Cotizacion por ley */}
-                  <Ley precio={precioGrBol} />
+                  <div className="p-1">
+                    <Ley precio={precioGrBol} />
+                  </div>
                 </TabPane>
               </TabContent>
             </>
@@ -200,6 +232,47 @@ function ProfilePage() {
         </Container>
       </div>
       <DemoFooter />
+      {/**  agregamos el modal de la paguina*/}
+      <Modal isOpen={modal} toggle={actionModal}>
+        <div className="modal-header">
+          <h5 className="modal-title text-center" id="exampleModalLabel">
+            Precio del oro en kitco.com
+          </h5>
+        </div>
+        <div className="modal-body">
+          <Row>
+            <Col sm="12">
+              <FormGroup className="has-danger">
+                <Input
+                  className="form-control-danger"
+                  defaultValue=""
+                  id="inputDanger1"
+                  type="text"
+                />
+                <div className="form-control-feedback">
+                  Pueden buscar en kitco.com
+                </div>
+              </FormGroup>
+            </Col>
+          </Row>
+        </div>
+        <div className="modal-footer">
+          <Button
+            className="btn-round mr-1"
+            color="default"
+            outline
+            type="button"
+            onClick={actionModal}
+          >
+            cancelar
+          </Button>
+
+          <Button className="btn-round ml-1" color="info" type="button">
+            GUARDAR
+            <i className="fa fa-heart mr-1" />
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 }
