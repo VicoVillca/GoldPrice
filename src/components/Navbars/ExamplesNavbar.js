@@ -6,9 +6,13 @@ import classnames from "classnames";
 
 // reactstrap components
 import {
+  Button,
   Collapse,
   NavbarBrand,
   Navbar,
+  NavItem,
+  NavLink,
+  Nav,
   Container,
 } from "reactstrap";
 
@@ -76,7 +80,47 @@ function ExamplesNavbar() {
           navbar
           isOpen={navbarCollapse}
         >
-          
+          <Nav navbar>
+            
+            
+            
+           
+            <NavItem>
+              <NavLink
+                href="/joyas"
+                target="_blank"
+              >
+                 precio de Joyas
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/pepa"
+                target="_blank"
+              >
+                precio de pepa
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                href="/chafa"
+                target="_blank"
+              >
+                 precio por ley
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <Button
+                className="btn-round"
+                color="primary"
+                href="/info"
+                target="_blank"
+              >
+                Contacto
+              </Button>
+            </NavItem>
+          </Nav>
+
         </Collapse>
       </Container>
     </Navbar>

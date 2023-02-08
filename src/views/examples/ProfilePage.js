@@ -24,6 +24,7 @@ import {
   Row,
   Col,
   CustomInput,
+  Alert,
 } from "reactstrap";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
@@ -37,7 +38,8 @@ function ProfilePage() {
   const [activeTab, setActiveTab] = React.useState("1");
   const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
   const [precioGrBol, setPrecioGrBol] = useState(0);
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
+  const [manualmente, setManualmente] = useState(true);
 
   const actionModal = () => setModal(!modal);
   const toggle = (tab) => {
@@ -45,7 +47,10 @@ function ProfilePage() {
       setActiveTab(tab);
     }
   };
-
+  const handleChange = (event) => {
+    console.log(event.target.value);
+    setPrecioOnzaDol(event.target.value);
+  };
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
     document.body.classList.add("landing-page");
@@ -59,26 +64,18 @@ function ProfilePage() {
     setPrecioOnzaDol(valor_Onza);
     setPrecioGrBol(valor_Onza * 6.97 * 0.03215);
     console.log("Obtenemso Precio");
-    /*await axios
-      .get(baseUrl, JSON.stringify({}), header)
-      .then((response) => {
-        console.log(response?.data?.olimpiadas);
-        setResultado(response?.data?.olimpiadas);
-        setResultado2(response?.data?.olimpiadas);
-      })
-      .catch((error) => {
-        //alert(error+"");
-        setResultado([]);
-        setResultado2([]);
-        enqueueSnackbar(error + "", { variant: "error" });
-      });*/
   }, []);
-
+  const precioManualmente = (nro) => {
+    setPrecioGrBol(nro * 6.97 * 0.03215);
+    setModal(false);
+  };
   const getAllPrecioAgain = useCallback(async () => {
-    setPrecioOnzaDol(0);
-    const valor_Onza = 1871;
-    setPrecioOnzaDol(valor_Onza);
-    setPrecioGrBol(valor_Onza * 6.97 * 0.03215);
+    
+    console.log("precio "+precioOnzaDol);
+    setPrecioOnzaDol(precioOnzaDol);
+    //const valor_Onza = 1871;
+    setPrecioOnzaDol(precioOnzaDol);
+    setPrecioGrBol(precioOnzaDol * 6.97 * 0.03215);
     console.log("Obtenemso Precio");
     /*await axios
       .get(baseUrl, JSON.stringify({}), header)
@@ -96,13 +93,13 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    console.log("hola chiquitas");
     getAllPrecio();
   }, [getAllPrecio]);
   return (
     <>
       <ExamplesNavbar />
       <ProfilePageHeader />
+
       <div className="section profile-content">
         <Container>
           <div className="owner">
@@ -113,61 +110,24 @@ function ProfilePage() {
                 src={require("assets/img/imgloginedit.png")}
               />
             </div>
-            {precioOnzaDol === 0 ? (
-              <div className="author">
-                <CardTitle>
-                  <Spinner />
-                </CardTitle>
-                <h6 className="card-category">consultando precio...</h6>
-              </div>
-            ) : (
-              <>
-                {precioOnzaDol > 0 ? (
-                  <div className="author">
-                    <CardTitle tag="h1">
-                      <b>
-                        {precioOnzaDol}$
-                        <Button
-                          className="btn-just-icon ml-1"
-                          color="info"
-                          type="button"
-
-                          
-                          onClick={actionModal}
-                        >
-                          <i className="fa fa-refresh" />
-                        </Button>
-                      </b>
-                    </CardTitle>
-                    <h6 className="card-category">Precio del oro</h6>
-                  </div>
-                ) : (
-                  <div className="author">
-                    <h6 className="card-category">
-                      Error al consultar la onza....
-                    </h6>
-                    <Button
-                      className="btn-round mr-1"
-                      color="info"
-                      outline
-                      type="button"
-                      onClick={getAllPrecioAgain}
-                    >
-                      Intentar Otra ves
-                    </Button>
-                    <Button
-                      className="btn-round mr-1"
-                      color="success"
-                      type="button"
-                    >
-                      Colocar Manualmente
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
+            <div className="author">
+              <CardTitle tag="h1">
+                <b>
+                  {precioOnzaDol}$
+                  <Button
+                    className="btn-just-icon ml-1"
+                    color="info"
+                    type="button"
+                    onClick={actionModal}
+                  >
+                    <i className="fa fa-refresh" />
+                  </Button>
+                </b>
+              </CardTitle>
+              <h6 className="card-category">Precio del oro</h6>
+            </div>
           </div>
-          {precioOnzaDol > 0 ? (
+          {precioOnzaDol > 0 && !modal ? (
             <>
               <div className="nav-tabs-navigation">
                 <div className="nav-tabs-wrapper">
@@ -236,40 +196,105 @@ function ProfilePage() {
       <Modal isOpen={modal} toggle={actionModal}>
         <div className="modal-header">
           <h5 className="modal-title text-center" id="exampleModalLabel">
-            Precio del oro en kitco.com
+            Precio del oro
           </h5>
         </div>
         <div className="modal-body">
           <Row>
             <Col sm="12">
-              <FormGroup className="has-danger">
-                <Input
-                  className="form-control-danger"
-                  defaultValue=""
-                  id="inputDanger1"
-                  type="text"
-                />
-                <div className="form-control-feedback">
-                  Pueden buscar en kitco.com
-                </div>
-              </FormGroup>
+              {manualmente ? (
+                <>
+                  <Col sm="12">
+                    <FormGroup className="">
+                      <Input
+                        className="form-control"
+                        onChange={handleChange}
+                        defaultValue={undefined}
+                        value={precioOnzaDol>0?precioOnzaDol:''}
+                        type="number"
+                      />
+                    </FormGroup>
+                    <div className="form-control-feedback">
+                      Pueden buscar en kitco.com
+                    </div>
+                  </Col>
+                </>
+              ) : (
+                <>
+                  {precioOnzaDol === 0  ? (
+                    <div className="author">
+                      <CardTitle>
+                        <Spinner />
+                      </CardTitle>
+                      <h6 className="card-category">consultando precio...</h6>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="author">
+                        <Alert
+                          className="alert-with-icon"
+                          color="danger"
+                          isOpen={true}
+                        >
+                          <Container>
+                            <div className="alert-wrapper">
+                              <div className="message">
+                                Error al Obtener el precio de la ONZA!!
+                              </div>
+                            </div>
+                          </Container>
+                        </Alert>
+                        <Button
+                          className="btn-round mr-1"
+                          color="info"
+                          outline
+                          type="button"
+                          onClick={getAllPrecioAgain}
+                        >
+                          Intentar Otra ves
+                        </Button>
+                        <Button
+                          className="btn-round mr-1"
+                          color="success"
+                          type="button"
+                          onClick={() => setManualmente(true)}
+                        >
+                          Colocar Manualmente
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
             </Col>
           </Row>
         </div>
         <div className="modal-footer">
-          <Button
-            className="btn-round mr-1"
-            color="default"
-            outline
-            type="button"
-            onClick={actionModal}
-          >
-            cancelar
-          </Button>
+          {manualmente ? (
+            <>
+              <Button
+                type="button"
+                className="btn-round mr-1"
+                  color="default"
+                  outline
+                disabled={true}
+                onClick={() => setManualmente(false)}
+              >
+                cancelar
+              </Button>
+            </>
+          ) : (
+            <></>
+          )}
 
-          <Button className="btn-round ml-1" color="info" type="button">
-            GUARDAR
-            <i className="fa fa-heart mr-1" />
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            disabled={precioOnzaDol > 0 ? false : true}
+            onClick={()=>precioManualmente(precioOnzaDol)}
+          >
+            Continuar
           </Button>
         </div>
       </Modal>
