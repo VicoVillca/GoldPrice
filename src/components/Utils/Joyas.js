@@ -7,8 +7,11 @@ import { Row, Table } from "reactstrap";
 
 function Joyas(prop) {
   const [joyas] = useState([
+    { klt: "22", estado: "chafa", ley: (22/24)-0.03 },
+    { klt: "20", estado: "chafa", ley: (20/24)-0.03 },
     { klt: "18", estado: "fundido", ley: 0.75 },
     { klt: "18", estado: "chafa", ley: 0.72 },
+    { klt: "18", estado: "cadena", ley: 0.65 },
     { klt: "14", estado: "chafa", ley: 0.65 },
     { klt: "10", estado: "chafa", ley: 0.45 },
   ]);
@@ -29,7 +32,7 @@ function Joyas(prop) {
             <th>KLTS</th>
             <th>ESTADO</th>
             <th>COMPRA</th>
-            <th>VENTA</th>
+            {/**<th>VENTA</th>*/}
           </tr>
         </thead>
         <tbody>
@@ -39,8 +42,8 @@ function Joyas(prop) {
               <td>
                 <small>({row.estado})</small>
               </td>
-              <td>{compra(row.ley)}</td>
-              <td>{venta(row.ley)}</td>
+              <td>{compra(row.ley)-10}</td>
+              {/**<td>{venta(row.ley)}</td>*/}
             </tr>
           ))}
         </tbody>
