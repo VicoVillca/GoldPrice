@@ -14,17 +14,19 @@ import {
 } from "reactstrap";
 
 import { createItem, getItems, deleteItem } from "variables/api";
-import SectionCarousel from "views/index-sections/SectionCarousel";
 import Example from "views/index-sections/example";
 function Pepa(prop) {
+  const [id, setId] = useState(null);
   const [nombre, setNombre] = useState(null);
   const [ley, setLey] = useState(null);
   const [modal, setModal] = useState(false);
   const [modalUpdate, setModalUpdate] = useState(false);
   const [modalFoto, setModalFoto] = useState(false);
-  const actionModal = () => setModal(!modal);
+  const [modalDelete, setModalDelete] = useState(false);
+  const actionModal = useCallback(() => setModal(!modal), [setModal, modal]);
   const actionModalUpdate = () => setModalUpdate(!modalUpdate);
   const actionModalFoto = () => setModalFoto(!modalFoto);
+  const actionModalDelete = () => setModalDelete(!modalDelete);
   const [pepa, setPepa] = useState([]);
   const compra = (n) => {
     //descontamso el 6% para ganancias
@@ -44,6 +46,14 @@ function Pepa(prop) {
     setLey(e.ley);
     actionModalFoto();
   };
+  const openModalDelete = (e) => {
+    console.log("eliminamos de la lista");
+    console.log(e.id);
+    setId(e.id);
+    setLey(e.ley);
+    setNombre(e.nombre);
+    actionModalDelete();
+  };
   const guardar = useCallback(async () => {
     console.log("guardamos");
     createItem({
@@ -53,7 +63,14 @@ function Pepa(prop) {
     const p = await getItems();
     setPepa(p);
     actionModal();
-  }, [nombre, ley]);
+  }, [nombre, ley, actionModal]);
+  const borrar = useCallback(async () => {
+    console.log("borramos " + id);
+    deleteItem(id);
+    const p = await getItems();
+    setPepa(p);
+    actionModalDelete();
+  }, [nombre, ley,id, actionModalDelete,setPepa]);
 
   const getAll = useCallback(async () => {
     console.log("Papus");
@@ -88,20 +105,19 @@ function Pepa(prop) {
               <td>{compra(row.ley) - 10}</td>
               <td>
                 <i
-                  className="fa fa-picture-o fa-2x"
+                  className="fa fa-picture-o"
                   onClick={() => openModalFoto(row)}
                 />
-                {"  - "}
+
                 <i
-                  className="fa fa-pencil text-info fa-2x"
+                  className="fa fa-pencil text-info "
                   onClick={() => openModalUpdate(row)}
                 />
-                {"  - "}
+
                 <i
-                  className="fa fa fa-trash text-danger fa-2x"
+                  className="fa fa fa-trash text-danger "
                   onClick={() => {
-                    deleteItem(row.id);
-                    getAll();
+                    openModalDelete(row);
                   }}
                 />
               </td>
@@ -127,7 +143,7 @@ function Pepa(prop) {
       </Container>
       {/** modal nuevo */}
       <Modal isOpen={modal} toggle={actionModal}>
-        <ModalHeader>Agregar Nuevo</ModalHeader>
+        <ModalHeader>Agregar Nuevo Elemento</ModalHeader>
         <div className="modal-body">
           <Row>
             <Col sm="12">
@@ -265,8 +281,7 @@ function Pepa(prop) {
       </Modal>
       {/** modal fotos */}
       <Modal isOpen={modalFoto} toggle={actionModalFoto}>
-       
-        <Example/>
+        <Example />
         <div className="modal-footer">
           <Button
             type="button"
@@ -284,6 +299,74 @@ function Pepa(prop) {
             onClick={() => guardar()}
           >
             guardar
+          </Button>
+        </div>
+      </Modal>
+      {/** modal fotos */}
+      <Modal isOpen={modalDelete} toggle={actionModalDelete}>
+        <div className="modal-header">
+          <h6>Eliminar</h6>
+        </div>
+
+        <div className="modal-body">
+          <Row>
+            <Col sm="12">
+              <h6>
+                Esta seguro que quiere eliminar la siguiente informatión de la
+                lista?
+              </h6>
+            </Col>
+
+            <Col sm="12">
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  Nombre
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleEmail"
+                    name="nombre"
+                    value={nombre}
+                    disabled={true}
+                  />
+                </Col>
+              </FormGroup>
+              <br />
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  ley
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleEmail"
+                    name="nombre"
+                    value={ley}
+                    disabled={true}
+                  />
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+        </div>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => actionModalDelete()}
+          >
+            cancelar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="danger"
+            type="button"
+            onClick={() => {
+              borrar();
+            }}
+          >
+            eliminar
           </Button>
         </div>
       </Modal>
