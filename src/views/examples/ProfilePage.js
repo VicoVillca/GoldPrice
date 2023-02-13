@@ -36,7 +36,7 @@ function ProfilePage() {
   const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
   const [precioOnzaAux, setPrecioOnzaAux] = useState(0);
   const [precioGrBol, setPrecioGrBol] = useState(0);
-  const [fecha, setFecha] = useState('');
+  const [fecha, setFecha] = useState("");
   const [modal, setModal] = useState(false);
   const [manualmente, setManualmente] = useState(false);
 
@@ -79,7 +79,6 @@ function ProfilePage() {
         setPrecioOnzaDol(parseFloat(response?.data?.compra));
         setPrecioGrBol(parseFloat(response?.data?.compra) * 6.97 * 0.03215);
         setFecha(response?.data?.fecha);
-        
       })
       .catch((error) => {
         console.log("error en cath");
@@ -106,21 +105,19 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
+
+              <Button
+                color="info"
+                type="button"
+                outline
+                onClick={() => getAllPrecioAgain()}
+              >
+                ONZA:_
+                {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
+              </Button>
               
-                  <Button
-                    className=" ml-1"
-                    color="info"
-                    type="button"
-                    outline
-                    onClick={() => getAllPrecioAgain()}
-                  >
-                    ONZA:_
-                    {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
-                    
-                  </Button>
-                  <span className="note">{fecha}</span>
-                
-                {/*<h6 className="card-category">Precio del oro</h6>*/}
+
+              {/*<h6 className="card-category">Precio del oro</h6>*/}
             </div>
           </div>
           {precioOnzaDol > 0 && !modal ? (
@@ -158,7 +155,6 @@ function ProfilePage() {
                         Por Ley
                       </NavLink>
                     </NavItem>
-                    
                   </Nav>
                 </div>
               </div>
@@ -173,7 +169,9 @@ function ProfilePage() {
                 </TabPane>
                 <TabPane className="text-center" tabId="2" id="following">
                   {/** Cotizacion de pepa */}
-                  <Pepa precio={precioGrBol} />
+                  <div className="p-1">
+                    <Pepa precio={precioGrBol} />
+                  </div>
                 </TabPane>
                 <TabPane className="text-center" tabId="3" id="following">
                   {/** Cotizacion por ley */}

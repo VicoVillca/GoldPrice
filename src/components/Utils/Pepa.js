@@ -1,84 +1,293 @@
-/*!
-
-=========================================================
-* Paper Kit React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from "react";
-
+import React, { useEffect, useState, useCallback } from "react";
 // reactstrap components
-import { Button, Container, Row, Col } from "reactstrap";
+import {
+  Button,
+  Container,
+  Row,
+  Col,
+  Table,
+  Modal,
+  FormGroup,
+  Label,
+  Input,
+  ModalHeader,
+} from "reactstrap";
 
-// core components
+import { createItem, getItems, deleteItem } from "variables/api";
+import SectionCarousel from "views/index-sections/SectionCarousel";
+import Example from "views/index-sections/example";
+function Pepa(prop) {
+  const [nombre, setNombre] = useState(null);
+  const [ley, setLey] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [modalUpdate, setModalUpdate] = useState(false);
+  const [modalFoto, setModalFoto] = useState(false);
+  const actionModal = () => setModal(!modal);
+  const actionModalUpdate = () => setModalUpdate(!modalUpdate);
+  const actionModalFoto = () => setModalFoto(!modalFoto);
+  const [pepa, setPepa] = useState([]);
+  const compra = (n) => {
+    //descontamso el 6% para ganancias
+    return Math.ceil(prop.precio * n * 0.94);
+  };
+  const openModalUpdate = (e) => {
+    console.log("Abrimos modal para editar");
+    console.log(e);
+    actionModalUpdate();
+    setNombre(e.nombre);
+    setLey(e.ley);
+  };
+  const openModalFoto = (e) => {
+    console.log("mostramos la foto");
+    console.log(e.id);
+    setNombre(e.nombre);
+    setLey(e.ley);
+    actionModalFoto();
+  };
+  const guardar = useCallback(async () => {
+    console.log("guardamos");
+    createItem({
+      nombre: nombre,
+      ley: ley,
+    });
+    const p = await getItems();
+    setPepa(p);
+    actionModal();
+  }, [nombre, ley]);
 
-function Pepa() {
+  const getAll = useCallback(async () => {
+    console.log("Papus");
+    const p = await getItems();
+    setPepa(p);
+    console.log("GetAllPrecios");
+  }, []);
+  // core components
+  useEffect(() => {
+    getAll();
+  }, [getAll]);
   return (
-    <>
-      <div className="section section-dark section-nucleo-icons">
-        <Container>
+    <Row>
+      <Table responsive className="text-center ">
+        <thead>
+          <tr>
+            <th>LUGAR</th>
+            <th>LEY</th>
+            <th>COMPRA</th>
+            <th>ACCIONES</th>
+            {/**<th>VENTA</th>*/}
+          </tr>
+        </thead>
+        <tbody>
+          {pepa.map((row, index) => (
+            <tr key={index}>
+              <th scope="row">{row.nombre}</th>
+
+              <td>
+                <small>{row.ley}</small>
+              </td>
+              <td>{compra(row.ley) - 10}</td>
+              <td>
+                <i
+                  className="fa fa-picture-o fa-2x"
+                  onClick={() => openModalFoto(row)}
+                />
+                {"  - "}
+                <i
+                  className="fa fa-pencil text-info fa-2x"
+                  onClick={() => openModalUpdate(row)}
+                />
+                {"  - "}
+                <i
+                  className="fa fa fa-trash text-danger fa-2x"
+                  onClick={() => {
+                    deleteItem(row.id);
+                    getAll();
+                  }}
+                />
+              </td>
+              {/**<td>{venta(row.ley)}</td>*/}
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      <Container>
+        <Row>
+          <Col sm={8}></Col>
+          <Col sm={4}>
+            <Button
+              className="btn-round mr-1"
+              color="success"
+              type="button"
+              onClick={() => actionModal()}
+            >
+              Agregar Nuevo +
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+      {/** modal nuevo */}
+      <Modal isOpen={modal} toggle={actionModal}>
+        <ModalHeader>Agregar Nuevo</ModalHeader>
+        <div className="modal-body">
           <Row>
-            <Col lg="6" md="12">
-              <h2 className="title">En desarrollo</h2>
+            <Col sm="12">
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  Nombre
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleEmail"
+                    name="nombre"
+                    onChange={(e) => setNombre(e.target.value)}
+                    placeholder="Orijen del material"
+                    type="nombre"
+                  />
+                </Col>
+              </FormGroup>
               <br />
-              <p className="description">
-                Este modulo no se encuentra habilitado por el momento 
-                nos encontramos trabajando constantemente para presentar el area
-                muy pronto.
-              </p>
-              <br />
-              <Button
-                className="btn-round"
-                color="danger"
-                href="/nucleo-icons"
-                target="_blank"
-              >
-                View Demo Icons
-              </Button>
-              <Button
-                className="btn-round ml-1"
-                color="danger"
-                href="https://nucleoapp.com/?ref=1712"
-                outline
-                target="_blank"
-              >
-                View All Icons
-              </Button>
-            </Col>
-            <Col lg="6" md="12">
-              <div className="icons-container">
-                <i className="nc-icon nc-time-alarm" />
-                <i className="nc-icon nc-atom" />
-                <i className="nc-icon nc-camera-compact" />
-                <i className="nc-icon nc-watch-time" />
-                <i className="nc-icon nc-key-25" />
-                <i className="nc-icon nc-diamond" />
-                <i className="nc-icon nc-user-run" />
-                <i className="nc-icon nc-layout-11" />
-                <i className="nc-icon nc-badge" />
-                <i className="nc-icon nc-bulb-63" />
-                <i className="nc-icon nc-favourite-28" />
-                <i className="nc-icon nc-planet" />
-                <i className="nc-icon nc-tie-bow" />
-                <i className="nc-icon nc-zoom-split" />
-                <i className="nc-icon nc-cloud-download-93" />
-              </div>
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  calidad
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    onChange={(e) => setLey(e.target.value)}
+                  >
+                    {(function (rows, i, len) {
+                      while (--i >= len) {
+                        rows.push(
+                          <option key={i} value={i / 1000}>
+                            {i / 1000}
+                          </option>
+                        );
+                      }
+                      return rows;
+                    })([], 1000, 10)}
+                  </Input>
+                </Col>
+              </FormGroup>
             </Col>
           </Row>
-        </Container>
-      </div>{" "}
-    </>
+        </div>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => actionModal()}
+          >
+            cancelar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            onClick={() => guardar()}
+          >
+            Continuar
+          </Button>
+        </div>
+      </Modal>
+      {/** modal editar */}
+      <Modal isOpen={modalUpdate} toggle={actionModalUpdate}>
+        <ModalHeader>Modificar</ModalHeader>
+        <div className="modal-body">
+          <Row>
+            <Col sm="12">
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  Nombre
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleEmail"
+                    name="nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    placeholder="Orijen del material"
+                    type="nombre"
+                  />
+                </Col>
+              </FormGroup>
+              <br />
+              <FormGroup row>
+                <Label for="exampleEmail" sm={2}>
+                  calidad
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    value={ley}
+                    onChange={(e) => setLey(e.target.value)}
+                  >
+                    {(function (rows, i, len) {
+                      while (--i >= len) {
+                        rows.push(
+                          <option key={i} value={i / 1000}>
+                            {i / 1000}
+                          </option>
+                        );
+                      }
+                      return rows;
+                    })([], 1000, 10)}
+                  </Input>
+                </Col>
+              </FormGroup>
+            </Col>
+          </Row>
+        </div>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => actionModalUpdate()}
+          >
+            cancelar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            onClick={() => guardar()}
+          >
+            guardar
+          </Button>
+        </div>
+      </Modal>
+      {/** modal fotos */}
+      <Modal isOpen={modalFoto} toggle={actionModalFoto}>
+       
+        <Example/>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => actionModalFoto()}
+          >
+            cancelar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            onClick={() => guardar()}
+          >
+            guardar
+          </Button>
+        </div>
+      </Modal>
+    </Row>
   );
 }
 
