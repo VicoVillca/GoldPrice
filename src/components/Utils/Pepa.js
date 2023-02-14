@@ -11,21 +11,21 @@ import {
   Label,
   Input,
   ModalHeader,
-} from "reactstrap";
 
+} from "reactstrap";
 import { createItem, getItems, deleteItem } from "variables/api";
-import Example from "views/index-sections/example";
+
 function Pepa(prop) {
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState(null);
   const [ley, setLey] = useState(null);
   const [modal, setModal] = useState(false);
   const [modalUpdate, setModalUpdate] = useState(false);
-  const [modalFoto, setModalFoto] = useState(false);
+
   const [modalDelete, setModalDelete] = useState(false);
   const actionModal = useCallback(() => setModal(!modal), [setModal, modal]);
   const actionModalUpdate = () => setModalUpdate(!modalUpdate);
-  const actionModalFoto = () => setModalFoto(!modalFoto);
+
   const actionModalDelete = () => setModalDelete(!modalDelete);
   const [pepa, setPepa] = useState([]);
   const compra = (n) => {
@@ -39,13 +39,7 @@ function Pepa(prop) {
     setNombre(e.nombre);
     setLey(e.ley);
   };
-  const openModalFoto = (e) => {
-    console.log("mostramos la foto");
-    console.log(e.id);
-    setNombre(e.nombre);
-    setLey(e.ley);
-    actionModalFoto();
-  };
+
   const openModalDelete = (e) => {
     console.log("eliminamos de la lista");
     console.log(e.id);
@@ -64,13 +58,14 @@ function Pepa(prop) {
     setPepa(p);
     actionModal();
   }, [nombre, ley, actionModal]);
+
   const borrar = useCallback(async () => {
     console.log("borramos " + id);
     deleteItem(id);
     const p = await getItems();
     setPepa(p);
     actionModalDelete();
-  }, [nombre, ley,id, actionModalDelete,setPepa]);
+  }, [nombre, ley, id, actionModalDelete, setPepa]);
 
   const getAll = useCallback(async () => {
     console.log("Papus");
@@ -104,22 +99,20 @@ function Pepa(prop) {
               </td>
               <td>{compra(row.ley) - 10}</td>
               <td>
-                <i
-                  className="fa fa-picture-o"
-                  onClick={() => openModalFoto(row)}
-                />
-
-                <i
-                  className="fa fa-pencil text-info "
-                  onClick={() => openModalUpdate(row)}
-                />
-
-                <i
-                  className="fa fa fa-trash text-danger "
+                <a target="_self" href="/landing-page">
+                  <i className="fa fa-picture-o" />
+                </a>
+                <a target="_self" onClick={() => openModalUpdate(row)}>
+                  <i className="fa fa-pencil text-info" />
+                </a>
+                <a
+                  target="_self"
                   onClick={() => {
                     openModalDelete(row);
                   }}
-                />
+                >
+                  <i className="fa fa fa-trash text-danger" />
+                </a>
               </td>
               {/**<td>{venta(row.ley)}</td>*/}
             </tr>
@@ -279,30 +272,7 @@ function Pepa(prop) {
           </Button>
         </div>
       </Modal>
-      {/** modal fotos */}
-      <Modal isOpen={modalFoto} toggle={actionModalFoto}>
-        <Example />
-        <div className="modal-footer">
-          <Button
-            type="button"
-            className="btn-round mr-1"
-            color="default"
-            outline
-            onClick={() => actionModalFoto()}
-          >
-            cancelar
-          </Button>
-          <Button
-            className="btn-round ml-1"
-            color="success"
-            type="button"
-            onClick={() => guardar()}
-          >
-            guardar
-          </Button>
-        </div>
-      </Modal>
-      {/** modal fotos */}
+      {/** modal confirmacion para eliminar */}
       <Modal isOpen={modalDelete} toggle={actionModalDelete}>
         <div className="modal-header">
           <h6>Eliminar</h6>
