@@ -99,7 +99,7 @@ function Pepa(prop) {
               </td>
               <td>{compra(row.ley) - 10}</td>
               <td>
-                <a target="_self" href="/landing-page">
+                <a target="_self" href={"/landing-page/"+row.id}>
                   <i className="fa fa-picture-o" />
                 </a>
                 <a target="_self" onClick={() => openModalUpdate(row)}>
