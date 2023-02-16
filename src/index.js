@@ -40,14 +40,14 @@ root.render(
         </>
       )*/}
 
-      <Route path="/index" render={(props) => <ProfilePage {...props} />} />
+      <Route path="/" render={(props) => <ProfilePage {...props} />} />
       <Route
         path="/landing-page"
         render={(props) => <LandingPage {...props} />}
       />
 
       <Route path="/login" render={(props) => <RegisterPage {...props} />} />
-      <Redirect to="/index" />
+      <Redirect to="/" />
     </Switch>
   </BrowserRouter>
 );

@@ -112,7 +112,7 @@ function ProfilePage() {
                 outline
                 onClick={() => getAllPrecioAgain()}
               >
-                ONZA:_
+                ONZAA:_
                 {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
               </Button>
               
