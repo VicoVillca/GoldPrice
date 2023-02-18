@@ -99,7 +99,7 @@ function Pepa(prop) {
               </td>
               <td>{compra(row.ley) - 10}</td>
               <td>
-                <a target="_self" href={"/landing-page/"+row.id}>
+                <a target="_self" href={"landing-page/"+row.id}>
                   <i className="fa fa-picture-o" />
                 </a>
                 <a target="_self" onClick={() => openModalUpdate(row)}>
@@ -121,7 +121,7 @@ function Pepa(prop) {
       </Table>
       <Container>
         <Row>
-          <Col sm={8}></Col>
+          <Col sm={8}><a href="/landing-page/123123">hola papu</a></Col>
           <Col sm={4}>
             <Button
               className="btn-round mr-1"
