@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   Button,
@@ -26,6 +26,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
+
 import { UploadFile } from "variables/firebase";
 // core components
 import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
@@ -125,7 +126,7 @@ function LandingPage() {
           </Container>
         </div>
       </Container>
-
+      
       <DemoFooter />
 
       {/** modal fotos */}

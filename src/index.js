@@ -29,24 +29,26 @@ const cookies = new Cookies();
 root.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/index" render={(props) => <ProfilePage {...props} />} />
-      <Route
-        path="/nucleo-icons"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
-        path="/landing-page"
-        render={(props) => <LandingPage {...props} />}
-      />
-      <Route
-        path="/profile-page"
-        render={(props) => <ProfilePage {...props} />}
-      />
-      <Route
+    <Route  exact  path="/index" render={(props) => <ProfilePage {...props} />} />
+      <Route exact 
         path="/register-page"
         render={(props) => <RegisterPage {...props} />}
       />
-      <Redirect to="/index" />
+      
+      <Route exact 
+        path="/nucleo-icons"
+        render={(props) => <ProfilePage {...props} />}
+      />
+      <Route exact 
+        path="/landing-page"
+        render={(props) => <LandingPage {...props} />}
+      />
+      <Route exact 
+        path="/profile-page"
+        render={(props) => <ProfilePage {...props} />}
+      />
+
+      <Redirect to="/register-page" />
     </Switch>
   </BrowserRouter>
 );

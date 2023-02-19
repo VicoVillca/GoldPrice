@@ -11,8 +11,11 @@ import {
   Label,
   Input,
   ModalHeader,
+  NavItem,
+  NavLink,
 
 } from "reactstrap";
+import { Link } from "react-router-dom";
 import { createItem, getItems, deleteItem } from "variables/api";
 
 function Pepa(prop) {
@@ -121,7 +124,17 @@ function Pepa(prop) {
       </Table>
       <Container>
         <Row>
-          <Col sm={8}><a href="/landing-page/123123">hola papu</a></Col>
+          <Col sm={8}><a href="/landing-page/123123">hola wewee</a><NavLink to="/index" tag={Link}>
+                <i className="nc-icon nc-layout-11" /> Components
+              </NavLink>
+              <NavItem>
+              <NavLink
+                href="/joyas"
+                target="_blank"
+              >
+                 precio de Joyas
+              </NavLink>
+            </NavItem></Col>
           <Col sm={4}>
             <Button
               className="btn-round mr-1"
