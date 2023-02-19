@@ -13,7 +13,6 @@ import {
   ModalHeader,
   NavItem,
   NavLink,
-
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { createItem, getItems, deleteItem } from "variables/api";
@@ -82,71 +81,62 @@ function Pepa(prop) {
   }, [getAll]);
   return (
     <Row>
-      <Table responsive className="text-center ">
-        <thead>
-          <tr>
-            <th>LUGAR</th>
-            <th>LEY</th>
-            <th>COMPRA</th>
-            <th>ACCIONES</th>
-            {/**<th>VENTA</th>*/}
-          </tr>
-        </thead>
-        <tbody>
-          {pepa.map((row, index) => (
-            <tr key={index}>
-              <th scope="row">{row.nombre}</th>
-
-              <td>
-                <small>{row.ley}</small>
-              </td>
-              <td>{compra(row.ley) - 10}</td>
-              <td>
-                <a target="_self" href={"landing-page/"+row.id}>
-                  <i className="fa fa-picture-o" />
-                </a>
-                <a target="_self" onClick={() => openModalUpdate(row)}>
-                  <i className="fa fa-pencil text-info" />
-                </a>
-                <a
-                  target="_self"
-                  onClick={() => {
-                    openModalDelete(row);
-                  }}
-                >
-                  <i className="fa fa fa-trash text-danger" />
-                </a>
-              </td>
-              {/**<td>{venta(row.ley)}</td>*/}
+      <Col className="ml-auto mr-auto " md="12">
+        <Table responsive className="text-center ">
+          <thead>
+            <tr>
+              <th>LUGAR</th>
+              <th>LEY</th>
+              <th>COMPRA</th>
+              <th>ACCIONES</th>
+              {/**<th>VENTA</th>*/}
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      <Container>
-        <Row>
-          <Col sm={8}><a href="/landing-page/123123">hola wewee</a><NavLink to="/index" tag={Link}>
-                <i className="nc-icon nc-layout-11" /> Components
-              </NavLink>
-              <NavItem>
-              <NavLink
-                href="/joyas"
-                target="_blank"
-              >
-                 precio de Joyas
-              </NavLink>
-            </NavItem></Col>
-          <Col sm={4}>
-            <Button
-              className="btn-round mr-1"
-              color="success"
-              type="button"
-              onClick={() => actionModal()}
-            >
-              Agregar Nuevo +
-            </Button>
-          </Col>
-        </Row>
-      </Container>
+          </thead>
+          <tbody>
+            {pepa.map((row, index) => (
+              <tr key={index}>
+                <th scope="row">{row.nombre}</th>
+
+                <td>
+                  <small>{row.ley}</small>
+                </td>
+                <td>{compra(row.ley) - 10}</td>
+                <td>
+                  <Link to={"/fotos/" + row.id}>
+                    <i className="fa fa-picture-o" />
+                  </Link>
+                  <a target="_self" onClick={() => openModalUpdate(row)}>
+                    <i className="fa fa-pencil text-info" />
+                  </a>
+                  <a
+                    target="_self"
+                    onClick={() => {
+                      openModalDelete(row);
+                    }}
+                  >
+                    <i className="fa fa fa-trash text-danger" />
+                  </a>
+                </td>
+                {/**<td>{venta(row.ley)}</td>*/}
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Col>
+
+      <Col className="ml-auto mr-auto " md="12">
+        <center>
+          <Button
+            className="btn-round mr-1"
+            color="success"
+            type="button"
+            onClick={() => actionModal()}
+          >
+            Agregar Nuevo +
+          </Button>
+        </center>
+      </Col>
+
       {/** modal nuevo */}
       <Modal isOpen={modal} toggle={actionModal}>
         <ModalHeader>Agregar Nuevo Elemento</ModalHeader>

@@ -1,7 +1,7 @@
 import React from "react";
 
 // reactstrap components
-import { Row, Table } from "reactstrap";
+import { Row, Table,Col } from "reactstrap";
 
 // core components
 
@@ -16,7 +16,8 @@ function Joyas(prop) {
   };
   return (
     <Row>
-      <Table responsive className="text-center ">
+        <Col className="ml-auto mr-auto " md="12">
+        <Table responsive className="text-center ">
         <thead>
           <tr>
             <th>#</th>
@@ -43,6 +44,8 @@ function Joyas(prop) {
           })([], 100, 10)}
         </tbody>
       </Table>
+        </Col>
+      
     </Row>
   );
 }

@@ -105,7 +105,6 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
-
               <Button
                 color="info"
                 type="button"
@@ -115,78 +114,38 @@ function ProfilePage() {
                 ONZAA:_
                 {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
               </Button>
-              
-
-              {/*<h6 className="card-category">Precio del oro</h6>*/}
             </div>
           </div>
-          {precioOnzaDol > 0 && !modal ? (
-            <>
-              <div className="nav-tabs-navigation">
-                <div className="nav-tabs-wrapper">
-                  <Nav role="tablist" tabs>
-                    <NavItem>
-                      <NavLink
-                        className={activeTab === "1" ? "active" : ""}
-                        onClick={() => {
-                          toggle("1");
-                        }}
-                      >
-                        En joya
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={activeTab === "2" ? "active" : ""}
-                        onClick={() => {
-                          toggle("2");
-                        }}
-                      >
-                        En pepa
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink
-                        className={activeTab === "3" ? "active" : ""}
-                        onClick={() => {
-                          toggle("3");
-                        }}
-                      >
-                        Por Ley
-                      </NavLink>
-                    </NavItem>
-                  </Nav>
-                </div>
-              </div>
-              {/* Tab panes */}
-
-              <TabContent className="following" activeTab={activeTab}>
-                <TabPane tabId="1" id="follows">
-                  {/** Cotizacion de joyas */}
-                  <div className="p-1">
-                    <Joyas precio={precioGrBol} />
-                  </div>
-                </TabPane>
-                <TabPane className="text-center" tabId="2" id="following">
-                  {/** Cotizacion de pepa */}
-                  <div className="p-1">
-                    <Pepa precio={precioGrBol} />
-                  </div>
-                </TabPane>
-                <TabPane className="text-center" tabId="3" id="following">
-                  {/** Cotizacion por ley */}
-                  <div className="p-1">
-                    <Ley precio={precioGrBol} />
-                  </div>
-                </TabPane>
-              </TabContent>
-            </>
-          ) : (
-            <></>
-          )}
+        </Container>
+        <Container>
+          <div className="title">
+            <h3>Oro en joyas</h3>
+          </div>
+          <div id="buttons">
+            <Joyas precio={precioGrBol} />
+          </div>
+        </Container>
+        <Container>
+          <div className="title">
+            <h3>Oro en pepa</h3>
+          </div>
+          <div id="buttons">
+            <Pepa precio={precioGrBol} />
+          </div>
+        </Container>
+        <Container>
+          <div className="title">
+            <h3>Oro por ley</h3>
+          </div>
+          <div id="buttons">
+            <Ley precio={precioGrBol} />
+          </div>
         </Container>
       </div>
-      <DemoFooter />
+      <center>
+        <DemoFooter />
+      </center>
+
       {/**  agregamos el modal de la paguina*/}
       <Modal isOpen={modal} toggle={actionModal}>
         <div className="modal-body">

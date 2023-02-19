@@ -4,6 +4,7 @@
 /node_modules
 /Documentation
 /src/variables/firebase.js
+/build
 /.pnp
 .pnp.js
 

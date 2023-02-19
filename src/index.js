@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserHistory } from "history";
+//import { createBrowserHistory } from "history";
 import { StrictMode } from "react";
 import {
   BrowserRouter,
@@ -10,6 +10,7 @@ import {
   Route,
   Redirect,
   Switch,
+  Link,
 } from "react-router-dom";
 
 // styles
@@ -24,19 +25,20 @@ import LandingPage from "views/examples/LandingPage.js";
 // others
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const hist = createBrowserHistory();
+//const hist = createBrowserHistory();
 const cookies = new Cookies();
-root.render(
-  <BrowserRouter>
+//util
+{
+  /*<BrowserRouter>
     <Switch>
-    <Route  exact  path="/index" render={(props) => <ProfilePage {...props} />} />
+    <Route  exact  path="/" render={(props) => <ProfilePage {...props} />} />
       <Route exact 
         path="/register-page"
         render={(props) => <RegisterPage {...props} />}
       />
       
       <Route exact 
-        path="/nucleo-icons"
+        path="/index/nucleo-icons"
         render={(props) => <ProfilePage {...props} />}
       />
       <Route exact 
@@ -48,7 +50,49 @@ root.render(
         render={(props) => <ProfilePage {...props} />}
       />
 
-      <Redirect to="/register-page" />
+      <Redirect to="/" />
     </Switch>
+</BrowserRouter>
+
+
+
+
+
+
+  <React.StrictMode>
+    <HashRouter>
+      <Router history={hist}>
+        <Switch>
+          <Route exact path="/">
+            <ProfilePage />
+          </Route>
+          <Route path="/fotos/:id">
+            <LandingPage />
+          </Route>
+        </Switch>
+      </Router>
+    </HashRouter>
+  </React.StrictMode>
+*/
+}
+root.render(
+  <BrowserRouter basename="/GoldPrice">
+    
+    <Routes>
+      <Route path="/" element={<ProfilePage />}></Route>
+      <Route path="/login" element={<RegisterPage />} />
+      <Route path="/chafa" element={<RegisterPage />} />
+      <Route path="/pepa" element={<RegisterPage />} />
+      <Route path="/ley" element={<RegisterPage />} />
+      <Route path="/fotos/:id" element={<LandingPage />} />
+      <Route
+        path="*"
+        element={
+          <main>
+            <p>There's nothing here!</p>
+          </main>
+        }
+      ></Route>
+    </Routes>
   </BrowserRouter>
 );
