@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'oswald';
+    src: url('~assets/fonts/1.ttf');
+}
+@font-face {
+    font-family: 'oswald2';
+    src: url('~assets/fonts/2.ttf');
+}
+@font-face {
+    font-family: 'oswald3';
+    src: url('~assets/fonts/3.ttf');
+}
+@font-face {
+    font-family: 'oswald4';
+    src: url('~assets/fonts/4.ttf');
+}
+@font-face {
+    font-family: 'oswald5';
+    src: url('~assets/fonts/5.ttf');
+}
+@font-face {
+    font-family: 'oswald6';
+    src: url('~assets/fonts/6.ttf');
+}
+@font-face {
+    font-family: 'oswald7';
+    src: url('~assets/fonts/7.ttf');
+}
+@font-face {
+    font-family: 'oswald8';
+    src: url('~assets/fonts/8.ttf');
+}
+@font-face {
+    font-family: 'oswald9';
+    src: url('~assets/fonts/9.otf');
+}
+@font-face {
+    font-family: 'oswald10';
+    src: url('~assets/fonts/10.ttf');
+}
+.nombre1{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald;
+}
+
+.nombre2{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald2;
+}
+.nombre3{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald3;
+}
+.nombre4{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald4;
+}
+.nombre5{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald5;
+}
+.nombre6{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald6;
+}
+.nombre7{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald7;
+}
+.nombre8{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald8;
+}
+.nombre9{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald9;
+}
+.nombre10{
+    color: #000000;
+    font-size: 100px;
+    font-family: oswald10;
+}

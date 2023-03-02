@@ -17,6 +17,15 @@ import {
 } from "reactstrap";
 
 function ExamplesNavbar() {
+
+    // This styling will be applied to a <NavLink> when the
+  // route that it links to is currently selected.
+  let activeStyle = {
+    textDecoration: "underline",
+  };
+
+  let activeClassName = "underline";
+
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
@@ -56,7 +65,7 @@ function ExamplesNavbar() {
         <div className="navbar-translate">
           <NavbarBrand
             data-placement="bottom"
-            to="/index"
+            to="/"
             target="_blank"
             title="Coded by Creative Tim"
             tag={Link}
@@ -80,6 +89,7 @@ function ExamplesNavbar() {
           navbar
           isOpen={navbarCollapse}
         >
+         
           <Nav navbar>
             
             
@@ -87,34 +97,29 @@ function ExamplesNavbar() {
            
             <NavItem>
               <NavLink
-                href="/joyas"
-                target="_blank"
+                to="/"
+                tag={Link}
               >
-                 precio de Joyas
+                 precio del oro
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                href="/pepa"
-                target="_blank"
+               to="/dijes"
+                tag={Link}
               >
-                precio de pepa
+                Ramilletes
               </NavLink>
+              
             </NavItem>
-            <NavItem>
-              <NavLink
-                href="/chafa"
-                target="_blank"
-              >
-                 precio por ley
-              </NavLink>
-            </NavItem>
+           
             <NavItem>
               <Button
                 className="btn-round"
                 color="primary"
                 href="/info"
                 target="_blank"
+                tag={Link}
               >
                 Contacto
               </Button>

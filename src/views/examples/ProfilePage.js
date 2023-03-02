@@ -2,11 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 
 import {
   Button,
-  NavItem,
-  NavLink,
-  Nav,
-  TabContent,
-  TabPane,
   Container,
   CardSubtitle,
   Spinner,
@@ -32,20 +27,15 @@ const baseUrl = process.env.REACT_APP_URL_BACK_END + "/prueba";
 const header = HOST.headerPublic();
 
 function ProfilePage() {
-  const [activeTab, setActiveTab] = React.useState("1");
   const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
   const [precioOnzaAux, setPrecioOnzaAux] = useState(0);
   const [precioGrBol, setPrecioGrBol] = useState(0);
-  const [fecha, setFecha] = useState("");
+
   const [modal, setModal] = useState(false);
   const [manualmente, setManualmente] = useState(false);
 
   const actionModal = () => setModal(!modal);
-  const toggle = (tab) => {
-    if (activeTab !== tab) {
-      setActiveTab(tab);
-    }
-  };
+
   const handleChange = (event) => {
     console.log(event.target.value);
     setPrecioOnzaAux(event.target.value);
@@ -78,7 +68,7 @@ function ProfilePage() {
         setModal(false);
         setPrecioOnzaDol(parseFloat(response?.data?.compra));
         setPrecioGrBol(parseFloat(response?.data?.compra) * 6.97 * 0.03215);
-        setFecha(response?.data?.fecha);
+        //setFecha(response?.data?.fecha);
       })
       .catch((error) => {
         console.log("error en cath");
@@ -96,7 +86,7 @@ function ProfilePage() {
       <ExamplesNavbar />
       <ProfilePageHeader />
 
-      <div className="section profile-content">
+      <div className="section  profile-content">
         <Container>
           <div className="owner">
             <div className="avatar">
@@ -125,7 +115,8 @@ function ProfilePage() {
             <Joyas precio={precioGrBol} />
           </div>
         </Container>
-        <Container>
+      
+        <Container >
           <div className="title">
             <h3>Oro en pepa</h3>
           </div>

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 // reactstrap components
 import {
   Button,
-  Container,
   Row,
   Col,
   Table,
@@ -11,8 +10,8 @@ import {
   Label,
   Input,
   ModalHeader,
-  NavItem,
-  NavLink,
+  ButtonToolbar,
+  ButtonGroup,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { createItem, getItems, deleteItem } from "variables/api";
@@ -66,8 +65,8 @@ function Pepa(prop) {
     deleteItem(id);
     const p = await getItems();
     setPepa(p);
-    actionModalDelete();
-  }, [nombre, ley, id, actionModalDelete, setPepa]);
+    setModalDelete(false);
+  }, [id, setModalDelete, setPepa]);
 
   const getAll = useCallback(async () => {
     console.log("Papus");
@@ -82,7 +81,7 @@ function Pepa(prop) {
   return (
     <Row>
       <Col className="ml-auto mr-auto " md="12">
-        <Table responsive className="text-center ">
+        <Table responsive className="text-center">
           <thead>
             <tr>
               <th>LUGAR</th>
@@ -104,37 +103,49 @@ function Pepa(prop) {
                 <td>
                   <Link to={"/fotos/" + row.id}>
                     <i className="fa fa-picture-o" />
-                  </Link>
-                  <a target="_self" onClick={() => openModalUpdate(row)}>
-                    <i className="fa fa-pencil text-info" />
-                  </a>
-                  <a
-                    target="_self"
-                    onClick={() => {
-                      openModalDelete(row);
-                    }}
-                  >
-                    <i className="fa fa fa-trash text-danger" />
-                  </a>
+            </Link>
+
+                  <ButtonToolbar >
+                    <ButtonGroup >
+                      
+                      <Button
+                        className="btn-round mr-1"
+                        color="success"
+                        type="button"
+                        onClick={() => openModalUpdate(row)}
+                      >
+                        <i className="fa fa-pencil " />
+                      </Button>
+                      <Button
+                        className="btn-round mr-1"
+                        color="danger"
+                        type="button"
+                        onClick={() => openModalDelete(row)}
+                      >
+                        <i className="fa fa fa-trash" />
+                      </Button>
+                    </ButtonGroup>
+                  </ButtonToolbar>
                 </td>
                 {/**<td>{venta(row.ley)}</td>*/}
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan="4">
+                <Button
+                  className="btn-round mr-1"
+                  color="success"
+                  type="button"
+                  onClick={() => actionModal()}
+                >
+                  Agregar Nuevo +
+                </Button>
+              </td>
+            </tr>
+          </tfoot>
         </Table>
-      </Col>
-
-      <Col className="ml-auto mr-auto " md="12">
-        <center>
-          <Button
-            className="btn-round mr-1"
-            color="success"
-            type="button"
-            onClick={() => actionModal()}
-          >
-            Agregar Nuevo +
-          </Button>
-        </center>
       </Col>
 
       {/** modal nuevo */}
