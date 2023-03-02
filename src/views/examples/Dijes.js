@@ -60,80 +60,61 @@ function Dijes() {
             </div>
           </div>
         </Container>
-        <Container className="tim-container">
-          <Row>
-            {nombre.length > 0 ? (
-              <div id="typography">
-                <div className="title">
-                  <h3>Lista de Diseños</h3>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 1</span>
-                    <div className="nombre1">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 2</span>
-                    <div className="nombre2">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 3</span>
-                    <div className="nombre3">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 4</span>
-                    <div className="nombre4">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 5</span>
-                    <div className="nombre5">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 6</span>
-                    <div className="nombre6">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 7</span>
-                    <div className="nombre7">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 8</span>
-                    <div className="nombre8">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 9</span>
-                    <div className="nombre9">{nombre}</div>
-                  </h1>
-                </div>
-                <div className="typography-line">
-                  <h1>
-                    <span className="title">Diseño 10</span>
-                    <div className="nombre10">{nombre}</div>
-                  </h1>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-          </Row>
+      </div>
+
+      <div className="section section-buttons">
+        <Container>
+          <div className="title">
+            <h2>Lista de diseños</h2>
+          </div>
+          <div id="buttons">
+            <div className="title">
+              <h3>
+                Modelo 1 <br />
+                <div className="nombre1">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 2 <br />
+                <div className="nombre2">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 3 <br />
+                <div className="nombre3">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 4 <br />
+                <div className="nombre4">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 5 <br />
+                <div className="nombre5">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 6 <br />
+                <div className="nombre6">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 7 <br />
+                <div className="nombre7">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 8 <br />
+                <div className="nombre8">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 9 <br />
+                <div className="nombre9">{nombre}</div>
+              </h3>
+              <h3>
+                Modelo 10 <br />
+                <div className="nombre10">{nombre}</div>
+              </h3>
+            </div>
+            
+          </div>
         </Container>
       </div>
+
       <center>
         <DemoFooter />
       </center>

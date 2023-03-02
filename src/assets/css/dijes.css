@@ -41,51 +41,73 @@
 .nombre1{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald;
 }
 
 .nombre2{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald2;
 }
 .nombre3{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald3;
 }
 .nombre4{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald4;
 }
 .nombre5{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald5;
 }
 .nombre6{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald6;
 }
 .nombre7{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald7;
 }
 .nombre8{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald8;
 }
 .nombre9{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald9;
 }
 .nombre10{
     color: #000000;
     font-size: 100px;
+    text-align: center;
     font-family: oswald10;
+}
+@media (min-width: 576px){
+    container, container-sm {
+        max-width: 540px;
+    }
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
