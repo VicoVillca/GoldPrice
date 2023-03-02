@@ -10,13 +10,7 @@ import DemoFooter from "components/Footers/DemoFooter.js";
 function Dijes() {
   const [nombre, setNombre] = useState("Maria");
 
-  document.documentElement.classList.remove("nav-open");
-  React.useEffect(() => {
-    document.body.classList.add("landing-page");
-    return function cleanup() {
-      document.body.classList.remove("landing-page");
-    };
-  });
+
 
   const capitalizeFirst = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
