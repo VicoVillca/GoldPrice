@@ -1,9 +1,27 @@
 {
   "files": {
-    "main.js": "https://vicovillca.github.io/GoldPrice/static/js/main.d51ea1dc.js",
-    "index.html": "https://vicovillca.github.io/GoldPrice/index.html"
+    "main.css": "/GoldPrice/static/css/main.38f3cef6.css",
+    "main.js": "/GoldPrice/static/js/main.7666b8fb.js",
+    "static/media/8.ttf": "/GoldPrice/static/media/8.92a3919f0882d37c004c.ttf",
+    "static/media/antoine-barres.jpg": "/GoldPrice/static/media/antoine-barres.bc3299c239c25e5bf937.jpg",
+    "static/media/9.otf": "/GoldPrice/static/media/9.0f97e53e3c658676e2ce.otf",
+    "static/media/5.ttf": "/GoldPrice/static/media/5.168fc1b2a4d2c981a93f.ttf",
+    "static/media/10.ttf": "/GoldPrice/static/media/10.dff3fed9b98d886d4df2.ttf",
+    "static/media/4.ttf": "/GoldPrice/static/media/4.53c511f5445171b5fd55.ttf",
+    "static/media/3.ttf": "/GoldPrice/static/media/3.5494a8f790cc322e1bb7.ttf",
+    "static/media/6.ttf": "/GoldPrice/static/media/6.51bb84a38da8afbf7afb.ttf",
+    "static/media/2.ttf": "/GoldPrice/static/media/2.bbea65083e574f96a329.ttf",
+    "static/media/imgloginedit.png": "/GoldPrice/static/media/imgloginedit.218ccb4374aa556184e3.png",
+    "static/media/1.ttf": "/GoldPrice/static/media/1.13430192301403fe56eb.ttf",
+    "static/media/7.ttf": "/GoldPrice/static/media/7.13430192301403fe56eb.ttf",
+    "static/media/nucleo-icons.eot": "/GoldPrice/static/media/nucleo-icons.bd42d77b9672555647d1.eot",
+    "static/media/nucleo-icons.ttf": "/GoldPrice/static/media/nucleo-icons.4466aeec3386b965a232.ttf",
+    "static/media/nucleo-icons.woff": "/GoldPrice/static/media/nucleo-icons.8e954b749f951b654fc6.woff",
+    "static/media/nucleo-icons.woff2": "/GoldPrice/static/media/nucleo-icons.ec16bc4cc4526801004d.woff2",
+    "index.html": "/GoldPrice/index.html"
   },
   "entrypoints": [
-    "static/js/main.d51ea1dc.js"
+    "static/css/main.38f3cef6.css",
+    "static/js/main.7666b8fb.js"
   ]
 }
