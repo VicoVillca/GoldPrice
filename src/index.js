@@ -76,7 +76,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           path="/404"
           element={
             <main>
-              <p>There's nothing here!</p>
+              <p>Paguina no encotrada!</p>
             </main>
           }
         />
