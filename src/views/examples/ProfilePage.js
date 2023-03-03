@@ -79,12 +79,12 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
+    console.log("UseEfect");
     getAllPrecioAgain();
   }, [getAllPrecioAgain]);
   return (
     <>
-      <ExamplesNavbar />
-      <ProfilePageHeader />
+      
 
       <div className="section  profile-content">
         <Container>
@@ -133,9 +133,7 @@ function ProfilePage() {
           </div>
         </Container>
       </div>
-      <center>
-        <DemoFooter />
-      </center>
+      
 
       {/**  agregamos el modal de la paguina*/}
       <Modal isOpen={modal} toggle={actionModal}>

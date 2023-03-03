@@ -23,9 +23,6 @@ function Dijes() {
   };
   return (
     <>
-      <ExamplesNavbar />
-      <ProfilePageHeader />
-
       <div className="section  profile-content">
         <Container>
           <div className="owner">
@@ -114,10 +111,6 @@ function Dijes() {
           </div>
         </Container>
       </div>
-
-      <center>
-        <DemoFooter />
-      </center>
     </>
   );
 }

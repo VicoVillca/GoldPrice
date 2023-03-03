@@ -2,7 +2,6 @@
 
 https://vicovillca.github.io/GoldPrice/
 
-
 # Deproy en gitPages
 npm run deploy
 # proyecto base 

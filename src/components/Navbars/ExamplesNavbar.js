@@ -117,8 +117,7 @@ function ExamplesNavbar() {
               <Button
                 className="btn-round"
                 color="primary"
-                href="/info"
-                target="_blank"
+                to={"/contactos"}
                 tag={Link}
               >
                 Contacto

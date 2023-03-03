@@ -101,9 +101,9 @@ function Pepa(prop) {
                 </td>
                 <td>{compra(row.ley) - 10}</td>
                 <td>
-                  <Link to={"/fotos/" + row.id}>
+                  {/*<Link to={"/fotos/" + row.id}>
                     <i className="fa fa-picture-o" />
-            </Link>
+            </Link>*/}
 
                   <ButtonToolbar >
                     <ButtonGroup >
