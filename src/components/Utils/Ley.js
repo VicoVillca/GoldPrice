@@ -28,20 +28,21 @@ function Joyas(prop) {
         </thead>
         <tbody>
           {(function (rows, i, len) {
-            while (--i >= len) {
+            console.log(i +" "+len);
+            while ((i-=5) >= len) {
               rows.push(
                 <tr key={i}>
-                  <th scope="row">{i}</th>
+                  <th scope="row">{(i/10).toFixed(1)}</th>
                   <td>
                     <small>fundido</small>
                   </td>
-                  <td>{compra(i)-10}</td>
+                  <td>{compra(i/10)-10}</td>
                   {/**<td>{venta(row.ley)}</td>*/}
                 </tr>
               );
             }
             return rows;
-          })([], 100, 10)}
+          })([], 1000, 10)}
         </tbody>
       </Table>
         </Col>
