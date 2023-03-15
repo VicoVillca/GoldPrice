@@ -25,6 +25,7 @@ import Ley from "components/Utils/Ley";
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from '@mui/icons-material/Replay';
 import SettingsIcon from '@mui/icons-material/Settings';
+import TimelineIcon from '@mui/icons-material/Timeline';
 
 import axios from "axios";
 import HOST from "variables/general.js";
@@ -108,6 +109,16 @@ function ProfilePage() {
                 ONZAA:_
                 {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
               </Button>
+              
+              
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+                
+              >
+                <TimelineIcon />
+              </IconButton>
               <IconButton
                 color="primary"
                 aria-label="upload picture"
@@ -156,15 +167,17 @@ function ProfilePage() {
 
       {/**  agregamos el modal de la paguina*/}
       <Modal isOpen={modal} toggle={actionModal}>
+      <div className="modal-head">
+      <h4><center>Precio de la Onza</center></h4>
+      </div>
         <div className="modal-body">
           <Row>
             <Col sm="12">
               {manualmente ? (
                 <>
-                  <br />
-                  <br />
                   <Col sm="12">
-                    <FormGroup className="m-2">
+                   
+                    <FormGroup className="">
                       <Input
                         className="form-control"
                         onChange={handleChange}
@@ -260,6 +273,7 @@ function ProfilePage() {
                 outline
                 onClick={() => {
                   setManualmente(false);
+                  setModal(false);
                   setPrecioOnzaAux("");
                 }}
               >

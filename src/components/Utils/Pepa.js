@@ -110,7 +110,7 @@ function Pepa(prop) {
                       
                       <Button
                         className="btn-round mr-1"
-                        color="success"
+                        color="info"
                         type="button"
                         onClick={() => openModalUpdate(row)}
                       >
