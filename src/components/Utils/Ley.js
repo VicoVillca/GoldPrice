@@ -42,7 +42,7 @@ function Joyas(prop) {
               );
             }
             return rows;
-          })([], 1000, 10)}
+          })([], 1000, 100)}
         </tbody>
       </Table>
         </Col>

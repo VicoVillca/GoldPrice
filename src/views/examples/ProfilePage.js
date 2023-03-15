@@ -20,6 +20,11 @@ import DemoFooter from "components/Footers/DemoFooter.js";
 import Joyas from "components/Utils/Joyas";
 import Pepa from "components/Utils/Pepa";
 import Ley from "components/Utils/Ley";
+//icons
+
+import IconButton from "@mui/material/IconButton";
+import ReplayIcon from '@mui/icons-material/Replay';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import axios from "axios";
 import HOST from "variables/general.js";
@@ -84,8 +89,6 @@ function ProfilePage() {
   }, [getAllPrecioAgain]);
   return (
     <>
-      
-
       <div className="section  profile-content">
         <Container>
           <div className="owner">
@@ -95,15 +98,32 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
+              
               <Button
                 color="info"
                 type="button"
                 outline
-                onClick={() => getAllPrecioAgain()}
+                
               >
                 ONZAA:_
                 {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
               </Button>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+                onClick={() =>{setManualmente(false); getAllPrecioAgain()}}
+              >
+                <ReplayIcon />
+              </IconButton>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+                onClick={()=>{setManualmente(true); setModal(true)}}
+              >
+                <SettingsIcon />
+              </IconButton>
             </div>
           </div>
         </Container>
@@ -115,8 +135,8 @@ function ProfilePage() {
             <Joyas precio={precioGrBol} />
           </div>
         </Container>
-      
-        <Container >
+
+        <Container>
           <div className="title">
             <h3>Oro en pepa</h3>
           </div>
@@ -133,7 +153,6 @@ function ProfilePage() {
           </div>
         </Container>
       </div>
-      
 
       {/**  agregamos el modal de la paguina*/}
       <Modal isOpen={modal} toggle={actionModal}>
@@ -145,13 +164,14 @@ function ProfilePage() {
                   <br />
                   <br />
                   <Col sm="12">
-                    <FormGroup className="">
+                    <FormGroup className="m-2">
                       <Input
                         className="form-control"
                         onChange={handleChange}
                         defaultValue={undefined}
                         value={precioOnzaAux || ""}
                         type="number"
+                        placeholder="Onza en dolares"
                       />
                     </FormGroup>
                     <div className="form-control-feedback">
