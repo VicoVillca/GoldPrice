@@ -14,18 +14,15 @@ import {
 
 // reactstrap components
 // core components
-import ExamplesNavbar from "components/Navbars/ExamplesNavbar.js";
-import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
-import DemoFooter from "components/Footers/DemoFooter.js";
 import Joyas from "components/Utils/Joyas";
 import Pepa from "components/Utils/Pepa";
 import Ley from "components/Utils/Ley";
 //icons
 
 import IconButton from "@mui/material/IconButton";
-import ReplayIcon from '@mui/icons-material/Replay';
-import SettingsIcon from '@mui/icons-material/Settings';
-import TimelineIcon from '@mui/icons-material/Timeline';
+import ReplayIcon from "@mui/icons-material/Replay";
+import SettingsIcon from "@mui/icons-material/Settings";
+import TimelineIcon from "@mui/icons-material/Timeline";
 
 import axios from "axios";
 import HOST from "variables/general.js";
@@ -38,12 +35,13 @@ function ProfilePage() {
   const [precioGrBol, setPrecioGrBol] = useState(0);
 
   const [modal, setModal] = useState(false);
+  const [modalGrafico, setModalGrafico] = useState(false);
   const [manualmente, setManualmente] = useState(false);
 
   const actionModal = () => setModal(!modal);
+  const actionModalGrafico = () => setModalGrafico(!modalGrafico);
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     setPrecioOnzaAux(event.target.value);
   };
   document.documentElement.classList.remove("nav-open");
@@ -99,23 +97,17 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
-              
-              <Button
-                color="info"
-                type="button"
-                outline
-                
-              >
+
+              <Button color="info" type="button" outline>
                 ONZAA:_
                 {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
               </Button>
-              
-              
+
               <IconButton
                 color="primary"
                 aria-label="upload picture"
                 component="label"
-                
+                onClick={()=>setModalGrafico(true)}
               >
                 <TimelineIcon />
               </IconButton>
@@ -123,7 +115,10 @@ function ProfilePage() {
                 color="primary"
                 aria-label="upload picture"
                 component="label"
-                onClick={() =>{setManualmente(false); getAllPrecioAgain()}}
+                onClick={() => {
+                  setManualmente(false);
+                  getAllPrecioAgain();
+                }}
               >
                 <ReplayIcon />
               </IconButton>
@@ -131,7 +126,10 @@ function ProfilePage() {
                 color="primary"
                 aria-label="upload picture"
                 component="label"
-                onClick={()=>{setManualmente(true); setModal(true)}}
+                onClick={() => {
+                  setManualmente(true);
+                  setModal(true);
+                }}
               >
                 <SettingsIcon />
               </IconButton>
@@ -167,16 +165,17 @@ function ProfilePage() {
 
       {/**  agregamos el modal de la paguina*/}
       <Modal isOpen={modal} toggle={actionModal}>
-      <div className="modal-head">
-      <h4><center>Precio de la Onza</center></h4>
-      </div>
+        <div className="modal-head">
+          <h4>
+            <center>Precio de la Onza</center>
+          </h4>
+        </div>
         <div className="modal-body">
           <Row>
             <Col sm="12">
               {manualmente ? (
                 <>
                   <Col sm="12">
-                   
                     <FormGroup className="">
                       <Input
                         className="form-control"
@@ -292,6 +291,37 @@ function ProfilePage() {
           ) : (
             <></>
           )}
+        </div>
+      </Modal>
+     
+      <Modal isOpen={modalGrafico} toggle={actionModalGrafico}>
+        <div className="modal-head">
+          <h4>
+            <center>Grafico de la Onza</center>
+          </h4>
+        </div>
+        <div className="modal-body">holap</div>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => {
+              setModalGrafico(false);
+            }}
+          >
+            Cerrar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            disabled={precioOnzaAux > 0 ? false : true}
+            onClick={() => precioManualmente(precioOnzaAux)}
+          >
+            Continuar
+          </Button>
         </div>
       </Modal>
     </>
