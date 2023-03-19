@@ -36,11 +36,13 @@ function ProfilePage() {
 
   const [modal, setModal] = useState(false);
   const [modalGrafico, setModalGrafico] = useState(false);
-  const [manualmente, setManualmente] = useState(false);
+  const [modalEditar, setModalEditar] = useState(false);
+  const [modalError, setModalError] = useState(false);
 
   const actionModal = () => setModal(!modal);
   const actionModalGrafico = () => setModalGrafico(!modalGrafico);
-
+  const actionModalEditar = () => setModalEditar(!modalEditar);
+  const actionModalError = () => setModalError(!modalError);
   const handleChange = (event) => {
     setPrecioOnzaAux(event.target.value);
   };
@@ -58,7 +60,7 @@ function ProfilePage() {
     setPrecioOnzaDol(nro);
     setPrecioGrBol(nro * 6.97 * 0.03215);
     setPrecioOnzaAux("");
-    setModal(false);
+    setModalEditar(false);
   };
   const getAllPrecioAgain = useCallback(async () => {
     setModal(true);
@@ -75,10 +77,11 @@ function ProfilePage() {
         //setFecha(response?.data?.fecha);
       })
       .catch((error) => {
+        setModal(false);
+        setModalError(true);
         console.log("error en cath");
         console.log(error);
         setPrecioOnzaDol(-1);
-        setManualmente(false);
       });
   }, []);
 
@@ -97,17 +100,20 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
-
-              <Button color="info" type="button" outline>
-                ONZAA:_
-                {precioOnzaDol > 0 ? precioOnzaDol : "0"}$
+              
+              <Button color="info" type="button" >
+               Onza: 
+                {
+                  ' $ ' + precioOnzaDol.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+                }
+                
               </Button>
 
               <IconButton
                 color="primary"
                 aria-label="upload picture"
                 component="label"
-                onClick={()=>setModalGrafico(true)}
+                onClick={() => setModalGrafico(true)}
               >
                 <TimelineIcon />
               </IconButton>
@@ -116,7 +122,6 @@ function ProfilePage() {
                 aria-label="upload picture"
                 component="label"
                 onClick={() => {
-                  setManualmente(false);
                   getAllPrecioAgain();
                 }}
               >
@@ -127,8 +132,7 @@ function ProfilePage() {
                 aria-label="upload picture"
                 component="label"
                 onClick={() => {
-                  setManualmente(true);
-                  setModal(true);
+                  setModalEditar(true);
                 }}
               >
                 <SettingsIcon />
@@ -173,127 +177,99 @@ function ProfilePage() {
         <div className="modal-body">
           <Row>
             <Col sm="12">
-              {manualmente ? (
-                <>
-                  <Col sm="12">
-                    <FormGroup className="">
-                      <Input
-                        className="form-control"
-                        onChange={handleChange}
-                        defaultValue={undefined}
-                        value={precioOnzaAux || ""}
-                        type="number"
-                        placeholder="Onza en dolares"
-                      />
-                    </FormGroup>
-                    <div className="form-control-feedback">
-                      Pueden buscar en kitco.com
-                    </div>
-                  </Col>
-                </>
-              ) : (
-                <>
-                  {precioOnzaDol === 0 ? (
-                    <div className="author">
-                      <center>
-                        <CardSubtitle>
-                          <Spinner
-                            className="m-3"
-                            color="primary"
-                            style={{
-                              height: "3rem",
-                              width: "3rem",
-                            }}
-                          />
-                          <h6 className=" col-centered">
-                            consultando precio....
-                          </h6>
-                          <br />
-                          <Button
-                            className="btn-round mr-1"
-                            color="success"
-                            type="button"
-                            onClick={() => setManualmente(true)}
-                          >
-                            Colocar Manualmente
-                          </Button>
-                        </CardSubtitle>
-                      </center>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="author">
-                        <center>
-                          <i
-                            className="fa fa-times-circle  fa-5x text-danger m-3"
-                            color="primary"
-                            style={{
-                              height: "3rem",
-                              width: "3rem",
-                            }}
-                          />
-                          <br />
-                          <br />
-                          <Container>Error al Obtener el precio!!</Container>
-                          <br />
-                          <Button
-                            className="btn-round mr-1"
-                            color="info"
-                            outline
-                            type="button"
-                            onClick={getAllPrecioAgain}
-                          >
-                            Intentar Otra ves
-                          </Button>
-                          <Button
-                            className="btn-round mr-1"
-                            color="success"
-                            type="button"
-                            onClick={() => setManualmente(true)}
-                          >
-                            Colocar Manualmente
-                          </Button>
-                        </center>
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
+              <div className="author">
+                <center>
+                  <CardSubtitle>
+                    <Spinner
+                      className="m-3"
+                      color="primary"
+                      style={{
+                        height: "3rem",
+                        width: "3rem",
+                      }}
+                    />
+                    <h6 className=" col-centered">consultando precio....</h6>
+                  </CardSubtitle>
+                </center>
+              </div>
             </Col>
           </Row>
         </div>
         <div className="modal-footer">
-          {manualmente ? (
-            <>
-              <Button
-                type="button"
-                className="btn-round mr-1"
-                color="default"
-                outline
-                onClick={() => {
-                  setManualmente(false);
-                  setModal(false);
-                  setPrecioOnzaAux("");
-                }}
-              >
-                cancelar
-              </Button>
-              <Button
-                className="btn-round ml-1"
-                color="success"
-                type="button"
-                disabled={precioOnzaAux > 0 ? false : true}
-                onClick={() => precioManualmente(precioOnzaAux)}
-              >
-                Continuar
-              </Button>
-            </>
-          ) : (
-            <></>
-          )}
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => {
+              setModal(false);
+              setPrecioOnzaAux("");
+            }}
+          >
+            cancelar
+          </Button>
+          <Button
+            className="btn-round mr-1"
+            color="success"
+            type="button"
+            onClick={() => {
+              setModal(false);
+              setModalEditar(true);
+            }}
+          >
+            editar
+          </Button>
         </div>
       </Modal>
-     
+      {/** Modal editar */}
+      <Modal isOpen={modalEditar} toggle={actionModalEditar}>
+        <div className="modal-head">
+          <h4>
+            <center>Editar Onza Manualmente</center>
+          </h4>
+        </div>
+        <div className="modal-body">
+          <Col sm="12">
+            <FormGroup className="">
+              <Input
+                className="form-control"
+                onChange={handleChange}
+                defaultValue={undefined}
+                value={precioOnzaAux || ""}
+                type="number"
+                placeholder="Onza en dolares"
+              />
+            </FormGroup>
+            <div className="form-control-feedback">
+              Pueden buscar en kitco.com
+            </div>
+          </Col>
+        </div>
+        <div className="modal-footer">
+          <Button
+            type="button"
+            className="btn-round mr-1"
+            color="default"
+            outline
+            onClick={() => {
+              setModalEditar(false);
+            }}
+          >
+            Cerrar
+          </Button>
+          <Button
+            className="btn-round ml-1"
+            color="success"
+            type="button"
+            disabled={precioOnzaAux > 0 ? false : true}
+            onClick={() => precioManualmente(precioOnzaAux)}
+          >
+            Continuar
+          </Button>
+        </div>
+      </Modal>
+
+      {/** Modal abrir graficos */}
       <Modal isOpen={modalGrafico} toggle={actionModalGrafico}>
         <div className="modal-head">
           <h4>
@@ -318,10 +294,54 @@ function ProfilePage() {
             color="success"
             type="button"
             disabled={precioOnzaAux > 0 ? false : true}
-            onClick={() => precioManualmente(precioOnzaAux)}
+            
           >
             Continuar
           </Button>
+        </div>
+      </Modal>
+      {/** Modal Error */}
+      <Modal isOpen={modalError} toggle={actionModalError}>
+        <div className="modal-body">
+          <div className="author">
+            <center>
+              <i
+                className="fa fa-times-circle  fa-5x text-danger m-3"
+                color="primary"
+                style={{
+                  height: "3rem",
+                  width: "3rem",
+                }}
+              />
+              <br />
+              <br />
+              <Container>Error al Obtener el precio!!</Container>
+              <br />
+              <Button
+                className="btn-round mr-1"
+                color="info"
+                outline
+                type="button"
+                onClick={() => {
+                  setModalError(false);
+                  getAllPrecioAgain();
+                }}
+              >
+                Intentar Otra ves
+              </Button>
+              <Button
+                className="btn-round mr-1"
+                color="success"
+                type="button"
+                onClick={() => {
+                  setModalError(false);
+                  setModalEditar(true);
+                }}
+              >
+                Colocar Manualmente
+              </Button>
+            </center>
+          </div>
         </div>
       </Modal>
     </>

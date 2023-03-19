@@ -20,11 +20,6 @@ function ExamplesNavbar() {
 
     // This styling will be applied to a <NavLink> when the
   // route that it links to is currently selected.
-  let activeStyle = {
-    textDecoration: "underline",
-  };
-
-  let activeClassName = "underline";
 
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
@@ -79,6 +74,7 @@ function ExamplesNavbar() {
             })}
             onClick={toggleNavbarCollapse}
           >
+            
             <span className="navbar-toggler-bar bar1" />
             <span className="navbar-toggler-bar bar2" />
             <span className="navbar-toggler-bar bar3" />
