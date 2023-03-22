@@ -100,13 +100,13 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
-              
-              <Button color="info" type="button" >
-               Onza: 
-                {
-                  ' $ ' + precioOnzaDol.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-                }
-                
+
+              <Button color="info" type="button">
+                Onza:
+                {" $ " +
+                  precioOnzaDol
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Button>
 
               <IconButton
@@ -276,7 +276,7 @@ function ProfilePage() {
             <center>Grafico de la Onza</center>
           </h4>
         </div>
-        <div className="modal-body">holap</div>
+        <div className="modal-body center"> En desarrollo...</div>
         <div className="modal-footer">
           <Button
             type="button"
@@ -294,7 +294,6 @@ function ProfilePage() {
             color="success"
             type="button"
             disabled={precioOnzaAux > 0 ? false : true}
-            
           >
             Continuar
           </Button>
