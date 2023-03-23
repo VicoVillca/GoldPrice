@@ -24,6 +24,8 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TimelineIcon from "@mui/icons-material/Timeline";
 
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 import axios from "axios";
 import HOST from "variables/general.js";
 const baseUrl = process.env.REACT_APP_URL_BACK_END + "/prueba";
@@ -276,26 +278,19 @@ function ProfilePage() {
             <center>Grafico de la Onza</center>
           </h4>
         </div>
-        <div className="modal-body center"> En desarrollo...</div>
+        <div className="modal-body center"> <img src="https://www.kitco.com/kcastcharts/live/gold/438_235/au_24h_usd_oz.gif" alt="grafico"/></div>
         <div className="modal-footer">
           <Button
             type="button"
             className="btn-round mr-1"
-            color="default"
-            outline
+     
+
+            color="primary"
             onClick={() => {
               setModalGrafico(false);
             }}
           >
-            Cerrar
-          </Button>
-          <Button
-            className="btn-round ml-1"
-            color="success"
-            type="button"
-            disabled={precioOnzaAux > 0 ? false : true}
-          >
-            Continuar
+            Continuar  <ArrowForwardIosIcon/>
           </Button>
         </div>
       </Modal>
