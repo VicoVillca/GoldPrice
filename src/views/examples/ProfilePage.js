@@ -24,7 +24,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import SettingsIcon from "@mui/icons-material/Settings";
 import TimelineIcon from "@mui/icons-material/Timeline";
 
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import axios from "axios";
 import HOST from "variables/general.js";
@@ -105,8 +105,9 @@ function ProfilePage() {
 
               <Button color="info" type="button">
                 Onza:
-                {" $ " +
-                  precioOnzaDol
+              
+                    {" $ " +
+                  (parseFloat(precioOnzaDol))
                     .toFixed(2)
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Button>
@@ -278,19 +279,23 @@ function ProfilePage() {
             <center>Grafico de la Onza</center>
           </h4>
         </div>
-        <div className="modal-body center"> <img src="https://www.kitco.com/kcastcharts/live/gold/438_235/au_24h_usd_oz.gif" alt="grafico"/></div>
+        <div className="modal-body center">
+          {" "}
+          <img
+            src="https://www.kitco.com/kcastcharts/live/gold/438_235/au_24h_usd_oz.gif"
+            alt="grafico"
+          />
+        </div>
         <div className="modal-footer">
           <Button
             type="button"
             className="btn-round mr-1"
-     
-
             color="primary"
             onClick={() => {
               setModalGrafico(false);
             }}
           >
-            Continuar  <ArrowForwardIosIcon/>
+            Continuar <ArrowForwardIosIcon />
           </Button>
         </div>
       </Modal>
