@@ -57,7 +57,7 @@ function ProfilePage() {
   });
 
   const precioManualmente = (nro) => {
-    console.log("precio manuelamente");
+    console.log("precio manualmente");
     console.log("nro = " + nro);
     setPrecioOnzaDol(nro);
     setPrecioGrBol(nro * 6.97 * 0.03215);
