@@ -57,8 +57,6 @@ function ProfilePage() {
   });
 
   const precioManualmente = (nro) => {
-    console.log("precio manualmente");
-    console.log("nro = " + nro);
     setPrecioOnzaDol(nro);
     setPrecioGrBol(nro * 6.97 * 0.03215);
     setPrecioOnzaAux("");
@@ -66,29 +64,23 @@ function ProfilePage() {
   };
   const getAllPrecioAgain = useCallback(async () => {
     setModal(true);
-    console.log("Obtenemso Precio");
     setPrecioOnzaDol(0);
-    console.log(baseUrl);
+    //console.log(baseUrl);
     await axios
       .get(baseUrl, JSON.stringify({}), header)
       .then((response) => {
-        console.log(response);
         setModal(false);
         setPrecioOnzaDol(parseFloat(response?.data?.compra));
         setPrecioGrBol(parseFloat(response?.data?.compra) * 6.97 * 0.03215);
-        //setFecha(response?.data?.fecha);
       })
       .catch((error) => {
         setModal(false);
         setModalError(true);
-        console.log("error en cath");
-        console.log(error);
         setPrecioOnzaDol(-1);
       });
   }, []);
 
   useEffect(() => {
-    console.log("UseEfect");
     getAllPrecioAgain();
   }, [getAllPrecioAgain]);
   return (
@@ -102,16 +94,13 @@ function ProfilePage() {
                 className="img-circle img-no-padding img-responsive"
                 src={require("assets/img/imgloginedit.png")}
               />
-
               <Button color="info" type="button">
                 Onza:
-              
-                    {" $ " +
-                  (parseFloat(precioOnzaDol))
+                {" $ " +
+                  parseFloat(precioOnzaDol)
                     .toFixed(2)
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </Button>
-
               <IconButton
                 color="primary"
                 aria-label="upload picture"
@@ -160,6 +149,7 @@ function ProfilePage() {
             <Pepa precio={precioGrBol} />
           </div>
         </Container>
+        
         <Container>
           <div className="title">
             <h3>Oro por ley</h3>
