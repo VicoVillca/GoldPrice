@@ -132,32 +132,38 @@ function ProfilePage() {
             </div>
           </div>
         </Container>
-        <Container>
-          <div className="title">
-            <h3>Oro en joyas</h3>
-          </div>
-          <div id="buttons">
-            <Joyas precio={precioGrBol} />
-          </div>
-        </Container>
+        {precioGrBol > 0 ? (
+          <>
+            <Container>
+              <div className="title">
+                <h3>Oro en joyas</h3>
+              </div>
+              <div id="buttons">
+                <Joyas precio={precioGrBol} />
+              </div>
+            </Container>
 
-        <Container>
-          <div className="title">
-            <h3>Oro en pepa</h3>
-          </div>
-          <div id="buttons">
-            <Pepa precio={precioGrBol} />
-          </div>
-        </Container>
-        
-        <Container>
-          <div className="title">
-            <h3>Oro por ley</h3>
-          </div>
-          <div id="buttons">
-            <Ley precio={precioGrBol} />
-          </div>
-        </Container>
+            <Container>
+              <div className="title">
+                <h3>Oro en pepa</h3>
+              </div>
+              <div id="buttons">
+                <Pepa precio={precioGrBol} />
+              </div>
+            </Container>
+
+            <Container>
+              <div className="title">
+                <h3>Oro por ley</h3>
+              </div>
+              <div id="buttons">
+                <Ley precio={precioGrBol} />
+              </div>
+            </Container>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
 
       {/**  agregamos el modal de la paguina*/}
@@ -210,7 +216,7 @@ function ProfilePage() {
               setModalEditar(true);
             }}
           >
-            editar
+            Colocar Manualmente
           </Button>
         </div>
       </Modal>
@@ -274,6 +280,7 @@ function ProfilePage() {
           <img
             src="https://www.kitco.com/kcastcharts/live/gold/438_235/au_24h_usd_oz.gif"
             alt="grafico"
+            className="img-rounded img-responsive"
           />
         </div>
         <div className="modal-footer">
