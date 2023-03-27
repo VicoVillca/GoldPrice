@@ -81,6 +81,7 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
+    console.log("Holap zzz");
     getAllPrecioAgain();
   }, [getAllPrecioAgain]);
   return (
