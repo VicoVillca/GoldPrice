@@ -23,7 +23,7 @@ function Joyas(prop) {
             <th>#</th>
             <th>ESTADO</th>
             <th>COMPRA</th>
-            {/**<th>VENTA</th>*/}
+            {<th>VENTA</th>}
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@ function Joyas(prop) {
                     <small>fundido</small>
                   </td>
                   <td>{compra(i/10)-10}</td>
-                  {/**<td>{venta(row.ley)}</td>*/}
+                  {<td>{venta(i/10)}</td>}
                 </tr>
               );
             }

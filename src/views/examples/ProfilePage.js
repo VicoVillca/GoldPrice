@@ -41,6 +41,7 @@ function ProfilePage() {
   const [modalEditar, setModalEditar] = useState(false);
   const [modalError, setModalError] = useState(false);
 
+  const precioDolar = 8.5;
   const actionModal = () => setModal(!modal);
   const actionModalGrafico = () => setModalGrafico(!modalGrafico);
   const actionModalEditar = () => setModalEditar(!modalEditar);
@@ -58,7 +59,7 @@ function ProfilePage() {
 
   const precioManualmente = (nro) => {
     setPrecioOnzaDol(nro);
-    setPrecioGrBol(nro * 6.97 * 0.03215);
+    setPrecioGrBol(nro * precioDolar * 0.03215);
     setPrecioOnzaAux("");
     setModalEditar(false);
   };
@@ -69,9 +70,34 @@ function ProfilePage() {
     await axios
       .get(baseUrl, JSON.stringify({}), header)
       .then((response) => {
-        setModal(false);
-        setPrecioOnzaDol(parseFloat(response?.data?.compra));
-        setPrecioGrBol(parseFloat(response?.data?.compra) * 6.97 * 0.03215);
+        console.log(response);
+        console.log(response.data.success);
+        try {
+          // Parsear la respuesta JSON
+          console.log("Antesd e la respuesta");
+        console.log(response.data.success);
+          // Verificar si la respuesta es exitosa
+          if (response.data.success) {
+            console.log("Respuesta exitosa");
+            // Si la respuesta es exitosa, mostrar el array
+            const array = response.data.data.array;
+            console.log("Array:", array);
+            setModal(false);
+            setPrecioOnzaDol(parseFloat(array[0].replace(',', '')));
+            //setPrecioGrBol(parseFloat(array[1].replace(',', '')) * 6.97 * 0.03215);
+            setPrecioGrBol(parseFloat(array[1].replace(',', '')) * precioDolar * 0.03215);
+          } else {
+            // Si la respuesta no es exitosa, mostrar un mensaje de error
+            console.log("Mensaje de error:", response.data.message);
+          }
+        } catch (error) {
+          // Manejar cualquier error que ocurra durante el análisis JSON
+          console.error("Error al analizar la respuesta JSON:", error.message);
+        }
+
+
+
+
       })
       .catch((error) => {
         setModal(false);
