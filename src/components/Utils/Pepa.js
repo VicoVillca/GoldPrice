@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+
 // reactstrap components
 import {
   Button,
@@ -13,68 +14,63 @@ import {
   ButtonToolbar,
   ButtonGroup,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+
+// core components
 import { createItem, getItems, deleteItem } from "variables/api";
 
 function Pepa(prop) {
+  // State variables
   const [id, setId] = useState(null);
   const [nombre, setNombre] = useState(null);
   const [ley, setLey] = useState(null);
   const [modal, setModal] = useState(false);
   const [modalUpdate, setModalUpdate] = useState(false);
-
   const [modalDelete, setModalDelete] = useState(false);
-  const actionModal = useCallback(() => setModal(!modal), [setModal, modal]);
-  const actionModalUpdate = () => setModalUpdate(!modalUpdate);
-
-  const actionModalDelete = () => setModalDelete(!modalDelete);
   const [pepa, setPepa] = useState([]);
-  const compra = (n) => {
-    //descontamso el 6% para ganancias
-    return Math.ceil(prop.precio * n * 0.94);
-  };
+
+  // Toggle modals
+  const actionModal = useCallback(() => setModal(!modal), [modal]);
+  const actionModalUpdate = () => setModalUpdate(!modalUpdate);
+  const actionModalDelete = () => setModalDelete(!modalDelete);
+
+  // Calculations
+  const compra = (n) => Math.ceil(prop.precio * n * 0.94);
+
+  // Open modals with data
   const openModalUpdate = (e) => {
-    console.log("Abrimos modal para editar");
-    console.log(e);
-    actionModalUpdate();
     setNombre(e.nombre);
     setLey(e.ley);
+    actionModalUpdate();
   };
 
   const openModalDelete = (e) => {
-    console.log("eliminamos de la lista");
-    console.log(e.id);
     setId(e.id);
-    setLey(e.ley);
     setNombre(e.nombre);
+    setLey(e.ley);
     actionModalDelete();
   };
+
+  // API calls
   const guardar = useCallback(async () => {
-    console.log("guardamos");
-    createItem({
-      nombre: nombre,
-      ley: ley,
-    });
-    const p = await getItems();
-    setPepa(p);
+    await createItem({ nombre, ley });
+    const items = await getItems();
+    setPepa(items);
     actionModal();
   }, [nombre, ley, actionModal]);
 
   const borrar = useCallback(async () => {
-    console.log("borramos " + id);
-    deleteItem(id);
-    const p = await getItems();
-    setPepa(p);
+    await deleteItem(id);
+    const items = await getItems();
+    setPepa(items);
     setModalDelete(false);
-  }, [id, setModalDelete, setPepa]);
+  }, [id]);
 
   const getAll = useCallback(async () => {
-    console.log("Papus");
-    const p = await getItems();
-    setPepa(p);
-    console.log("GetAllPrecios");
+    const items = await getItems();
+    setPepa(items);
   }, []);
-  // core components
+
+  // Fetch items on component mount
   useEffect(() => {
     getAll();
   }, [getAll]);

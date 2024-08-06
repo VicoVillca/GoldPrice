@@ -46,3 +46,18 @@ const getArrayFromCollection = (collection) => {
         return { ...doc.data(), id: doc.id };
     });
 }
+
+//precio del dolar
+
+// UPDATE
+export const updateDolar = async (id, obj) => {
+    const colRef = collection(db, 'dolar');
+    await updateDoc(doc(colRef, id), obj)
+}
+
+// READ
+export const getDolar= async ()  => {
+    const colRef = collection(db, 'dolar');
+    const result = await getDocs(query(colRef));
+    return getArrayFromCollection(result);
+}
