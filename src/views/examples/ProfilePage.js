@@ -22,7 +22,6 @@ import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EditIcon from "@mui/icons-material/Edit";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 // Other
 import axios from "axios";
@@ -37,22 +36,26 @@ function ProfilePage() {
  // State
 const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
 const [precioOnzaAux, setPrecioOnzaAux] = useState(0);
+const [precioDolarAux, setPrecioDolarAux] = useState(0);
 const [precioGrBol, setPrecioGrBol] = useState(0);
 const [data, setData] = useState({ dolar: null, id: '' });
 
 const [modal, setModal] = useState(false);
-const [modalGrafico, setModalGrafico] = useState(false);
+const [modalDolar, setModalDolar] = useState(false);
 const [modalEditar, setModalEditar] = useState(false);
 const [modalError, setModalError] = useState(false);
 
 // Handlers
 const actionModal = () => setModal(!modal);
-const actionModalGrafico = () => setModalGrafico(!modalGrafico);
+const actionModalDolar = () => setModalDolar(!modalDolar);
 const actionModalEditar = () => setModalEditar(!modalEditar);
 const actionModalError = () => setModalError(!modalError);
 
 const handleChange = (event) => {
   setPrecioOnzaAux(event.target.value);
+};
+const handleChangeDolar = (event) => {
+  setPrecioDolarAux(event.target.value);
 };
 
 const precioManualmente = (nro) => {
@@ -60,6 +63,17 @@ const precioManualmente = (nro) => {
   setPrecioGrBol(nro * data.dolar * 0.03215);
   setPrecioOnzaAux("");
   setModalEditar(false);
+};
+
+const dolarManualmente = (nro) => {
+  console.log("Hlaasd");
+  setData(prevData => ({
+    ...prevData,
+    dolar: nro,
+  }));
+  setPrecioGrBol(precioOnzaDol * nro * 0.03215);
+  setPrecioDolarAux("");
+  setModalDolar(false);
 };
 
 // Fetch Data
@@ -75,7 +89,7 @@ const getAllPrecioAgain = useCallback(async () => {
       const array = response.data.data.array;
       setModal(false);
       setPrecioOnzaDol(parseFloat(array[0].replace(',', '')));
-      setPrecioGrBol(parseFloat(array[1].replace(',', '')) * data.dolar * 0.03215);
+      setPrecioGrBol(parseFloat(array[1].replace(',', '')) * p[0].dolar * 0.03215);
     } else {
       console.log("Mensaje de error:", response.data.message);
     }
@@ -85,7 +99,7 @@ const getAllPrecioAgain = useCallback(async () => {
     setModalError(true);
     setPrecioOnzaDol(-1);
   }
-}, [data.dolar]);
+}, []);
 
 // Effects
 useEffect(() => {
@@ -132,7 +146,7 @@ return (
               color="primary"
               aria-label="open graph"
               component="label"
-              onClick={() => setModalGrafico(true)}
+              onClick={() => setModalDolar(true)}
             >
               <AttachMoneyIcon />
             </IconButton>
@@ -263,21 +277,6 @@ return (
             Pueden buscar en kitco.com
           </div>
         </Col>
-
-        <Col sm="12">
-          <FormGroup>
-            <Input
-              className="form-control"
-              onChange={handleChange}
-              value={precioOnzaAux || ""}
-              type="number"
-              placeholder="Precio de 1 dolar en bolivianos"
-            />
-          </FormGroup>
-          <div className="form-control-feedback">
-            Pueden buscar en kitco.com
-          </div>
-        </Col>
       </div>
       <div className="modal-footer">
         <Button
@@ -302,27 +301,46 @@ return (
     </Modal>
 
     {/* Modal for Opening Graph */}
-    <Modal isOpen={modalGrafico} toggle={actionModalGrafico}>
+    <Modal isOpen={modalDolar} toggle={actionModalDolar}>
       <div className="modal-head">
         <h4>
-          <center>Grafico de la Onza</center>
+          <center>Editar Dolar manualmente</center>
         </h4>
       </div>
-      <div className="modal-body center">
-        <img
-          src="https://www.kitco.com/kcastcharts/live/gold/438_235/au_24h_usd_oz.gif"
-          alt="grafico"
-          className="img-rounded img-responsive"
-        />
+      <div className="modal-body">
+      <Col sm="12">
+          <FormGroup>
+            <Input
+              className="form-control"
+              onChange={handleChangeDolar}
+              value={precioDolarAux || ""}
+              type="number"
+              placeholder="Precio del dolar en bolivianos"
+            />
+          </FormGroup>
+          <div className="form-control-feedback">
+            Modificar dependiendo el estado actual en la sociedad
+          </div>
+        </Col>
       </div>
       <div className="modal-footer">
-        <Button
+      <Button
           type="button"
           className="btn-round mr-1"
-          color="primary"
-          onClick={() => setModalGrafico(false)}
+          color="default"
+          outline
+          onClick={() => setModalDolar(false)}
         >
-          Continuar <ArrowForwardIosIcon />
+          Cerrar
+        </Button>
+        <Button
+          className="btn-round ml-1"
+          color="success"
+          type="button"
+          disabled={precioDolarAux <= 0}
+          onClick={() => dolarManualmente(precioDolarAux)}
+        >
+          Continuar
         </Button>
       </div>
     </Modal>
