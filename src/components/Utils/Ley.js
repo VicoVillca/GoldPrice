@@ -5,7 +5,7 @@ import { Row, Table, Col } from "reactstrap";
 
 function Joyas(prop) {
   // Calculate purchase price with a 6% profit margin deducted
-  const compra = (n) => Math.ceil(prop.precio * (n / 100) * 0.94);
+  const compra = (n) => Math.ceil(prop.precio * (n / 100) * 0.98);
 
   // Calculate sale price without the profit margin deduction
   const venta = (n) => Math.ceil(prop.precio * (n / 100));
@@ -18,7 +18,7 @@ function Joyas(prop) {
         <tr key={i}>
           <th scope="row">{(i / 10).toFixed(1)}</th>
           <td><small>fundido</small></td>
-          <td>{compra(i / 10) - 10}</td>
+          <td>{compra(i / 10)}</td>
           <td>{venta(i / 10)}</td>
         </tr>
       );

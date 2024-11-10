@@ -34,7 +34,7 @@ function Pepa(prop) {
   const actionModalDelete = () => setModalDelete(!modalDelete);
 
   // Calculations
-  const compra = (n) => Math.ceil(prop.precio * n * 0.94);
+  const compra = (n) => Math.ceil(prop.precio * n * 0.98);
 
   // Open modals with data
   const openModalUpdate = (e) => {
@@ -95,7 +95,7 @@ function Pepa(prop) {
                 <td>
                   <small>{row.ley}</small>
                 </td>
-                <td>{compra(row.ley) - 10}</td>
+                <td>{compra(row.ley)}</td>
                 <td>
                   {/*<Link to={"/fotos/" + row.id}>
                     <i className="fa fa-picture-o" />

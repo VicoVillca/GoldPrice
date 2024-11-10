@@ -17,7 +17,7 @@ function Joyas(prop) {
   ]);
   const compra = (n) => {
     //descontamso el 6% para ganancias
-    return Math.ceil(prop.precio * n * 0.94);
+    return Math.ceil(prop.precio * n * 0.98);
   };
   const venta = (n) => {
     //sin el descuento de ganancias
@@ -43,7 +43,7 @@ function Joyas(prop) {
               <td>
                 <small>({row.estado})</small>
               </td>
-              <td>{compra(row.ley)-10}</td>
+              <td>{compra(row.ley)}</td>
               {<td>{venta(row.ley)}</td>}
             </tr>
           ))}

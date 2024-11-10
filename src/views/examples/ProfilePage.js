@@ -20,13 +20,14 @@ import Ley from "components/Utils/Ley";
 // Icons
 import IconButton from "@mui/material/IconButton";
 import ReplayIcon from "@mui/icons-material/Replay";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import EditIcon from "@mui/icons-material/Edit";
+import CalculatorIcon from '@mui/icons-material/Calculate';
 
 // Other
 import axios from "axios";
 import HOST from "variables/general.js";
 import { getDolar } from "variables/api";
+import Calculadora from "components/Utils/Calculadora";
 
 const baseUrl = process.env.REACT_APP_URL_BACK_END + "/prueba";
 const header = HOST.headerPublic();
@@ -34,20 +35,21 @@ const header = HOST.headerPublic();
 
 function ProfilePage() {
  // State
-const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
+//const [precioOnzaDol, setPrecioOnzaDol] = useState(0);
 const [precioOnzaAux, setPrecioOnzaAux] = useState(0);
 const [precioDolarAux, setPrecioDolarAux] = useState(0);
 const [precioGrBol, setPrecioGrBol] = useState(0);
-const [data, setData] = useState({ dolar: null, id: '' });
+const [dolar, setDolar] = useState({ dolar: null,id: '' });
+const [onza, setOnza] = useState(null);
 
 const [modal, setModal] = useState(false);
-const [modalDolar, setModalDolar] = useState(false);
+const [modalCalculadora, setModalCalculadora] = useState(false);
 const [modalEditar, setModalEditar] = useState(false);
 const [modalError, setModalError] = useState(false);
 
 // Handlers
 const actionModal = () => setModal(!modal);
-const actionModalDolar = () => setModalDolar(!modalDolar);
+const actionModalCalculadora = () => setModalCalculadora(!modalCalculadora);
 const actionModalEditar = () => setModalEditar(!modalEditar);
 const actionModalError = () => setModalError(!modalError);
 
@@ -58,38 +60,34 @@ const handleChangeDolar = (event) => {
   setPrecioDolarAux(event.target.value);
 };
 
-const precioManualmente = (nro) => {
-  setPrecioOnzaDol(nro);
-  setPrecioGrBol(nro * data.dolar * 0.03215);
+const precioManualmente = (newOnza,newDolar) => {
+  setOnza(newOnza);
+  setDolar(prevData => ({
+    ...prevData,
+    dolar: newDolar
+  }));
+  setPrecioDolarAux("");
   setPrecioOnzaAux("");
   setModalEditar(false);
 };
 
 const dolarManualmente = (nro) => {
-  console.log("Hlaasd");
-  setData(prevData => ({
-    ...prevData,
-    dolar: nro,
-  }));
-  setPrecioGrBol(precioOnzaDol * nro * 0.03215);
-  setPrecioDolarAux("");
-  setModalDolar(false);
+
 };
 
 // Fetch Data
 const getAllPrecioAgain = useCallback(async () => {
   setModal(true);
-  setPrecioOnzaDol(0);
 
   try {
     const p = await getDolar();
-    setData(p[0]);
+    setDolar(p[0]);
     const response = await axios.get(baseUrl, JSON.stringify({}), header);
     if (response.data.success) {
       const array = response.data.data.array;
       setModal(false);
-      setPrecioOnzaDol(parseFloat(array[0].replace(',', '')));
-      setPrecioGrBol(parseFloat(array[1].replace(',', '')) * p[0].dolar * 0.03215);
+      setOnza(array[0]);
+      
     } else {
       console.log("Mensaje de error:", response.data.message);
     }
@@ -97,9 +95,28 @@ const getAllPrecioAgain = useCallback(async () => {
     console.error("Error al obtener o analizar la respuesta JSON:", error.message);
     setModal(false);
     setModalError(true);
-    setPrecioOnzaDol(-1);
+    setDolar({dolar:null,id:''})
+    setOnza(null);
   }
 }, []);
+
+const abrirCalculadora = () => {
+  setPrecioOnzaAux(onza? onza:'');
+  setPrecioDolarAux(dolar.dolar? dolar.dolar:'');
+  setModalCalculadora(true); // Abrimos el modal
+};
+
+const editarPrecios = () => {
+  setPrecioOnzaAux(onza? onza:'');
+  setPrecioDolarAux(dolar.dolar? dolar.dolar:'');
+  setModalEditar(true); // Abrimos el modal
+};
+
+useEffect(() => {
+  if(onza!=null && dolar.dolar !=null)
+  setPrecioGrBol(onza * dolar.dolar * 0.03215);
+  else setPrecioGrBol(0);
+}, [onza, dolar.dolar]); 
 
 // Effects
 useEffect(() => {
@@ -130,25 +147,27 @@ return (
             />
             <Button color="info" type="button">
               Onz ={" "}
-              {parseFloat(precioOnzaDol)
+              {parseFloat(onza)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 + " $"}
             </Button>
             <Button color="success" type="button">
               1 $ ={" "}
-              {parseFloat(data.dolar)
+              {parseFloat(dolar.dolar)
                 .toFixed(2)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
                 + " bs"}
             </Button>
+            
+          
             <IconButton
               color="primary"
               aria-label="open graph"
               component="label"
-              onClick={() => setModalDolar(true)}
+              onClick={abrirCalculadora}
             >
-              <AttachMoneyIcon />
+              <CalculatorIcon />
             </IconButton>
             <IconButton
               color="primary"
@@ -162,14 +181,13 @@ return (
               color="primary"
               aria-label="edit"
               component="label"
-              onClick={() => setModalEditar(true)}
+              onClick={editarPrecios}
             >
               <EditIcon />
             </IconButton>
           </div>
         </div>
       </Container>
-
       {/* Conditional Rendering */}
       {precioGrBol > 0 && (
         <>
@@ -259,10 +277,25 @@ return (
     <Modal isOpen={modalEditar} toggle={actionModalEditar}>
       <div className="modal-head">
         <h4>
-          <center>Editar Onza Manualmente</center>
+          <center>Editar Precios</center>
         </h4>
       </div>
       <div className="modal-body">
+      <Col sm="12">
+          <FormGroup>
+            <Input
+              className="form-control"
+              onChange={handleChangeDolar}
+              value={precioDolarAux || ""}
+              type="number"
+              placeholder="Precio del dolar en bolivianos"
+            />
+          </FormGroup>
+          <div className="form-control-feedback">
+            Precio del dolar en bolivianos
+          </div>
+        </Col>
+        <br/>
         <Col sm="12">
           <FormGroup>
             <Input
@@ -274,9 +307,11 @@ return (
             />
           </FormGroup>
           <div className="form-control-feedback">
-            Pueden buscar en kitco.com
+          Precio de la Onza en dolares, Pueden buscar en kitco.com
           </div>
         </Col>
+
+        
       </div>
       <div className="modal-footer">
         <Button
@@ -292,36 +327,23 @@ return (
           className="btn-round ml-1"
           color="success"
           type="button"
-          disabled={precioOnzaAux <= 0}
-          onClick={() => precioManualmente(precioOnzaAux)}
+          disabled={precioOnzaAux <= 0 || precioDolarAux <= 0}
+          onClick={() => precioManualmente(precioOnzaAux,precioDolarAux)}
         >
           Continuar
         </Button>
       </div>
     </Modal>
 
-    {/* Modal for Opening Graph */}
-    <Modal isOpen={modalDolar} toggle={actionModalDolar}>
+    {/* Modal for Opening calculadora */}
+    <Modal isOpen={modalCalculadora} toggle={actionModalCalculadora}>
       <div className="modal-head">
         <h4>
-          <center>Editar Dolar manualmente</center>
+          <center>Calculadora</center>
         </h4>
       </div>
       <div className="modal-body">
-      <Col sm="12">
-          <FormGroup>
-            <Input
-              className="form-control"
-              onChange={handleChangeDolar}
-              value={precioDolarAux || ""}
-              type="number"
-              placeholder="Precio del dolar en bolivianos"
-            />
-          </FormGroup>
-          <div className="form-control-feedback">
-            Modificar dependiendo el estado actual en la sociedad
-          </div>
-        </Col>
+      <Calculadora precio={precioGrBol} />
       </div>
       <div className="modal-footer">
       <Button
@@ -329,18 +351,9 @@ return (
           className="btn-round mr-1"
           color="default"
           outline
-          onClick={() => setModalDolar(false)}
+          onClick={() => setModalCalculadora(false)}
         >
-          Cerrar
-        </Button>
-        <Button
-          className="btn-round ml-1"
-          color="success"
-          type="button"
-          disabled={precioDolarAux <= 0}
-          onClick={() => dolarManualmente(precioDolarAux)}
-        >
-          Continuar
+          Cerrar calculadora
         </Button>
       </div>
     </Modal>
