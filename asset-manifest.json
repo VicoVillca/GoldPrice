@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/GoldPrice/static/css/main.38f3cef6.css",
-    "main.js": "/GoldPrice/static/js/main.46a89df4.js",
+    "main.js": "/GoldPrice/static/js/main.f2f17aea.js",
     "static/media/8.ttf": "/GoldPrice/static/media/8.92a3919f0882d37c004c.ttf",
     "static/media/antoine-barres.jpg": "/GoldPrice/static/media/antoine-barres.bc3299c239c25e5bf937.jpg",
     "static/media/9.otf": "/GoldPrice/static/media/9.0f97e53e3c658676e2ce.otf",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.38f3cef6.css",
-    "static/js/main.46a89df4.js"
+    "static/js/main.f2f17aea.js"
   ]
 }
