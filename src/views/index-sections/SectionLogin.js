@@ -17,8 +17,6 @@
 
 */
 import React from "react";
-
-// reactstrap components
 import {
   Button,
   Card,
@@ -32,7 +30,6 @@ import {
   Col
 } from "reactstrap";
 
-// core components
 
 function SectionLogin() {
   return (
