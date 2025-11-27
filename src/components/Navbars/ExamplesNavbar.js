@@ -1,10 +1,8 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-// nodejs library that concatenates strings
 import classnames from "classnames";
 
-// reactstrap components
 import {
   Button,
   Collapse,
@@ -17,10 +15,6 @@ import {
 } from "reactstrap";
 
 function ExamplesNavbar() {
-
-    // This styling will be applied to a <NavLink> when the
-  // route that it links to is currently selected.
-
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [navbarCollapse, setNavbarCollapse] = React.useState(false);
 
@@ -74,7 +68,6 @@ function ExamplesNavbar() {
             })}
             onClick={toggleNavbarCollapse}
           >
-            
             <span className="navbar-toggler-bar bar1" />
             <span className="navbar-toggler-bar bar2" />
             <span className="navbar-toggler-bar bar3" />
@@ -85,18 +78,13 @@ function ExamplesNavbar() {
           navbar
           isOpen={navbarCollapse}
         >
-         
           <Nav navbar>
-            
-            
-            
-           
             <NavItem>
               <NavLink
                 to="/"
                 tag={Link}
               >
-                 precio del oro
+                 Precio del oro
               </NavLink>
             </NavItem>
             <NavItem>
