@@ -7,7 +7,11 @@ import {
   FilterMatchMode,
   setAttribute,
   setAttributes
-} from "./chunk-AXRAP654.js";
+} from "./chunk-YXZ7UID5.js";
+import {
+  minifyCSS,
+  resolve
+} from "./chunk-JKXUBX6Y.js";
 import {
   DOCUMENT
 } from "./chunk-DTRZVJQ6.js";
@@ -28,10 +32,6 @@ import {
 import {
   Subject
 } from "./chunk-FHTVLBLO.js";
-import {
-  minifyCSS,
-  resolve
-} from "./chunk-JKXUBX6Y.js";
 import {
   __spreadValues
 } from "./chunk-WDMUDEB6.js";
@@ -690,4 +690,4 @@ export {
   PRIME_NG_CONFIG,
   providePrimeNG
 };
-//# sourceMappingURL=chunk-OJPBOBNP.js.map
+//# sourceMappingURL=chunk-KUSU6S6H.js.map

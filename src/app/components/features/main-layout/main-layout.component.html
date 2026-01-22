@@ -1,28 +1,25 @@
 <div class="main-layout" [class.dark-theme]="themeService.isDarkMode" [class.light-theme]="!themeService.isDarkMode">
   
+  <!-- Sidebar web -->
+  <div class="sidebar-container" *ngIf="!isMobile">
+    <app-sidebar></app-sidebar>
+  </div>
 
-  <p-sidebar 
-    [(visible)]="sidebarVisible"
-    position="left"
-    [fullScreen]="false"
-    [showCloseIcon]="false"
-    class="sidebar"
-  >
-    <!-- Pasa el contenido del sidebar a través de ng-template -->
-    <ng-template pTemplate="content">
-      <app-sidebar 
-        (toggleSidebar)="toggleSidebar()"
-      ></app-sidebar>
-    </ng-template>
-  </p-sidebar>
+  <!-- Sidebar móvil personalizado -->
+  <div *ngIf="isMobile && mobileSidebarVisible" class="mobile-sidebar-overlay" (click)="closeMobileSidebar()"></div>
+
+  <div *ngIf="isMobile && mobileSidebarVisible" class="mobile-sidebar">
+<app-sidebar></app-sidebar>
+  </div>
 
   <!-- Main Content Area -->
-  <div class="main-content-area" [class.sidebar-collapsed]="!sidebarVisible">
+  <div class="main-content-area" [class.sidebar-visible]="!isMobile">
     
-    <!-- Toolbar -->
+    <!-- Toolbar con botón para móviles -->
     <app-toolbar 
       [title]="pageTitle"
-      (toggleSidebar)="toggleSidebar()"
+      [showMobileMenu]="isMobile"
+      (toggleMobileSidebar)="toggleMobileSidebar()"
     ></app-toolbar>
 
     <!-- Content -->

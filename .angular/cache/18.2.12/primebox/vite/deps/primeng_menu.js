@@ -1,14 +1,14 @@
 import {
   Tooltip,
   TooltipModule
-} from "./chunk-Q3ZFMPZE.js";
+} from "./chunk-E6AGDUV6.js";
 import {
   Ripple
-} from "./chunk-45VX3VGP.js";
+} from "./chunk-OAPP6XMR.js";
 import {
   Badge,
   BadgeModule
-} from "./chunk-HAWYBIBH.js";
+} from "./chunk-UASSTVKW.js";
 import {
   zindexutils
 } from "./chunk-6EUKM3X6.js";
@@ -17,16 +17,16 @@ import {
 } from "./chunk-5G7WYC4N.js";
 import {
   BaseComponent
-} from "./chunk-I7LNDHVD.js";
+} from "./chunk-WMJJQNA4.js";
 import {
   BaseStyle
-} from "./chunk-OJPBOBNP.js";
+} from "./chunk-KUSU6S6H.js";
 import {
   animate,
   style,
   transition,
   trigger
-} from "./chunk-DX6BQ44Z.js";
+} from "./chunk-6C427ZX5.js";
 import {
   RouterLink,
   RouterLinkActive,
@@ -48,7 +48,8 @@ import {
   isTouchDevice,
   relativePosition,
   uuid
-} from "./chunk-AXRAP654.js";
+} from "./chunk-YXZ7UID5.js";
+import "./chunk-JKXUBX6Y.js";
 import {
   CommonModule,
   NgClass,
@@ -129,7 +130,6 @@ import {
 import "./chunk-4N4GOYJH.js";
 import "./chunk-5OPE3T2R.js";
 import "./chunk-FHTVLBLO.js";
-import "./chunk-JKXUBX6Y.js";
 import "./chunk-WDMUDEB6.js";
 
 // node_modules/primeng/fesm2022/primeng-menu.mjs

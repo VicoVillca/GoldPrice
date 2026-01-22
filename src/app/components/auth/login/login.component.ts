@@ -27,7 +27,7 @@ import { AuthService } from '../../../../core/services/auth.service';
   providers: [MessageService]
 })
 export class LoginComponent {
-  email: string = '';
+  usuario: string = '';
   password: string = '';
   loading: boolean = false;
 
@@ -38,18 +38,18 @@ export class LoginComponent {
   ) {}
 
   onSubmit(): void {
-    if (!this.email || !this.password) {
+    if (!this.usuario || !this.password) {
       this.messageService.add({
         severity: 'warn',
         summary: 'Advertencia',
-        detail: 'Por favor ingrese email y contraseña'
+        detail: 'Por favor ingrese usuario y contraseña'
       });
       return;
     }
 
     this.loading = true;
     
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService.login(this.usuario, this.password).subscribe({
       next: (success) => {
         if (success) {
           this.messageService.add({

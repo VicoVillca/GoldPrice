@@ -2,18 +2,20 @@
   <ng-template #start>
     <div class="toolbar-left">
       <button 
+        *ngIf="showMobileMenu"
         pButton 
         icon="pi pi-bars" 
         class="p-button-text p-button-rounded"
-        (click)="toggleSidebar.emit()"
-        pTooltip="Mostrar/Ocultar menú"
+        (click)="onMobileSidebarOpen()"
+        pTooltip="Abrir menú"
       ></button>
       
       <div class="toolbar-title">
         <h2>{{ title }}</h2>
-        <small class="toolbar-subtitle">
+        <!--small class="toolbar-subtitle">
+          {{authService.currentUserValue |json}}
           {{ authService.currentUserValue?.name || 'Administrador' }}
-        </small>
+        </small -->
       </div>
     </div>
   </ng-template>
@@ -32,7 +34,7 @@
       <!-- Tema claro/oscuro -->
       <app-theme-toggle></app-theme-toggle>
       
-      <!-- Menú de usuario -->
+      <!-- Menú de usuario (perfil, configuración, logout) -->
       <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
       <button 
         pButton 

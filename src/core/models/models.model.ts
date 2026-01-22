@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  email: string;
+  usuario: string;
   name: string;
   role: 'admin'; // Solo administradores
 }

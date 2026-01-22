@@ -1,4 +1,18 @@
-/* ===== LOGIN DISEÑO PROFESIONAL ===== */
+/* ===== LOGIN DISEÑO PROFESIONAL MODIFICADO ===== */
+
+.img-sidebar {
+  width: 150px;
+  height: 150px; /* Opcional */
+  display: grid;
+  place-items: center; /* Centra en ambos ejes */
+  margin: 0 auto;
+}
+
+.img-sidebar img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -6,10 +20,9 @@
   position: relative;
 }
 
-/* Panel izquierdo con imagen */
+/* Panel izquierdo con imagen - LIGERAMENTE MÁS GRANDE */
 .login-panel-left {
-  flex: 1;
-  background-color: #1a3c27; /* Verde oscuro profesional */
+  flex: 2; /* Aumentado de 1 a 2 (66%) */
   position: relative;
   overflow: hidden;
   display: flex;
@@ -17,9 +30,69 @@
   justify-content: center;
   padding: 2rem;
   min-height: 100vh;
+  /* Fondo principal */
+  background: 
+    url('https://www.eldiario.net/portal/wp-content/uploads/2025/10/oro-boliviano-internet-15-cm-x-10.webp') center/cover no-repeat;
 }
 
-/* Imagen de fondo con overlay */
+/* Panel derecho con formulario - LIGERAMENTE MÁS PEQUEÑO */
+.login-panel-right {
+  flex: 1; /* Mantenido como 1 (33%) - proporción 2:1 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  min-height: 100vh;
+  background-color: var(--primary-900);
+}
+
+/* Ajuste del contenido del formulario */
+.login-card-wrapper {
+  width: 100%;
+  max-width: 380px; /* Reducido ligeramente de 400px */
+}
+
+.login-card {
+  background: var(--surface-card);
+  border-radius: 8px;
+  //border: 1px solid var(--surface-border);
+  border-bottom: 0;
+  overflow: hidden;
+  transition: none;
+}
+
+/* Contenido del panel izquierdo */
+.login-panel-content {
+  position: relative;
+  z-index: 2;
+  max-width: 550px; /* Aumentado ligeramente */
+  color: white;
+  text-align: center;
+}
+
+.login-panel-content h1 {
+  font-size: 2.8rem; /* Aumentado ligeramente */
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.login-panel-content .tagline {
+  font-size: 1.2rem; /* Aumentado ligeramente */
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* Icono de seguridad */
+.security-icon {
+  font-size: 4.5rem; /* Aumentado ligeramente */
+  margin-bottom: 2.2rem;
+  display: block;
+}
+
+/* Overlay sutil para mejor legibilidad */
 .login-panel-left::before {
   content: '';
   position: absolute;
@@ -27,75 +100,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a3c27"/><path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="%23388e3c" stroke-width="1" fill="none"/><circle cx="50" cy="50" r="15" stroke="%23388e3c" stroke-width="1" fill="none"/></svg>') repeat,
-    linear-gradient(rgba(26, 60, 39, 0.95), rgba(26, 60, 39, 0.98));
-  opacity: 0.8;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  z-index: 1;
 }
 
-/* Contenido del panel izquierdo */
-.login-panel-content {
-  position: relative;
-  z-index: 2;
-  max-width: 500px;
-  color: white;
-  text-align: center;
-}
-
-.login-panel-content h1 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: white;
-  letter-spacing: 0.5px;
-}
-
-.login-panel-content .tagline {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-/* Icono de seguridad */
-.security-icon {
-  font-size: 4rem;
-  margin-bottom: 2rem;
-  display: block;
-}
-
-/* Panel derecho con formulario */
-.login-panel-right {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem 2rem;
-  min-height: 100vh;
-}
-
-.login-card-wrapper {
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-card {
-  background: var(--surface-card);
-  border-radius: 8px;
-  border: 1px solid var(--surface-border);
-  overflow: hidden;
-  transition: none;
-}
-
+/* Ajustes del formulario */
 .login-header {
   text-align: center;
-  padding: 2rem 2rem 1.5rem;
+  padding: 1.8rem 2rem 1.2rem; /* Reducido ligeramente */
   border-bottom: 1px solid var(--surface-border);
 }
 
 .login-header h2 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.5rem;
+  font-size: 1.45rem; /* Reducido muy ligeramente */
   font-weight: 600;
   color: var(--text-color);
   letter-spacing: 0.3px;
@@ -104,43 +126,35 @@
 .login-header .subtitle {
   color: var(--text-color-secondary);
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.92rem; /* Reducido muy ligeramente */
 }
 
 /* Formulario */
 .login-form {
-  padding: 2rem;
+  padding: 1.8rem; /* Reducido ligeramente */
 }
 
 .field {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem; /* Reducido ligeramente */
 }
 
 .field:last-of-type {
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem; /* Reducido ligeramente */
 }
 
-.field label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: var(--text-color);
-  font-size: 0.95rem;
-}
-
-/* Inputs estilo limpio */
+/* Inputs */
 ::ng-deep .p-inputtext,
 ::ng-deep .p-password {
   width: 100%;
   
   input {
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.7rem 0.95rem; /* Reducido ligeramente */
     border: 1px solid var(--surface-border);
     border-radius: 6px;
     background: var(--surface-card);
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: 0.98rem;
     transition: border-color 0.2s ease;
     
     &:focus {
@@ -165,40 +179,11 @@
   }
 }
 
-/* Password input */
-::ng-deep .p-password {
-  position: relative;
-  
-  .p-password-input {
-    padding-right: 2.5rem;
-  }
-  
-  .p-password-toggle {
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--text-color-secondary);
-    cursor: pointer;
-    padding: 0.25rem;
-    
-    &:hover {
-      color: var(--primary-500);
-    }
-    
-    &:focus {
-      outline: none;
-    }
-  }
-}
-
 /* Botón de login */
 ::ng-deep .p-button {
   width: 100%;
-  padding: 0.875rem;
-  font-size: 1rem;
+  padding: 0.82rem; /* Reducido ligeramente */
+  font-size: 0.98rem;
   font-weight: 600;
   border-radius: 6px;
   border: none;
@@ -222,25 +207,12 @@
   }
 }
 
-/* Loading state */
-::ng-deep .p-button-loading {
-  .p-button-label {
-    visibility: hidden;
-  }
-}
-
 /* Footer sutil */
 .login-footer {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: 1.4rem; /* Reducido ligeramente */
+  padding-top: 1.4rem; /* Reducido ligeramente */
   border-top: 1px solid var(--surface-border);
   text-align: center;
-}
-
-.copyright {
-  color: var(--text-color-secondary);
-  font-size: 0.85rem;
-  margin: 0;
 }
 
 /* ===== TEMA OSCURO ===== */
@@ -251,8 +223,11 @@
   
   .login-panel-left::before {
     background: 
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230c2918"/><path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="%234caf50" stroke-width="1" fill="none"/><circle cx="50" cy="50" r="15" stroke="%234caf50" stroke-width="1" fill="none"/></svg>') repeat,
-      linear-gradient(rgba(12, 41, 24, 0.95), rgba(12, 41, 24, 0.98));
+      linear-gradient(
+        to right,
+        rgba(12, 41, 24, 0.9) 0%,
+        rgba(12, 41, 24, 0.8) 100%
+      );
   }
 }
 
@@ -262,22 +237,43 @@
     flex-direction: column;
   }
   
+  /* EN MÓVIL: PANEL IZQUIERDO MÁS PEQUEÑO PERO VISIBLE */
   .login-panel-left {
-    min-height: 40vh;
-    padding: 2rem 1rem;
+    flex: 0 0 auto;
+    min-height: 35vh; /* Más pequeño pero visible */
+    padding: 1.5rem;
+    display: flex; /* Mantener visible */
   }
   
-  .login-panel-right {
-    min-height: 60vh;
-    padding: 2rem 1rem;
-  }
-  
+  /* Reducir contenido del panel izquierdo en móvil */
   .login-panel-content h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .login-panel-content .tagline {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
   
   .security-icon {
     font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* PANEL DERECHO MÁS GRANDE EN MÓVIL */
+  .login-panel-right {
+    flex: 1;
+    min-height: 65vh; /* Ocupa más espacio */
+    padding: 2rem 1.5rem;
+  }
+  
+  .login-card-wrapper {
+    max-width: 400px; /* Ancho normal en móvil */
+  }
+  
+  .login-header h2 {
+    font-size: 1.5rem; /* Restaurar tamaño */
   }
   
   .login-form {
@@ -288,16 +284,21 @@
 @media (max-width: 480px) {
   .login-panel-left {
     min-height: 30vh;
-    padding: 1.5rem 1rem;
+    padding: 1rem;
+  }
+  
+  .login-panel-content h1 {
+    font-size: 1.6rem;
+  }
+  
+  .login-panel-content .tagline {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
   
   .login-panel-right {
     min-height: 70vh;
     padding: 1.5rem 1rem;
-  }
-  
-  .login-panel-content h1 {
-    font-size: 1.75rem;
   }
   
   .login-header {

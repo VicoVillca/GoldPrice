@@ -26,7 +26,8 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 })
 export class ToolbarComponent {
   @Input() title: string = 'Dashboard';
-  @Output() toggleSidebar = new EventEmitter<void>();
+  @Input() showMobileMenu: boolean = false;
+  @Output() toggleMobileSidebar = new EventEmitter<void>();
   
   userMenuItems: MenuItem[] = [
     {
@@ -51,14 +52,17 @@ export class ToolbarComponent {
 
   constructor(public authService: AuthService) {}
 
+  // Emite el evento al main-layout para abrir el sidebar
+  onMobileSidebarOpen(): void {
+    this.toggleMobileSidebar.emit();
+  }
+
   private openProfile(): void {
     console.log('Abrir perfil');
-    // Navegar a perfil o abrir modal
   }
 
   private openSettings(): void {
     console.log('Abrir configuración');
-    // Navegar a configuración
   }
 
   getUserInitial(): string {

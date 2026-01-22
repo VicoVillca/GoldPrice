@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ButtonModule } from 'primeng/button';
-import { SidebarModule } from 'primeng/sidebar';
-import { AvatarModule } from 'primeng/avatar';
-import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { SidebarComponent } from '../sidebar/sidebar.component';
@@ -22,11 +17,6 @@ import { ThemeService } from '../../../../core/services/theme.service';
   imports: [
     CommonModule,
     RouterModule,
-    ToolbarModule,
-    ButtonModule,
-    SidebarModule,
-    AvatarModule,
-    MenuModule,
     ToastModule,
     SidebarComponent,
     ToolbarComponent
@@ -34,18 +24,24 @@ import { ThemeService } from '../../../../core/services/theme.service';
   providers: [MessageService]
 })
 export class MainLayoutComponent implements OnInit {
-  sidebarVisible: boolean = true;
   pageTitle: string = 'Dashboard';
-  currentYear: number
+  currentYear: number;
+  isMobile: boolean = false;
+  mobileSidebarVisible: boolean = false;  // Controla el sidebar móvil
 
-  constructor(
-    public authService: AuthService,
-    public themeService: ThemeService,
-    private router: Router,
-    private messageService: MessageService
-  ) {
+  private router = inject(Router);
+  private messageService = inject(MessageService);
+  public authService = inject(AuthService);
+  public themeService = inject(ThemeService);
+
+  constructor() {
     this.currentYear = new Date().getFullYear();
-    // Escuchar cambios de ruta para actualizar título
+    this.checkScreenSize();
+  }
+
+  ngOnInit(): void {
+    this.updatePageTitle();
+    
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -53,8 +49,17 @@ export class MainLayoutComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    this.updatePageTitle();
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreenSize();
+  }
+
+  private checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+    // Cerrar sidebar móvil si cambia a desktop
+    if (!this.isMobile) {
+      this.mobileSidebarVisible = false;
+    }
   }
 
   private updatePageTitle(): void {
@@ -65,8 +70,20 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
-  toggleSidebar(): void {
-    this.sidebarVisible = !this.sidebarVisible;
+  // Se llama desde el toolbar en móviles
+  toggleMobileSidebar(): void {
+    this.mobileSidebarVisible = !this.mobileSidebarVisible;
+  }
+
+  // Cierra el sidebar móvil
+  closeMobileSidebar(): void {
+    this.mobileSidebarVisible = false;
+  }
+
+  // Para el avatar en el sidebar móvil
+  getUserInitial(): string {
+    const name = this.authService.currentUserValue?.name;
+    return name ? name.charAt(0).toUpperCase() : 'A';
   }
 
   logout(): void {

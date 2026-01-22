@@ -16,8 +16,8 @@ export class AuthService {
   
   // Lista de administradores permitidos (en producción vendría de una API)
   private readonly ADMIN_USERS = [
-    { email: 'admin@test.com', password: '123456', name: 'Administrador Principal' },
-    { email: 'admin@vico.com', password: 'admin123', name: 'Administrador Vico' }
+    { usuario: 'abraham.villca', password: '123456', name: 'Abraham Villca' },
+    { usuario: 'ines.villca', password: 'admin123', name: 'Ines Villca' }
   ];
 
   constructor(private router: Router) {
@@ -32,16 +32,16 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(email: string, password: string): Observable<boolean> {
+  login(usuario: string, password: string): Observable<boolean> {
     // Buscar en la lista de administradores permitidos
     const adminUser = this.ADMIN_USERS.find(user => 
-      user.email === email && user.password === password
+      user.usuario === usuario && user.password === password
     );
 
     if (adminUser) {
       const user: User = {
         id: Date.now(), // En producción sería un ID real
-        email: email,
+        usuario: usuario,
         name: adminUser.name,
         role: 'admin'
       };

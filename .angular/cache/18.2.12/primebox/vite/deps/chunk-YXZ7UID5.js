@@ -1,4 +1,9 @@
 import {
+  equals,
+  removeAccents,
+  resolveFieldData
+} from "./chunk-JKXUBX6Y.js";
+import {
   CommonModule
 } from "./chunk-DTRZVJQ6.js";
 import {
@@ -23,11 +28,6 @@ import {
 import {
   Subject
 } from "./chunk-FHTVLBLO.js";
-import {
-  equals,
-  removeAccents,
-  resolveFieldData
-} from "./chunk-JKXUBX6Y.js";
 
 // node_modules/@primeuix/utils/dom/index.mjs
 function hasClass(element, className) {
@@ -48,9 +48,6 @@ function addClass(element, className) {
     [className].flat().filter(Boolean).forEach((_classNames) => _classNames.split(" ").forEach(fn));
   }
 }
-function calculateBodyScrollbarWidth() {
-  return window.innerWidth - document.documentElement.offsetWidth;
-}
 function getCSSVariableByRegex(variableRegex) {
   for (const sheet of document == null ? void 0 : document.styleSheets) {
     try {
@@ -68,11 +65,6 @@ function getCSSVariableByRegex(variableRegex) {
     }
   }
   return null;
-}
-function blockBodyScroll(className = "p-overflow-hidden") {
-  const variableData = getCSSVariableByRegex(/-scrollbar-width$/);
-  (variableData == null ? void 0 : variableData.name) && document.body.style.setProperty(variableData.name, calculateBodyScrollbarWidth() + "px");
-  addClass(document.body, className);
 }
 function removeClass(element, className) {
   if (element && className) {
@@ -1305,7 +1297,6 @@ var TreeDragDropService = class _TreeDragDropService {
 export {
   hasClass,
   addClass,
-  blockBodyScroll,
   removeClass,
   getViewport,
   getWindowScrollLeft,
@@ -1344,4 +1335,4 @@ export {
   TranslationKeys,
   TreeDragDropService
 };
-//# sourceMappingURL=chunk-AXRAP654.js.map
+//# sourceMappingURL=chunk-YXZ7UID5.js.map

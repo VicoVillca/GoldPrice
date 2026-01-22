@@ -1,9 +1,6 @@
 /* ===== TOOLBAR CON TEMA VERDE POLICÍA ===== */
 .main-toolbar {
-  background-color: var(--surface-card);
-  border-bottom: 1px solid var(--surface-border);
-  box-shadow: var(--shadow-1);
-  padding: 0.75rem 1.5rem;
+
   position: sticky;
   top: 0;
   z-index: 100;
@@ -14,6 +11,7 @@
     padding: 0;
     background: transparent;
     justify-content: space-between;
+    min-height: 64px;
     
     .p-toolbar-group-start,
     .p-toolbar-group-end {
@@ -28,27 +26,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  
-  /* Botón toggle sidebar */
-  ::ng-deep .p-button {
-    color: var(--text-color);
-    background: transparent;
-    border: none;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    &:hover {
-      background-color: var(--surface-hover);
-      color: var(--primary-500);
-    }
-    
-    &:focus {
-      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-    }
-  }
+  padding-left: 32px;
   
   .toolbar-title {
     h2 {
@@ -73,9 +51,10 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding-right: 32px;
   
   /* Botón de notificaciones */
-  ::ng-deep .p-button {
+  ::ng-deep .p-button:not(.user-avatar) {
     color: var(--text-color-secondary);
     background: transparent;
     border: none;
@@ -181,6 +160,8 @@
   }
   
   .toolbar-left {
+    gap: 0.5rem;
+    
     .toolbar-title {
       h2 {
         font-size: 1.25rem;
@@ -195,7 +176,7 @@
   .toolbar-right {
     gap: 0.5rem;
     
-    ::ng-deep .p-button {
+    ::ng-deep .p-button:not(.user-avatar) {
       width: 36px;
       height: 36px;
     }
@@ -216,14 +197,14 @@
       }
       
       .toolbar-subtitle {
-        display: none; /* Ocultar subtítulo en móviles muy pequeños */
+        display: none;
       }
     }
   }
   
   .toolbar-right {
-    ::ng-deep .p-button:not(.user-avatar) {
-      display: none; /* Ocultar botones no esenciales en móviles */
+    ::ng-deep .p-button:not(.user-avatar):not(.theme-toggle) {
+      display: none;
     }
   }
 }
