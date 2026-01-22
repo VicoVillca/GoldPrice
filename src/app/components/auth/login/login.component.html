@@ -1,0 +1,77 @@
+<div class="login-container">
+  <!-- Panel izquierdo con imagen/icono -->
+  <div class="login-panel-left">
+    <div class="login-panel-content">
+      <div class="security-icon">🔐</div>
+      <h1>Control Panel</h1>
+      <p class="tagline">
+        Sistema de gestión y administración de recursos
+      </p>
+    </div>
+  </div>
+  
+  <!-- Panel derecho con formulario -->
+  <div class="login-panel-right">
+    <div class="login-card-wrapper">
+      <p-card class="login-card">
+        <ng-template #header>
+          <div class="login-header">
+            <h2>Acceso al Sistema</h2>
+            <p class="subtitle">Ingrese sus credenciales</p>
+          </div>
+        </ng-template>
+
+        <div class="login-form">
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="field">
+              <label for="email">Usuario</label>
+              <input 
+                pInputText 
+                id="email" 
+                [(ngModel)]="email" 
+                name="email"
+                type="email"
+                placeholder="usuario@dominio.com"
+                class="w-full"
+                required
+                [disabled]="loading"
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Contraseña</label>
+              <p-password 
+                id="password"
+                [(ngModel)]="password" 
+                name="password"
+                placeholder="••••••••"
+                [feedback]="false"
+                [toggleMask]="true"
+                class="w-full"
+                required
+                [disabled]="loading"
+              ></p-password>
+            </div>
+
+            <button 
+              pButton 
+              type="submit" 
+              label="Iniciar Sesión" 
+              class="w-full"
+              [disabled]="loading"
+              [loading]="loading"
+            ></button>
+
+            <div class="login-footer">
+              <p class="copyright">
+                &copy; 2026 Sistema de Gestión
+              </p>
+            </div>
+          </form>
+        </div>
+      </p-card>
+    </div>
+  </div>
+  
+  <p-toast position="top-right"></p-toast>
+</div>

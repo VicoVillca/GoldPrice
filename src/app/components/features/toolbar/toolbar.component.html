@@ -1,0 +1,49 @@
+<p-toolbar class="main-toolbar">
+  <ng-template #start>
+    <div class="toolbar-left">
+      <button 
+        pButton 
+        icon="pi pi-bars" 
+        class="p-button-text p-button-rounded"
+        (click)="toggleSidebar.emit()"
+        pTooltip="Mostrar/Ocultar menú"
+      ></button>
+      
+      <div class="toolbar-title">
+        <h2>{{ title }}</h2>
+        <small class="toolbar-subtitle">
+          {{ authService.currentUserValue?.name || 'Administrador' }}
+        </small>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #end>
+    <div class="toolbar-right">
+      <!-- Notificaciones -->
+      <button 
+        pButton 
+        icon="pi pi-bell" 
+        class="p-button-text p-button-rounded"
+        pBadge value="3" severity="danger"
+        pTooltip="Notificaciones"
+      ></button>
+      
+      <!-- Tema claro/oscuro -->
+      <app-theme-toggle></app-theme-toggle>
+      
+      <!-- Menú de usuario -->
+      <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+      <button 
+        pButton 
+        class="user-avatar"
+        (click)="userMenu.toggle($event)"
+        pTooltip="Menú de usuario"
+      >
+        <span class="user-initial">
+          {{ getUserInitial() }}
+        </span>
+      </button>
+    </div>
+  </ng-template>
+</p-toolbar>

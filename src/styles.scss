@@ -1,0 +1,312 @@
+
+/* ===== TEMA VERDE POLICÍA/SEGURIDAD ===== */
+:root {
+  /* Colores primarios verde policía/seguridad */
+  --primary-50: #e8f5e9;
+  --primary-100: #c8e6c9;
+  --primary-200: #a5d6a7;
+  --primary-300: #81c784;
+  --primary-400: #66bb6a;
+  --primary-500: #4caf50;    /* Verde principal */
+  --primary-600: #43a047;    /* Verde oscuro */
+  --primary-700: #388e3c;
+  --primary-800: #2e7d32;
+  --primary-900: #1b5e20;
+  
+  /* Colores acento (azul para contraste) */
+  --accent-500: #2196f3;
+  --accent-700: #1976d2;
+  
+  /* Colores neutros */
+  --surface-ground: #f5f7fa;
+  --surface-card: #ffffff;
+  --surface-border: #e0e0e0;
+  --surface-hover: #f5f5f5;
+  
+  /* Texto */
+  --text-color: #263238;
+  --text-color-secondary: #546e7a;
+  --text-color-disabled: #90a4ae;
+  
+  /* Estado */
+  --success-500: #4caf50;
+  --info-500: #2196f3;
+  --warning-500: #ff9800;
+  --danger-500: #f44336;
+  
+  /* Sombras */
+  --shadow-1: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-2: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-3: 0 8px 32px rgba(0, 0, 0, 0.16);
+}
+
+/* ===== TEMA CLARO (Light Mode) ===== */
+.light-theme {
+  /* Superficies */
+  --surface-ground: #f5f7fa;
+  --surface-card: #ffffff;
+  --surface-border: #e0e0e0;
+  --surface-hover: #f5f5f5;
+  
+  /* Texto */
+  --text-color: #263238;
+  --text-color-secondary: #546e7a;
+  
+  /* PrimeNG variables para tema claro */
+  --p-primary-color: var(--primary-500);
+  --p-primary-color-dark: var(--primary-700);
+  --p-primary-color-light: var(--primary-300);
+  
+  --p-surface-ground: var(--surface-ground);
+  --p-surface-card: var(--surface-card);
+  --p-surface-border: var(--surface-border);
+  --p-surface-hover: var(--surface-hover);
+  
+  --p-text-color: var(--text-color);
+  --p-text-color-secondary: var(--text-color-secondary);
+  
+  /* Componentes específicos */
+  --p-button-primary-bg: var(--primary-500);
+  --p-button-primary-hover-bg: var(--primary-600);
+  --p-button-primary-active-bg: var(--primary-700);
+  
+  --p-highlight-bg: var(--primary-50);
+  --p-highlight-text-color: var(--primary-900);
+}
+
+/* ===== TEMA OSCURO (Dark Mode) ===== */
+.dark-theme {
+  /* Superficies - tonos oscuros profesionales */
+  --surface-ground: #121212;
+  --surface-card: #1e1e1e;
+  --surface-border: #2d2d2d;
+  --surface-hover: #2a2a2a;
+  
+  /* Texto */
+  --text-color: #e0e0e0;
+  --text-color-secondary: #b0b0b0;
+  
+  /* Colores primarios más suaves para modo oscuro */
+  --primary-500: #66bb6a;
+  --primary-600: #4caf50;
+  --primary-700: #388e3c;
+  
+  /* PrimeNG variables para tema oscuro */
+  --p-primary-color: var(--primary-500);
+  --p-primary-color-dark: var(--primary-700);
+  --p-primary-color-light: var(--primary-300);
+  
+  --p-surface-ground: var(--surface-ground);
+  --p-surface-card: var(--surface-card);
+  --p-surface-border: var(--surface-border);
+  --p-surface-hover: var(--surface-hover);
+  
+  --p-text-color: var(--text-color);
+  --p-text-color-secondary: var(--text-color-secondary);
+  
+  /* Componentes específicos */
+  --p-button-primary-bg: var(--primary-500);
+  --p-button-primary-hover-bg: var(--primary-600);
+  --p-button-primary-active-bg: var(--primary-700);
+  
+  --p-highlight-bg: rgba(76, 175, 80, 0.16);
+  --p-highlight-text-color: var(--primary-300);
+}
+
+/* ===== ESTILOS BASE ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.6;
+}
+
+/* ===== COMPONENTES PERSONALIZADOS ===== */
+
+/* Botones primarios con estilo policial */
+.p-button-primary {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+  
+  &:hover {
+    background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(76, 175, 80, 0.2);
+  }
+}
+
+/* Cards con estilo profesional */
+.p-card {
+  border-radius: 10px;
+  box-shadow: var(--shadow-1);
+  border: 1px solid var(--surface-border);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  
+  &:hover {
+    box-shadow: var(--shadow-2);
+    transform: translateY(-2px);
+  }
+  
+  .p-card-title {
+    color: var(--text-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-500);
+    padding-bottom: 0.75rem;
+  }
+}
+
+/* Sidebar estilo seguridad */
+.p-sidebar {
+  background: linear-gradient(180deg, var(--surface-card), var(--surface-ground));
+  border-right: 1px solid var(--surface-border);
+  
+  .p-sidebar-header {
+    background: var(--primary-700);
+    color: white;
+    padding: 1.5rem;
+    
+    h3 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+/* Toolbar profesional */
+.p-toolbar {
+  background: var(--surface-card);
+  border-bottom: 2px solid var(--primary-500);
+  box-shadow: var(--shadow-1);
+  
+  .p-toolbar-group-left h2 {
+    color: var(--primary-700);
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+/* Menús */
+.p-menu {
+  border: none;
+  background: transparent;
+  
+  .p-menuitem-link {
+    border-radius: 6px;
+    margin: 2px 0;
+    
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+    
+    &.router-link-active {
+      background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+      color: white;
+      
+      .p-menuitem-icon, .p-menuitem-text {
+        color: white;
+      }
+    }
+  }
+}
+
+/* Inputs */
+.p-inputtext {
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
+  
+  &:hover {
+    border-color: var(--primary-300);
+  }
+}
+
+/* Badges de estado */
+.p-badge {
+  &.p-badge-success {
+    background: var(--success-500);
+  }
+  
+  &.p-badge-info {
+    background: var(--info-500);
+  }
+  
+  &.p-badge-warning {
+    background: var(--warning-500);
+  }
+  
+  &.p-badge-danger {
+    background: var(--danger-500);
+  }
+}
+
+/* ===== UTILITARIOS ===== */
+.w-full { width: 100% !important; }
+.h-full { height: 100% !important; }
+.mt-4 { margin-top: 1rem !important; }
+.mb-4 { margin-bottom: 1rem !important; }
+.p-4 { padding: 1rem !important; }
+.text-center { text-align: center !important; }
+.font-semibold { font-weight: 600 !important; }
+
+/* ===== SCROLL PERSONALIZADO ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-ground);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 5px;
+  
+  &:hover {
+    background: var(--primary-300);
+  }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .p-card {
+    border-radius: 8px;
+  }
+  
+  .p-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}

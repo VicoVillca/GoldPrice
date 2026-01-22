@@ -1,0 +1,235 @@
+/* ===== TOOLBAR CON TEMA VERDE POLICÍA ===== */
+.main-toolbar {
+  background-color: var(--surface-card);
+  border-bottom: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-1);
+  padding: 0.75rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  ::ng-deep .p-toolbar {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    justify-content: space-between;
+    
+    .p-toolbar-group-start,
+    .p-toolbar-group-end {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  /* Botón toggle sidebar */
+  ::ng-deep .p-button {
+    color: var(--text-color);
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--primary-500);
+    }
+    
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+  }
+  
+  .toolbar-title {
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-color);
+      line-height: 1.2;
+    }
+    
+    .toolbar-subtitle {
+      color: var(--text-color-secondary);
+      font-size: 0.875rem;
+      font-weight: 400;
+      margin-top: 2px;
+      display: block;
+    }
+  }
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  
+  /* Botón de notificaciones */
+  ::ng-deep .p-button {
+    color: var(--text-color-secondary);
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    &:hover {
+      color: var(--primary-500);
+      background-color: var(--surface-hover);
+    }
+    
+    /* Badge de notificaciones */
+    .p-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      min-width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      line-height: 18px;
+      
+      &.p-badge-danger {
+        background: var(--danger-500);
+        color: white;
+      }
+    }
+  }
+  
+  /* Avatar de usuario */
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-500);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: var(--primary-600);
+      transform: scale(1.05);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+    
+    .user-initial {
+      display: block;
+    }
+    
+    /* Ocultar el icono por defecto, usar solo inicial */
+    ::ng-deep .p-button-icon {
+      display: none;
+    }
+  }
+  
+  /* Menú de usuario */
+  ::ng-deep .p-menu {
+    min-width: 200px;
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-2);
+    
+    .p-menuitem-link {
+      padding: 0.75rem 1rem;
+      
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+      
+      .p-menuitem-icon {
+        color: var(--text-color-secondary);
+        margin-right: 0.75rem;
+      }
+      
+      .p-menuitem-text {
+        color: var(--text-color);
+        font-weight: 500;
+      }
+    }
+    
+    .p-menuitem-separator {
+      border-top: 1px solid var(--surface-border);
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .main-toolbar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .toolbar-left {
+    .toolbar-title {
+      h2 {
+        font-size: 1.25rem;
+      }
+      
+      .toolbar-subtitle {
+        font-size: 0.8rem;
+      }
+    }
+  }
+  
+  .toolbar-right {
+    gap: 0.5rem;
+    
+    ::ng-deep .p-button {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar-left {
+    .toolbar-title {
+      h2 {
+        font-size: 1.1rem;
+      }
+      
+      .toolbar-subtitle {
+        display: none; /* Ocultar subtítulo en móviles muy pequeños */
+      }
+    }
+  }
+  
+  .toolbar-right {
+    ::ng-deep .p-button:not(.user-avatar) {
+      display: none; /* Ocultar botones no esenciales en móviles */
+    }
+  }
+}
+
+/* Accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}

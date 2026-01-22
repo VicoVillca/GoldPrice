@@ -1,0 +1,47 @@
+<div class="sidebar-content">
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <i class="pi pi-shield sidebar-logo-icon"></i>
+      <div class="sidebar-logo-text">
+        <h3>Control Panel</h3>
+        <small>Sistema de Gestión</small>
+      </div>
+    </div>
+    <button 
+      pButton 
+      icon="pi pi-times" 
+      class="p-button-text p-button-rounded sidebar-close-btn"
+      (click)="closeSidebar()"
+      pTooltip="Cerrar menú"
+      tooltipPosition="left"
+    ></button>
+  </div>
+
+  <!-- User Info -->
+  <div class="sidebar-user">
+    <div class="user-avatar">
+      <i class="pi pi-user"></i>
+    </div>
+    <div class="user-info">
+      <h4>{{ authService.currentUserValue?.name || 'Administrador' }}</h4>
+      <small>{{ authService.currentUserValue?.email || 'admin@sistema.com' }}</small>
+    </div>
+  </div>
+
+  <!-- Navigation Menu -->
+  <div class="sidebar-menu">
+    <p-menu [model]="menuItems" styleClass="w-full border-none"></p-menu>
+  </div>
+
+  <!-- Sidebar Footer -->
+  <div class="sidebar-footer">
+    <button 
+      pButton 
+      label="Cerrar Sesión" 
+      icon="pi pi-sign-out"
+      class="w-full"
+      (click)="onLogout()"
+    ></button>
+  </div>
+</div>

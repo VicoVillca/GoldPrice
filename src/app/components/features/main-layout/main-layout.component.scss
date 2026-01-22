@@ -1,0 +1,206 @@
+/* ===== MAIN LAYOUT CON TEMA VERDE POLICÍA ===== */
+.main-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--surface-ground);
+  transition: background-color 0.3s ease;
+}
+
+/* Sidebar de PrimeNG - SIN PADDING */
+::ng-deep .p-sidebar.sidebar {
+  background: var(--surface-card);
+  border-right: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-2);
+  
+  /* IMPORTANTE: Eliminar todo padding y margin */
+  .p-sidebar-content {
+    padding: 0 !important; /* !important para sobrescribir PrimeNG */
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  
+@layer primeng {
+    .p-sidebar-content {
+      padding: 0 !important;
+    }
+    
+    .p-drawer-content {
+      padding: 0 !important;
+    }
+  }
+}
+
+/* Main Content Area */
+.main-content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Cuando el sidebar está colapsado */
+.sidebar-collapsed {
+  margin-left: 0;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  background-color: var(--surface-ground);
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+}
+
+/* Footer */
+.main-footer {
+  background-color: var(--surface-card);
+  border-top: 1px solid var(--surface-border);
+  padding: 1rem 0;
+  margin-top: auto;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: var(--primary-500);
+    .brand-icon {
+      transform: rotate(15deg);
+    }
+  }
+}
+
+.brand-icon {
+  font-size: 1.4rem;
+  color: var(--primary-500);
+  transition: transform 0.3s ease;
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  color: var(--text-color-secondary);
+  font-weight: 400;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .main-layout {
+    position: relative;
+  }
+  
+  ::ng-deep .p-sidebar.sidebar {
+    width: 280px !important;
+    position: fixed;
+    z-index: 1100;
+    height: 100vh;
+    
+    & ~ .p-sidebar-mask {
+      z-index: 1099;
+    }
+  }
+  
+  .main-content-area {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+  
+  .footer-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .brand-badge {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  ::ng-deep .p-sidebar.sidebar {
+    width: 260px !important;
+  }
+  
+  .main-content-area {
+    margin-left: 260px;
+  }
+  
+  .sidebar-collapsed {
+    margin-left: 0;
+  }
+  
+  .content-wrapper {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  ::ng-deep .p-sidebar.sidebar {
+    width: 280px !important;
+    position: relative;
+  }
+  
+  .main-content-area {
+    margin-left: 280px;
+  }
+  
+  .sidebar-collapsed {
+    margin-left: 0;
+  }
+  
+  .content-wrapper {
+    padding: 1.5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .footer-container {
+    max-width: 1400px;
+  }
+}
+
+/* Utilidades */
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}

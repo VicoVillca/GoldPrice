@@ -1,0 +1,15 @@
+:host {
+  display: inline-block;
+  
+  button {
+    color: var(--text-color);
+    
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+    
+    .pi {
+      font-size: 1.25rem;
+    }
+  }
+}

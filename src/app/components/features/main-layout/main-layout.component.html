@@ -1,0 +1,50 @@
+<div class="main-layout" [class.dark-theme]="themeService.isDarkMode" [class.light-theme]="!themeService.isDarkMode">
+  
+
+  <p-sidebar 
+    [(visible)]="sidebarVisible"
+    position="left"
+    [fullScreen]="false"
+    [showCloseIcon]="false"
+    class="sidebar"
+  >
+    <!-- Pasa el contenido del sidebar a través de ng-template -->
+    <ng-template pTemplate="content">
+      <app-sidebar 
+        (toggleSidebar)="toggleSidebar()"
+      ></app-sidebar>
+    </ng-template>
+  </p-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="main-content-area" [class.sidebar-collapsed]="!sidebarVisible">
+    
+    <!-- Toolbar -->
+    <app-toolbar 
+      [title]="pageTitle"
+      (toggleSidebar)="toggleSidebar()"
+    ></app-toolbar>
+
+    <!-- Content -->
+    <main class="content-wrapper">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="#" class="brand-badge">
+            <i class="brand-icon pi pi-box"></i>
+            <span>Vico-Proyectos</span>
+          </a>
+        </div>
+        <div class="footer-copyright">
+          © {{ currentYear }} Sistema de Administración
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <p-toast position="top-right"></p-toast>
+</div>

@@ -1,0 +1,329 @@
+/* ===== LOGIN DISEÑO PROFESIONAL ===== */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  background-color: var(--surface-ground);
+  position: relative;
+}
+
+/* Panel izquierdo con imagen */
+.login-panel-left {
+  flex: 1;
+  background-color: #1a3c27; /* Verde oscuro profesional */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* Imagen de fondo con overlay */
+.login-panel-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a3c27"/><path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="%23388e3c" stroke-width="1" fill="none"/><circle cx="50" cy="50" r="15" stroke="%23388e3c" stroke-width="1" fill="none"/></svg>') repeat,
+    linear-gradient(rgba(26, 60, 39, 0.95), rgba(26, 60, 39, 0.98));
+  opacity: 0.8;
+}
+
+/* Contenido del panel izquierdo */
+.login-panel-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  color: white;
+  text-align: center;
+}
+
+.login-panel-content h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.login-panel-content .tagline {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Icono de seguridad */
+.security-icon {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+/* Panel derecho con formulario */
+.login-panel-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  min-height: 100vh;
+}
+
+.login-card-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-card {
+  background: var(--surface-card);
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  overflow: hidden;
+  transition: none;
+}
+
+.login-header {
+  text-align: center;
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.login-header h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: 0.3px;
+}
+
+.login-header .subtitle {
+  color: var(--text-color-secondary);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Formulario */
+.login-form {
+  padding: 2rem;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+/* Inputs estilo limpio */
+::ng-deep .p-inputtext,
+::ng-deep .p-password {
+  width: 100%;
+  
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    background: var(--surface-card);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: var(--primary-500);
+    }
+    
+    &:hover {
+      border-color: var(--primary-400);
+    }
+    
+    &:disabled {
+      background: var(--surface-ground);
+      color: var(--text-color-disabled);
+      cursor: not-allowed;
+    }
+    
+    &::placeholder {
+      color: var(--text-color-secondary);
+      opacity: 0.6;
+    }
+  }
+}
+
+/* Password input */
+::ng-deep .p-password {
+  position: relative;
+  
+  .p-password-input {
+    padding-right: 2.5rem;
+  }
+  
+  .p-password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    
+    &:hover {
+      color: var(--primary-500);
+    }
+    
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+/* Botón de login */
+::ng-deep .p-button {
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  background: var(--primary-500);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  
+  &:hover:not(:disabled) {
+    background: var(--primary-600);
+  }
+  
+  &:active:not(:disabled) {
+    background: var(--primary-700);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--primary-400);
+  }
+}
+
+/* Loading state */
+::ng-deep .p-button-loading {
+  .p-button-label {
+    visibility: hidden;
+  }
+}
+
+/* Footer sutil */
+.login-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--surface-border);
+  text-align: center;
+}
+
+.copyright {
+  color: var(--text-color-secondary);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ===== TEMA OSCURO ===== */
+:host-context(.dark-theme) {
+  .login-panel-left {
+    background-color: #0c2918;
+  }
+  
+  .login-panel-left::before {
+    background: 
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230c2918"/><path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="%234caf50" stroke-width="1" fill="none"/><circle cx="50" cy="50" r="15" stroke="%234caf50" stroke-width="1" fill="none"/></svg>') repeat,
+      linear-gradient(rgba(12, 41, 24, 0.95), rgba(12, 41, 24, 0.98));
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  
+  .login-panel-left {
+    min-height: 40vh;
+    padding: 2rem 1rem;
+  }
+  
+  .login-panel-right {
+    min-height: 60vh;
+    padding: 2rem 1rem;
+  }
+  
+  .login-panel-content h1 {
+    font-size: 2rem;
+  }
+  
+  .security-icon {
+    font-size: 3rem;
+  }
+  
+  .login-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-panel-left {
+    min-height: 30vh;
+    padding: 1.5rem 1rem;
+  }
+  
+  .login-panel-right {
+    min-height: 70vh;
+    padding: 1.5rem 1rem;
+  }
+  
+  .login-panel-content h1 {
+    font-size: 1.75rem;
+  }
+  
+  .login-header {
+    padding: 1.5rem 1rem 1rem;
+  }
+  
+  .login-form {
+    padding: 1.25rem;
+  }
+  
+  .field {
+    margin-bottom: 1.25rem;
+  }
+  
+  ::ng-deep .p-inputtext,
+  ::ng-deep .p-password input {
+    padding: 0.625rem 0.875rem;
+  }
+  
+  ::ng-deep .p-button {
+    padding: 0.75rem;
+  }
+}
+
+/* Accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
