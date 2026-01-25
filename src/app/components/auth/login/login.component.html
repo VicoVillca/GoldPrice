@@ -2,63 +2,34 @@
   <!-- Panel izquierdo con imagen/icono -->
   <div class="login-panel-left">
   </div>
-  
+
   <!-- Panel derecho con formulario -->
   <div class="login-panel-right">
     <div class="login-card-wrapper">
       <p-card class="login-card">
-        <ng-template #header>
-          <div class="login-header">
-            <img src="assets/img/imgloginedit.png" alt="" class="img-sidebar">
-            <h2>Acceso al Sistema</h2>
-          </div>
-        </ng-template>
-
+        <img src="assets/img/imgloginedit.png" alt="" class="img-sidebar">
         <div class="login-form">
+
           <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
             <div class="field">
               <label for="usuario">Usuario</label>
-              <input 
-                pInputText 
-                id="usuario" 
-                [(ngModel)]="usuario" 
-                name="usuario"
-                type="usuario"
-                placeholder="usuario@dominio.com"
-                class="w-full"
-                required
-                [disabled]="loading"
-              />
+              <input pInputText id="usuario" [(ngModel)]="usuario" name="usuario" type="usuario"
+                placeholder="usuario@dominio.com" class="w-full" required [disabled]="loading" />
             </div>
 
             <div class="field">
               <label for="password">Contraseña</label>
-              <p-password 
-                id="password"
-                [(ngModel)]="password" 
-                name="password"
-                placeholder="••••••••"
-                [feedback]="false"
-                [toggleMask]="true"
-                class="w-full"
-                required
-                [disabled]="loading"
-              ></p-password>
+              <p-password id="password" [(ngModel)]="password" name="password" placeholder="••••••••" [feedback]="false"
+                [toggleMask]="true" class="w-full" required [disabled]="loading"></p-password>
             </div>
 
-            <button 
-              pButton 
-              type="submit" 
-              label="Iniciar Sesión" 
-              class="w-full"
-              [disabled]="loading"
-              [loading]="loading"
-            ></button>
+            <button pButton type="submit" label="Iniciar Sesión" class="w-full" [disabled]="loading"
+              [loading]="loading"></button>
           </form>
         </div>
       </p-card>
     </div>
   </div>
-  
+
   <p-toast position="top-right"></p-toast>
 </div>
