@@ -24,7 +24,7 @@ import { ThemeService } from '../../../../core/services/theme.service';
   providers: [MessageService]
 })
 export class MainLayoutComponent implements OnInit {
-  pageTitle: string = 'Dashboard';
+  pageTitle: string = 'GoldPrice';
   currentYear: number;
   isMobile: boolean = false;
   mobileSidebarVisible: boolean = false;  // Controla el sidebar móvil
@@ -66,7 +66,7 @@ export class MainLayoutComponent implements OnInit {
     const currentRoute = this.router.routerState.root.firstChild;
     if (currentRoute) {
       const routeData = currentRoute.snapshot.data;
-      this.pageTitle = routeData['title'] || 'Dashboard';
+      this.pageTitle = routeData['title'] || 'GoldPrice';
     }
   }
 

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuModule } from 'primeng/menu';
 import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -16,8 +15,7 @@ import { AuthService } from '../../../../core/services/auth.service';
     CommonModule,
     RouterModule,
     MenuModule,
-    ButtonModule,
-    TooltipModule
+    ButtonModule
   ]
 })
 export class SidebarComponent {
@@ -25,39 +23,43 @@ export class SidebarComponent {
 
   menuItems: MenuItem[] = [
     {
-      label: 'Dashboard',
-      icon: 'pi pi-home',
-      routerLink: '/dashboard',
-      command: () => this.closeSidebar()
-    },
-    {
-      label: 'Componente 1',
-      icon: 'pi pi-box',
-      routerLink: '/componente1',
-      command: () => this.closeSidebar()
-    },
-    {
-      label: 'Componente 2',
-      icon: 'pi pi-cog',
-      routerLink: '/componente2',
-      command: () => this.closeSidebar()
-    },
-    {
-      separator: true
-    },
-    {
-      label: 'Configuración',
-      icon: 'pi pi-sliders-h',
+      label: '',
+      escape: true,
       items: [
         {
-          label: 'Perfil',
-          icon: 'pi pi-user',
-          routerLink: '/profile'
+          label: 'Precio del Oro',
+          icon: 'pi pi-dollar', // Dinero/Valor
+          routerLink: ['/precio-oro'],
+          escape: true,
+          command: () => this.closeSidebar()
         },
         {
-          label: 'Ajustes',
-          icon: 'pi pi-wrench',
-          routerLink: '/settings'
+          label: 'Oro en Joyas',
+          icon: 'pi pi-crown', // Joya/gema
+          routerLink: ['/oro-joyas'],
+          escape: true,
+          command: () => this.closeSidebar()
+        },
+        {
+          label: 'Oro en Pepas',
+          icon: 'pi pi-apple', // Fruta/forma redondeada (pepas)
+          routerLink: ['/oro-pepas'],
+          escape: true,
+          command: () => this.closeSidebar()
+        },
+        {
+          label: 'Oro Ley',
+          icon: 'pi pi-apple', // Fruta/forma redondeada (pepas)
+          routerLink: ['/oro-ley'],
+          escape: true,
+          command: () => this.closeSidebar()
+        },
+        {
+          label: 'Letras',
+          icon: 'pi pi-file-edit', // Documento/escritura
+          routerLink: ['/letras'],
+          escape: true,
+          command: () => this.closeSidebar()
         }
       ]
     }
@@ -70,6 +72,7 @@ export class SidebarComponent {
   }
 
   closeSidebar(): void {
+    console.log("Cerrando sidebar desde el menú");
     this.toggleSidebar.emit();
   }
 }

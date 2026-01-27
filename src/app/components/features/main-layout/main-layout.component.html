@@ -9,7 +9,7 @@
   <div *ngIf="isMobile && mobileSidebarVisible" class="mobile-sidebar-overlay" (click)="closeMobileSidebar()"></div>
 
   <div *ngIf="isMobile && mobileSidebarVisible" class="mobile-sidebar">
-<app-sidebar></app-sidebar>
+<app-sidebar (toggleSidebar)="closeMobileSidebar()"></app-sidebar>
   </div>
 
   <!-- Main Content Area -->
@@ -35,9 +35,6 @@
             <i class="brand-icon pi pi-box"></i>
             <span>Vico-Proyectos</span>
           </a>
-        </div>
-        <div class="footer-copyright">
-          © {{ currentYear }} Sistema de Administración
         </div>
       </div>
     </footer>

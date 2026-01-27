@@ -25,7 +25,7 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   ]
 })
 export class ToolbarComponent {
-  @Input() title: string = 'Dashboard';
+  @Input() title: string = 'GoldPrice';
   @Input() showMobileMenu: boolean = false;
   @Output() toggleMobileSidebar = new EventEmitter<void>();
   

@@ -53,40 +53,6 @@
   gap: 0.75rem;
   padding-right: 32px;
   
-  /* Botón de notificaciones */
-  ::ng-deep .p-button:not(.user-avatar) {
-    color: var(--text-color-secondary);
-    background: transparent;
-    border: none;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    
-    &:hover {
-      color: var(--primary-500);
-      background-color: var(--surface-hover);
-    }
-    
-    /* Badge de notificaciones */
-    .p-badge {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      min-width: 18px;
-      height: 18px;
-      font-size: 0.7rem;
-      line-height: 18px;
-      
-      &.p-badge-danger {
-        background: var(--danger-500);
-        color: white;
-      }
-    }
-  }
-  
   /* Avatar de usuario */
   .user-avatar {
     width: 40px;
