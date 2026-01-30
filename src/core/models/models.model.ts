@@ -58,3 +58,31 @@ export interface ExchangeServiceResponse {
   exchangeData: ExchangeData[];
   rates: Rate[];
 }
+
+/// Configuración para cálculos de metales
+export interface ConfiguracionMetal {
+  precioOnzaTroyUSD: number;      // Precio de la onza Troy en USD
+  tipoCambioUSDaBOB: number;     // Tipo de cambio USD a BOB
+  descuentoBase: number;         // Descuento base (ej: 6%)
+  ajusteJoya: number;            // Ajuste para joyería (ej: -2%)
+}
+
+export interface PrecioPorLey {
+  ley: number;                   // Ej: 0.94 = 94%
+  milesimas: number;            // Milésimas (ej: 940)
+  precioPorGramoBOB: number;
+  precioPorGramoConDescuentoBOB: number;
+  precioPorGramoUSD: number;
+  precioPorOnzaBOB: number;
+  precioPorOnzaUSD: number;
+}
+
+export interface PrecioJoya {
+  quilates: number;             // 24, 18, 14, 10
+  porcentajeTeorico: number;    // % teórico de oro
+  porcentajeAjustado: number;   // % con ajuste por soldadura
+  precioPorGramoBOB: number;
+  precioPorGramoConDescuentoBOB: number;
+  perdidaSoldadura: number;     // Pérdida por soldadura (%)
+  precioFinalPorGramoBOB: number; // Precio final
+}

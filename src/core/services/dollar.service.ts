@@ -11,16 +11,14 @@ import { environment } from '../../../environments/environment';
 export class DollarService {
   
   private dollarApiUrl = environment.dollarApiUrl;
-  private binanceApiUrl = 'https://api.allorigins.win/raw?url=' + 
+  private binanceApiUrl = 'https://corsproxy.io/?' + 
     encodeURIComponent(environment.binanceApiUrl);
   
   private dolarOficialSubject = new BehaviorSubject<Dollar>(this.getDefaultDollar('oficial'));
   private dolarBinanceSubject = new BehaviorSubject<Dollar>(this.getDefaultDollar('binance'));
-  private dolarSystemSubject = new BehaviorSubject<Dollar>(this.getDefaultDollar('system'));
   
   dolarOficial$ = this.dolarOficialSubject.asObservable();
   dolarBinance$ = this.dolarBinanceSubject.asObservable();
-  dolarSystem$ = this.dolarSystemSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -66,13 +64,6 @@ getDolarBinance(): Observable<Dollar> {
       tap((dollar: Dollar) => {
         this.dolarBinanceSubject.next(dollar);
 
-        // Crear dollarSystem con ajuste de -1 como antes
-        let dollarSystem = { ...dollar };
-        dollarSystem.casa = 'system';
-        dollarSystem.nombre = 'Dólar System';
-        dollarSystem.compra = dollar.compra ? dollar.compra - 1 : dollar.compra;
-        dollarSystem.venta = dollar.venta ? dollar.venta - 1 : dollar.venta;
-        this.dolarSystemSubject.next(dollarSystem);
       }),
       
       shareReplay(1),
@@ -136,12 +127,6 @@ getDolarBinance(): Observable<Dollar> {
     return this.dolarBinanceSubject.value;
   }
 
-  /**
-   * Obtiene valor actual del dólar Systema
-   */
-  getCurrentSystem(): Dollar {
-    return this.dolarSystemSubject.value;
-  }
 
   /**
    * Refresca ambos dólares

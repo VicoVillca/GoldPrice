@@ -1,132 +1,31 @@
 <div class="oro-pepas-container">
   <!-- Título con PrimeFlex -->
-  <div class="title-section mb-4">
-    <h3 class="title-secondary text-color-secondary">
-      Oro en Pepas
-    </h3>
+  <div class="header-section mb-4">
+    <div class="flex justify-content-between align-items-center">
+      <div>
+        <h3 class="title-secondary text-color-secondary m-0">
+          <i class="pi pi-chart-line mr-2"></i>
+          Oro en joyas
+        </h3>
+      </div>
+
+      <div class="flex align-items-center gap-2">
+        <p-button 
+          icon="pi pi-refresh" 
+          (click)="calcularPrecios()"
+          styleClass="p-button-rounded p-button-text p-button-sm"
+          tooltip="Recalcular precios"
+          tooltipPosition="bottom">
+        </p-button>
+      </div>
+    </div>
   </div>
 
   <!-- Cards con PrimeFlex Grid -->
   <div class="grid">
     
-    <!-- Card 1 - Total Pepas -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
-      <div class="card-item p-3">
-        <div class="flex align-items-center mb-2">
-          <i class="pi pi-database text-2xl text-primary mr-2"></i>
-          <h3 class="card-title m-0">Total Pepas</h3>
-        </div>
-        <div class="text-center">
-          <p class="card-value text-4xl font-bold text-900 m-0">{{pepas.length}}</p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">registros en sistema</p>
-        </div>
-      </div>
-    </div>
 
-    <!-- Card 2 - Peso Total -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
-      <div class="card-item p-3">
-        <div class="flex align-items-center mb-2">
-          <i class="pi pi-weight text-2xl text-green-500 mr-2"></i>
-          <h3 class="card-title m-0">Peso Total</h3>
-        </div>
-        <div class="text-center">
-          <p class="card-value text-4xl font-bold text-900 m-0">{{calcularPesoTotal()}}</p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">gramos acumulados</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 3 - Valor Total -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
-      <div class="card-item p-3">
-        <div class="flex align-items-center mb-2">
-          <i class="pi pi-dollar text-2xl text-yellow-500 mr-2"></i>
-          <h3 class="card-title m-0">Valor Total</h3>
-        </div>
-        <div class="text-center">
-          <p class="card-value text-4xl font-bold text-900 m-0">${{calcularValorTotal().toFixed(2)}}</p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">valor estimado</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card 4 - Disponibles -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
-      <div class="card-item p-3">
-        <div class="flex align-items-center mb-2">
-          <i class="pi pi-check-circle text-2xl text-green-700 mr-2"></i>
-          <h3 class="card-title m-0">Disponibles</h3>
-        </div>
-        <div class="text-center">
-          <p class="card-value text-4xl font-bold text-900 m-0">{{contarDisponibles()}}</p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">pepas para venta</p>
-        </div>
-      </div>
-    </div>
 
   </div>
 
-  <!-- Cards de detalle con PrimeFlex -->
-  <h3 class="text-2xl font-bold mt-5 mb-3 text-color">Detalle de Pepas</h3>
-  
-  <div class="grid">
-    
-    <div class="col-12 md:col-6 lg:col-4 mb-3" *ngFor="let pepa of pepas">
-      <div class="card-detail p-3">
-        <!-- Encabezado de la card -->
-        <div class="flex justify-content-between align-items-center mb-3">
-          <div>
-            <span class="inline-flex align-items-center justify-content-center bg-blue-100 text-blue-800 border-circle w-3rem h-3rem">
-              <i class="pi pi-gem text-xl"></i>
-            </span>
-          </div>
-          <span class="font-bold text-lg">{{pepa.codigo}}</span>
-        </div>
-        
-        <!-- Contenido -->
-        <div class="mb-3">
-          <div class="flex justify-content-between mb-2">
-            <span class="text-color-secondary">Peso:</span>
-            <span class="font-semibold">{{pepa.peso}} gr</span>
-          </div>
-          <div class="flex justify-content-between mb-2">
-            <span class="text-color-secondary">Pureza:</span>
-            <span class="font-semibold text-yellow-700">{{pepa.pureza}}</span>
-          </div>
-          <div class="flex justify-content-between mb-2">
-            <span class="text-color-secondary">Procedencia:</span>
-            <span class="font-semibold">{{pepa.procedencia}}</span>
-          </div>
-          <div class="flex justify-content-between mb-2">
-            <span class="text-color-secondary">Estado:</span>
-            <span [class]="'estado-badge estado-' + pepa.estado.toLowerCase()">
-              {{pepa.estado}}
-            </span>
-          </div>
-          <div class="flex justify-content-between">
-            <span class="text-color-secondary">Valor:</span>
-            <span class="font-bold text-green-600">${{pepa.precio.toFixed(2)}}</span>
-          </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="flex justify-content-end gap-2 pt-3 border-top-1 surface-border">
-          <button pButton 
-                  type="button" 
-                  icon="pi pi-eye" 
-                  class="p-button-rounded p-button-text p-button-sm"
-                  pTooltip="Ver detalles">
-          </button>
-          <button pButton 
-                  type="button" 
-                  icon="pi pi-pencil" 
-                  class="p-button-rounded p-button-text p-button-sm"
-                  pTooltip="Editar">
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>

@@ -1,33 +1,30 @@
 <div class="oro-pepas-container">
   <!-- Título con PrimeFlex -->
-     <div class="header-section mb-4">
+  <div class="header-section mb-4">
     <div class="flex justify-content-between align-items-center">
       <div>
         <h3 class="title-secondary text-color-secondary m-0">
           <i class="pi pi-chart-line mr-2"></i>
           Precio del Oro
         </h3>
-        <small class="text-color-secondary">
-          Última actualización: {{getLastUpdateTime()}}
-        </small>
       </div>
-      
+
       <div class="flex align-items-center gap-2">
         <p-button 
-          label="Actualizar" 
           icon="pi pi-refresh" 
-          [loading]="loading"
-          (onClick)="refreshData()"
-          styleClass="p-button-outlined p-button-sm">
+          (click)="calcularPrecios()"
+          styleClass="p-button-rounded p-button-text p-button-sm"
+          tooltip="Recalcular precios"
+          tooltipPosition="bottom">
         </p-button>
       </div>
     </div>
   </div>
   <!-- Cards con PrimeFlex Grid -->
   <div class="grid">
-    
+
     <!-- Card 1 - Total Pepas -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
+    <div class="col-12 md:col-6 lg:col-4 mb-4">
       <div class="card-item p-3">
         <div class="flex align-items-center mb-2">
           <i class="pi pi-database text-2xl text-primary mr-2"></i>
@@ -44,7 +41,7 @@
     </div>
 
     <!-- Card 2 - Peso Total -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
+    <div class="col-12 md:col-6 lg:col-4 mb-4">
       <div class="card-item p-3">
         <div class="flex align-items-center mb-2">
           <i class="pi pi-dollar text-2xl text-blue-500 mr-2"></i>
@@ -61,7 +58,7 @@
     </div>
 
     <!-- Card 3 - Valor Total -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
+    <div class="col-12 md:col-6 lg:col-4 mb-4">
       <div class="card-item p-3">
         <div class="flex align-items-center mb-2">
           <i class="pi pi-dollar text-2xl text-yellow-500 mr-2"></i>
@@ -77,101 +74,48 @@
       </div>
     </div>
 
-    <!-- Card 4 - Disponibles -->
-    <div class="col-12 md:col-6 lg:col-3 mb-3">
-      <div class="card-item p-3">
-        <div class="flex align-items-center mb-2">
-          <i class="pi pi-check-circle text-2xl text-green-700 mr-2"></i>
-          <h3 class="card-title m-0">Dolar en el Sistema</h3>
-        </div>
-        <div class="text-center">
-          <p class="card-value text-4xl font-bold text-900 m-0">{{getSystemVenta() | number:'1.2-2'}} (BS)</p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">
-            Compra/Venta: {{getSystemCompra() | number:'1.2-2'}} / {{getSystemVenta() | number:'1.2-2'}}
-          </p>
-        </div>
-      </div>
-    </div>
 
   </div>
 
   <!-- NUEVO: Cards adicionales para cálculo -->
   <div class="grid mt-4">
-    
+
     <!-- Card 5: Fórmula de conversión -->
-    <div class="col-12 md:col-6 lg:col-6 mb-3">
+    <div class="col-12 md:col-12 lg:col-6 mb-6">
       <div class="card-item p-3 border-left-3 border-blue-500">
-        <div class="flex align-items-center mb-3">
-          <i class="pi pi-calculator text-2xl text-blue-500 mr-2"></i>
-          <h3 class="card-title m-0">Fórmula de Conversión</h3>
-        </div>
-        
+
         <div class="pl-3">
           <!-- Fórmula 1: Onza a Gramos -->
           <div class="mb-3">
             <p class="font-semibold mb-1">1. Onza Troy a Gramos:</p>
-            <div class="bg-gray-100 p-2 rounded">
+            <div class="p-2 rounded">
               <code class="text-sm">
                 Precio por gramo (USD) = Precio onza (USD) ÷ 31.1035
               </code>
               <p class="text-xs text-gray-600 mt-1">(1 onza troy = 31.1035 gramos)</p>
             </div>
           </div>
-          
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 md:col-12 lg:col-6 mb-6">
+      <div class="card-item p-3 border-left-3 border-green-500">
+
+        <div class="pl-3">
+
           <!-- Fórmula 2: USD a Bs -->
           <div>
             <p class="font-semibold mb-1">2. USD a Bolivianos:</p>
-            <div class="bg-gray-100 p-2 rounded">
+            <div class="p-2 rounded">
               <code class="text-sm">
                 Precio por gramo (Bs.) = Precio gramo (USD) × Dólar Sistema
               </code>
               <p class="text-xs text-gray-600 mt-1">(Usando dólar del sistema para conversión)</p>
             </div>
           </div>
-        
-        </div>
-      </div>
-    </div>
 
-    <!-- Card 6: Precio ajustado -->
-    <div class="col-12 md:col-6 lg:col-6 mb-3">
-      <div class="card-item p-3 border-left-3 border-green-500">
-        <div class="flex align-items-center mb-3">
-          <i class="pi pi-money-bill text-2xl text-green-500 mr-2"></i>
-          <h3 class="card-title m-0">Precio Ajustado por Gramo</h3>
-        </div>
-        
-        <div class="pl-3">
-          
-          <!-- Precio en Bs. -->
-          <div>
-            <p class="font-semibold mb-2">Precio por gramo (Bolivianos):</p>
-            <div class="grid">
-              <div class="col-6">
-                <div class="p-2 bg-blue-50 rounded text-center">
-                  <p class="text-xs text-gray-600 mb-1">Compra</p>
-                  <p class="text-xl font-bold text-blue-700">
-                    {{calculateGramPrice('compra', 'bs') | number:'1.2-2'}} Bs.
-                  </p>
-                  <p class="text-xs">
-                    ({{getGoldCompra() | number:'1.2-2'}} ÷ 31.1035) × {{getSystemCompra() | number:'1.2-2'}}
-                  </p>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="p-2 bg-orange-50 rounded text-center">
-                  <p class="text-xs text-gray-600 mb-1">Venta</p>
-                  <p class="text-xl font-bold text-orange-700">
-                    {{calculateGramPrice('venta', 'bs') | number:'1.2-2'}} Bs.
-                  </p>
-                  <p class="text-xs">
-                    ({{getGoldVenta() | number:'1.2-2'}} ÷ 31.1035) × {{getSystemVenta() | number:'1.2-2'}}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
         </div>
       </div>
     </div>
