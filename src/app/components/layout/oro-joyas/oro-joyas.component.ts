@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { CardModule } from 'primeng/card';
 import { ChipModule } from 'primeng/chip';
-import { ButtonModule } from 'primeng/button';
 import { ServicioPreciosMetal } from '../../../../core/services/servicio-precios-metal.service';
 import { ConfiguracionMetal, PrecioJoya } from '../../../../core/models/models.model';
+import { DollarService } from '../../../../core/services/dollar.service';
+import { GoldService } from '../../../../core/services/gold.service';
 
 @Component({
   selector: 'app-oro-joyas',
@@ -14,19 +13,16 @@ import { ConfiguracionMetal, PrecioJoya } from '../../../../core/models/models.m
   standalone: true,
   imports: [
     CommonModule,
-    TableModule,
-    CardModule,
-    ChipModule,
-    ButtonModule
+    ChipModule
   ]
 })
 export class OroJoyasComponent implements OnInit {
   
-  // Datos quemados como en el ejemplo
-  precioOnzaUSD: number = 5332.5;  // Valor quemado del ejemplo
-  tipoCambioBOB: number = 8.93;    // Valor quemado del ejemplo
-  descuentoBase: number = 6;       // 6% descuento base
-  ajusteJoya: number = -2;         // -2% ajuste para joyería
+  // Valores fijos
+  precioOnzaUSD: number = 5332.5;
+  tipoCambioBOB: number = 8.93;
+  descuentoBase: number = 6;
+  ajusteJoya: number = -2;
   
   // Configuración
   configuracion!: ConfiguracionMetal;
@@ -34,20 +30,37 @@ export class OroJoyasComponent implements OnInit {
   // Precios calculados
   preciosJoya: PrecioJoya[] = [];
   
-  // Para las cards principales
+  // Quilates para mostrar en las cards
   quilatesPrincipales = [20, 18, 14, 10];
-  
-  // Estado
-  lastUpdate: Date = new Date();
 
-  constructor(private servicioPrecios: ServicioPreciosMetal) {}
+  constructor(
+    private servicioPrecios: ServicioPreciosMetal,
+    private dollarService: DollarService,
+    private goldService: GoldService,
+  ) {}
 
   ngOnInit() {
-    this.calcularPrecios();
+          // Dólar Binance
+      this.dollarService.dolarBinance$.subscribe(dolar => {
+        this.tipoCambioBOB = dolar.venta;
+        this.calcularPrecios();
+        //this.lastUpdate = new Date();
+      }),
+
+      
+      // Precio del oro
+      this.goldService.goldPrice$.subscribe(gold => {
+        this.precioOnzaUSD = gold.venta;
+        this.calcularPrecios();
+        //this.lastUpdate = new Date();
+      })
   }
 
+  /**
+   * Calcula los precios de joyería usando el servicio
+   */
   calcularPrecios(): void {
-    // Crear configuración con datos quemados
+    // Crear configuración con datos fijos
     this.configuracion = this.servicioPrecios.crearConfiguracion(
       this.precioOnzaUSD,
       this.tipoCambioBOB,
@@ -55,71 +68,41 @@ export class OroJoyasComponent implements OnInit {
       this.ajusteJoya
     );
     
-    // Obtener los precios para joyería
+    // Obtener precios de joyería
     this.preciosJoya = this.servicioPrecios.obtenerTablaPreciosJoya(this.configuracion);
-    
-    // Actualizar timestamp
-    this.lastUpdate = new Date();
   }
 
-  // Obtener precio específico para un quilate
+  /**
+   * Obtiene el precio para un quilate específico
+   */
   getPrecioForQuilate(quilate: number): PrecioJoya | undefined {
     return this.preciosJoya.find(p => p.quilates === quilate);
   }
 
-  // Obtener color según quilate
+  /**
+   * Calcula precio con descuento aplicado
+   */
+  calcularPrecioConDescuento(precioBase: number, porcentajeDescuento: number): number {
+    return precioBase * (1 - porcentajeDescuento / 100);
+  }
+
+  /**
+   * Asigna colores según el quilate para estilos
+   */
   getColorForQuilate(quilate: number): string {
-    switch (quilate) {
-      case 20: return 'yellow';
-      case 18: return 'green';
-      case 14: return 'orange';
-      case 10: return 'brown';
-      default: return 'gray';
-    }
+    const colores: {[key: number]: string} = {
+      20: 'yellow',
+      18: 'green',
+      14: 'orange',
+      10: 'brown'
+    };
+    return colores[quilate] || 'gray';
   }
 
-  // Obtener icono según quilate
-  getIconForQuilate(quilate: number): string {
-    switch (quilate) {
-      case 20: return 'pi pi-star';
-      case 18: return 'pi pi-star-fill';
-      case 14: return 'pi pi-gem';
-      case 10: return 'pi pi-shield';
-      default: return 'pi pi-circle';
-    }
-  }
-
-  // Formatear porcentaje para mostrar
-  formatPorcentaje(valor: number): string {
-    return valor.toFixed(1) + '%';
-  }
-
-  // Formatear precio
+  /**
+   * Formatea precios a string con moneda
+   */
   formatPrecio(valor: number): string {
-    return 'Bs. ' + valor.toFixed(2);
-  }
-
-  getLastUpdateTime(): string {
-    return this.lastUpdate.toLocaleTimeString('es-ES', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-  }
-
-  // Método para calcular precio de pepa (ejemplo)
-  calcularPrecioPepaEjemplo(): void {
-    const config: ConfiguracionMetal = this.servicioPrecios.crearConfiguracion(
-      this.precioOnzaUSD,
-      this.tipoCambioBOB
-    );
-    
-    // Ejemplo: calcular precio para pepa declarada 94% en condición regular
-    const precioPepa = this.servicioPrecios.calcularPrecioPepa(0.94, config, 'regular');
-    console.log('Precio pepa 94% regular:', precioPepa);
-    
-    // Obtener descuento recomendado
-    const descuento = this.servicioPrecios.obtenerDescuentoRecomendadoPepa('regular', true, false);
-    console.log('Descuento recomendado:', descuento + '%');
+    return `Bs. ${valor.toFixed(2)}`;
   }
 }

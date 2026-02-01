@@ -10,48 +10,56 @@
       </div>
 
       <div class="flex align-items-center gap-2">
-        <p-button 
-          icon="pi pi-refresh" 
-          (click)="calcularPrecios()"
-          styleClass="p-button-rounded p-button-text p-button-sm"
-          tooltip="Recalcular precios"
-          tooltipPosition="bottom">
-        </p-button>
       </div>
     </div>
   </div>
 
   <!-- Cards con PrimeFlex Grid -->
   <div class="grid">
-    
+
     <!-- Cards dinámicas para cada quilate -->
     <div class="col-12 md:col-6 lg:col-3 mb-4" *ngFor="let quilate of quilatesPrincipales">
-      <div class="card-item p-3" [class.border-left-4]="true" 
-           [ngClass]="'border-' + getColorForQuilate(quilate) + '-500'">
+      <div class="card-item p-3" [class.border-left-4]="true"
+        [ngClass]="'border-' + getColorForQuilate(quilate) + '-500'">
 
         <div class="text-center" *ngIf="getPrecioForQuilate(quilate) as precio">
           <p class="card-value text-4xl font-bold text-900 m-0">
             {{quilate}}K
           </p>
-          <p class="card-subtext text-color-secondary m-0 mt-1">
+          <!--p class="card-subtext text-color-secondary m-0 mt-1">
             Pureza: {{precio.porcentajeTeorico | number:'1.1-1'}}%
             <span *ngIf="precio.porcentajeAjustado !== precio.porcentajeTeorico">
               <br>Ajustado: {{precio.porcentajeAjustado | number:'1.1-1'}}%
             </span>
-          </p>
+          </p -->
           <div class="mt-3">
-            <p class="text-sm m-0">Precio compra/gramo:</p>
-            <p class="text-2xl font-bold m-0" 
-               [ngClass]="'text-' + getColorForQuilate(quilate) + '-700'">
-              {{formatPrecio(precio.precioFinalPorGramoBOB)}}
+
+            <p class="card-subtext text-color-secondary m-0 mt-1">Precio recomendado para Comprar</p>
+            <p class="text-2xl font-bold m-0" [ngClass]="'text-' + getColorForQuilate(quilate) + '-700'">
+              {{formatPrecio(calcularPrecioConDescuento(precio.precioFinalPorGramoBOB, 8))}}
             </p>
+            <br>
           </div>
-          <div class="mt-2 flex justify-content-center">
-            <p-chip *ngIf="precio.perdidaSoldadura > 0"
-                    [label]="'Soldadura: ' + precio.perdidaSoldadura + '%'" 
-                    class="text-xs"
-                    [ngClass]="'bg-' + getColorForQuilate(quilate) + '-100 text-' + getColorForQuilate(quilate) + '-800'">
-            </p-chip>
+          <div class="card-item p-3" [class.border-left-4]="true" [ngClass]="'border-gray-300'">
+
+
+            <p class="card-subtext text-color-secondary m-0 mt-1">Precios aproximados de Don Benigno</p>
+            <div class="mt-2 flex justify-content-center">
+              <p-chip *ngIf="precio.perdidaSoldadura > 0"
+                [label]="'Compra: '+formatPrecio(calcularPrecioConDescuento(precio.precioFinalPorGramoBOB, 6))"
+                class="text-xs"
+                [ngClass]="'text-' + getColorForQuilate(quilate) + '-800'">
+
+              </p-chip>
+            </div>
+            <div class="mt-2 flex justify-content-center">
+              <p-chip *ngIf="precio.perdidaSoldadura > 0"
+                [label]="'Vende: '+formatPrecio(calcularPrecioConDescuento(precio.precioFinalPorGramoBOB, 0))"
+                class="text-xs"
+                [ngClass]="'text-' + getColorForQuilate(quilate) + '-800'">
+
+              </p-chip>
+            </div>
           </div>
         </div>
       </div>

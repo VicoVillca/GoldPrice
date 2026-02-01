@@ -19,10 +19,10 @@ export class ServicioPreciosMetal {
   
   // Pérdida por soldadura según quilate
   private perdidaSoldaduraPorQuilate: { [key: number]: number } = {
-    20: 1.0,
-    18: 1.5,
+    20: 2.0,
+    18: 2.0,
     14: 2.0,
-    10: 2.5
+    10: 2.0
   };
 
   constructor() { }

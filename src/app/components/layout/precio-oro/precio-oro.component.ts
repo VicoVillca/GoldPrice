@@ -126,6 +126,6 @@ export class PrecioOroComponent implements OnInit{
   }
 
   openBinancePage():void {
-    window.open('https://www.binance.com', '_blank', 'noopener,noreferrer');
+    window.open('https://dolarboliviahoy.com/', '_blank', 'noopener,noreferrer');
   }
 }
