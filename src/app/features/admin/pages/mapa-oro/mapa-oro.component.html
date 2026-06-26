@@ -1,0 +1,77 @@
+<div class="mapa-oro-container py-4 px-3 md:px-6">
+
+  <!-- Filter & Search Controls Panel (Material style) -->
+  <div class="controls-panel bg-white p-4 mb-5 border-round-3xl shadow-sm border-1 border-slate-100">
+    <div class="grid align-items-center">
+      
+      <!-- Search Input -->
+      <div class="col-12 md:col-6 lg:col-4">
+        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">Búsqueda rápida</span>
+        <div class="relative flex align-items-center w-full">
+          <mat-icon class="absolute left-0 ml-3 text-slate-400">search</mat-icon>
+          <input 
+            type="text" 
+            [ngModel]="searchQuery()" 
+            (ngModelChange)="searchQuery.set($event)"
+            placeholder="Buscar (ej: Mapiri)" 
+            class="search-input w-full pl-5 pr-5 py-3 border-2 border-slate-200 border-round-2xl text-sm font-semibold outline-none focus:border-indigo-500 transition-all text-slate-800"
+          />
+          @if (searchQuery()) {
+            <button (click)="searchQuery.set('')" class="absolute right-0 mr-3 text-slate-400 hover:text-slate-600 border-none bg-transparent cursor-pointer flex align-items-center">
+              <mat-icon class="text-sm">close</mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gold Locations Catalog Grid -->
+  <div class="grid">
+    @for (region of filteredRegiones(); track region.id) {
+      <div class="col-12 md:col-6 lg:col-4 p-3">
+        <div class="location-m3-card border-round-3xl flex flex-column h-full transition-all relative p-4 gap-3">
+          
+
+          <!-- Location Details -->
+          <div class="flex-1 flex flex-column gap-2">
+            <h3 class="text-xl font-bold m-0 leading-tight tracking-tight flex align-items-center gap-1">
+              <mat-icon class="text-slate-400" style="font-size: 1.3rem; width: 1.3rem; height: 1.3rem;">place</mat-icon>
+              {{ region.nombre }}
+            </h3>
+          </div>
+
+          <!-- Ley and Price Grid -->
+          <div class="info-grid grid grid-nogutter p-3 border-round-2xl gap-2 justify-content-between align-items-center mt-2">
+            <div class="flex flex-column">
+              <span class="text-xxs font-bold uppercase tracking-widest leading-none">Ley de Pureza</span>
+              <span class="text-lg font-black mt-1 flex align-items-center gap-1">
+                <mat-icon style="font-size:1.15rem; width:1.15rem; height:1.15rem; color:#10b981">verified</mat-icon>
+                {{ region.ley }} Quilates/Ley
+              </span>
+            </div>
+            <div class="flex flex-column text-right">
+              <span class="text-xxs font-bold uppercase tracking-widest leading-none">Precio por gramo</span>
+              <span class="text-lg font-black text-amber-600 mt-1">
+                {{ calculatePrice(region.ley) | currency:'BOB ':'symbol':'1.2-2' }}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    } @empty {
+      <div class="col-12 py-6 text-center">
+        <div class="flex flex-column align-items-center justify-content-center gap-3">
+          <div class="icon-circle flex align-items-center justify-content-center bg-slate-100 text-slate-400 border-round-full p-4">
+            <mat-icon style="font-size: 3rem; width:3rem; height:3rem;">search_off</mat-icon>
+          </div>
+          <h3 class="text-xl font-bold text-slate-700 m-0">No se encontraron yacimientos auríferos</h3>
+          <p class="text-slate-500 m-0 text-sm max-w-20rem mx-auto">Prueba cambiando el departamento o utilizando otros términos de búsqueda.</p>
+          <button (click)="searchQuery.set(''); selectedDepartamento.set('Todos')" class="mt-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border-none font-bold border-round-xl cursor-pointer shadow-1 transition-all text-sm">
+            Restablecer Filtros
+          </button>
+        </div>
+      </div>
+    }
+  </div>

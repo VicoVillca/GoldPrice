@@ -1,0 +1,219 @@
+<div class="letras-container py-4 px-3 md:px-6">
+
+  <!-- Interactive Control Panel (Playground) -->
+  <div class="playground-card p-4 mb-5 border-round-3xl shadow-1">
+    <div class="grid">
+      
+      <!-- Primary Input & Presets -->
+      <div class="col-12 lg:col-6 flex flex-column gap-3 border-right-none lg:border-right-1 border-slate-200 pr-0 lg:pr-4">
+        
+        <div class="relative w-full">
+          <input 
+            type="text" 
+            [(ngModel)]="name" 
+            placeholder="Escribe un nombre..." 
+            class="playground-input w-full p-4 text-lg font-semibold border-round-2xl border-2 border-slate-200 text-slate-800 focus:border-indigo-500 transition-all outline-none"
+            maxlength="20"
+          />
+          @if (name) {
+            <button (click)="name = ''" class="absolute right-0 top-50 transform -translate-y-50 mr-3 text-slate-400 hover:text-slate-600 border-none bg-transparent cursor-pointer flex align-items-center">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          }
+        </div>
+
+      </div>
+
+      <!-- Live Customizer Settings (Size, Background) -->
+      <div class="col-12 lg:col-6 flex flex-column gap-3 pl-0 lg:pl-4 mt-4 lg:mt-0">
+
+        <div class="grid">
+          <!-- Font Size Slider -->
+          <div class="col-12 sm:col-6 flex flex-column gap-2">
+            <div class="flex justify-content-between align-items-center">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Tamaño de letra</span>
+              <span class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 border-round">{{ fontSize() }}px</span>
+            </div>
+            <p-slider 
+              [(ngModel)]="fontSize" 
+              [min]="40" 
+              [max]="130" 
+              styleClass="mt-2 w-full custom-slider"
+            />
+          </div>
+
+          <!-- Preview Backdrop style -->
+          <div class="col-12 sm:col-6 flex flex-column gap-2">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Fondo de Visualización</span>
+            <div class="grid grid-nogutter gap-1 mt-1">
+              <button 
+                (click)="selectedBackground.set('grid')"
+                class="col flex align-items-center justify-content-center py-2 border-1 border-round-lg cursor-pointer font-semibold text-xs transition-all gap-1"
+                [class.bg-btn-active]="selectedBackground() === 'grid'"
+              >
+                <mat-icon style="font-size: 1rem; width:1rem; height:1rem;">grid_on</mat-icon>
+                Cuadrícula
+              </button>
+              <button 
+                (click)="selectedBackground.set('dark')"
+                class="col flex align-items-center justify-content-center py-2 border-1 border-round-lg cursor-pointer font-semibold text-xs transition-all gap-1"
+                [class.bg-btn-active]="selectedBackground() === 'dark'"
+              >
+                <mat-icon style="font-size: 1rem; width:1rem; height:1rem;">layers</mat-icon>
+                Crema
+              </button>
+              <button 
+                (click)="selectedBackground.set('light')"
+                class="col flex align-items-center justify-content-center py-2 border-1 border-round-lg cursor-pointer font-semibold text-xs transition-all gap-1"
+                [class.bg-btn-active]="selectedBackground() === 'light'"
+              >
+                <mat-icon style="font-size: 1rem; width:1rem; height:1rem;">crop_portrait</mat-icon>
+                Blanco
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Fonts Grid Grid system -->
+  <div class="grid">
+    @for (font of filteredFonts(); track font.name) {
+      <div class="col-12 md:col-6 lg:col-4 p-2 font-card-col">
+        <div class="font-m3-card p-3 border-round-2xl shadow-sm flex flex-column justify-content-between h-full transition-all">
+          
+          <!-- Card Header Info -->
+          <div class="flex align-items-center justify-content-between mb-3">
+            <div class="flex flex-column">
+              <span class="font-bold text-slate-800 text-sm leading-tight">{{ font.name }}</span>
+              
+            </div>
+            
+            <button 
+              type="button" 
+              (click)="downloadImage(font.family, font.name, font.weight)"
+              class="download-btn flex align-items-center justify-content-center gap-1 px-3 py-2 border-none border-round-xl font-bold cursor-pointer transition-all text-xs"
+            >
+              <mat-icon style="font-size: 1.1rem; width:1.1rem; height:1.1rem;">download</mat-icon>
+              
+            </button>
+          </div>
+
+          <!-- Preview Content area with background & material styling -->
+          <div 
+            class="preview-box flex align-items-center justify-content-center border-round-xl mb-3 overflow-hidden transition-all relative"
+            [class]="getBackgroundClass()"
+            style="min-height: 140px;"
+          >
+            
+
+            <div 
+              class="preview-text text-center select-all transition-all py-3 px-2"
+              [style.font-family]="font.family" 
+              [style.font-weight]="font.weight"
+              [style.font-size.px]="fontSize()"
+              style="word-break: break-word; line-height: 1.1; color: #1e293b; text-shadow: none;"
+            >
+              {{ name || 'Vista Previa' }}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    } @empty {
+      <div class="col-12 py-6 text-center">
+        <div class="flex flex-column align-items-center justify-content-center gap-2">
+          <mat-icon class="text-slate-300" style="font-size: 4rem; width:4rem; height:4rem;">search_off</mat-icon>
+          <h3 class="text-xl font-bold text-slate-700 m-0">No se encontraron fuentes</h3>
+          <p class="text-slate-500 m-0 text-sm">Prueba ajustando los filtros o borrando tu búsqueda actual.</p>
+          <button (click)="searchQuery.set(''); selectedCategory.set('Todos')" class="mt-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white border-none font-bold border-round-xl cursor-pointer shadow-1 transition-all">
+            Restablecer Filtros
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Detailed Inspector Modal / Dialog Overlay -->
+  @if (activeInspectFont(); as font) {
+    <div class="inspect-overlay fixed inset-0 z-100 flex align-items-center justify-content-center p-3 animate-fade-in">
+      <!-- Backdrop -->
+      <button type="button" class="backdrop absolute inset-0 bg-slate-900/60 backdrop-blur-sm border-none w-full h-full block cursor-pointer p-0" aria-label="Cerrar modal" (click)="closeInspect()"></button>
+      
+      <!-- Modal Content Card -->
+      <div class="inspect-modal bg-white border-round-3xl shadow-2xl relative w-full max-w-30rem md:max-w-40rem flex flex-column max-h-90vh overflow-hidden animate-slide-up z-101">
+        
+        <!-- Header -->
+        <div class="p-4 border-bottom-1 border-slate-100 flex justify-content-between align-items-center bg-slate-50">
+          <div>
+            <div class="flex align-items-center gap-2 mb-1">
+              <span class="text-xs font-bold px-2 py-1 bg-indigo-50 text-indigo-700 border-round uppercase">Ficha de Fuente</span>
+              <span class="text-xs text-slate-500 font-bold">• {{ font.category }}</span>
+            </div>
+            <h2 class="text-2xl font-black text-slate-800 m-0">{{ font.name }}</h2>
+          </div>
+          <button (click)="closeInspect()" class="p-2 border-none bg-slate-200 hover:bg-slate-300 text-slate-600 border-round-full cursor-pointer flex align-items-center transition-all">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <!-- Scrollable details body -->
+        <div class="modal-body p-4 overflow-y-auto flex-1 flex flex-column gap-4">
+          <!-- Big Name Custom Preview -->
+          <div class="flex flex-column gap-2">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tu nombre personalizado</span>
+            <div class="p-4 border-round-2xl flex align-items-center justify-content-center border-1 border-slate-200 min-h-120px" [class]="getBackgroundClass()">
+              <div 
+                [style.font-family]="font.family" 
+                [style.font-weight]="font.weight"
+                style="font-size: 4rem; text-align: center; word-break: break-word; line-height: 1.1; color: #1e293b; text-shadow: none;"
+              >
+                {{ name || 'Vista Previa' }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Complete Alphabet & Character inspection -->
+          <div class="flex flex-column gap-2">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Letras Mayúsculas (A - Z)</span>
+            <div class="p-3 bg-slate-50 border-round-xl border-1 border-slate-100 text-slate-800 text-center select-all" [style.font-family]="font.family" [style.font-weight]="font.weight" style="font-size: 2rem; letter-spacing: 0.15em; word-break: break-all;">
+              A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z
+            </div>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Letras Minúsculas (a - z)</span>
+            <div class="p-3 bg-slate-50 border-round-xl border-1 border-slate-100 text-slate-800 text-center select-all" [style.font-family]="font.family" [style.font-weight]="font.weight" style="font-size: 1.8rem; letter-spacing: 0.12em; word-break: break-all;">
+              a b c d e f g h i j k l m n ñ o p q r s t u v w x y z
+            </div>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Números (0 - 9)</span>
+            <div class="p-3 bg-slate-50 border-round-xl border-1 border-slate-100 text-slate-800 text-center select-all" [style.font-family]="font.family" [style.font-weight]="font.weight" style="font-size: 1.8rem; letter-spacing: 0.15em;">
+              0 1 2 3 4 5 6 7 8 9
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="p-4 border-top-1 border-slate-100 flex gap-2 justify-content-end bg-slate-50">
+          <button (click)="closeInspect()" class="px-4 py-2 border-1 border-slate-300 text-slate-700 bg-white font-bold border-round-xl cursor-pointer hover:bg-slate-50 transition-all text-sm">
+            Cerrar Ficha
+          </button>
+          <button 
+            (click)="downloadImage(font.family, font.name, font.weight); closeInspect()" 
+            class="px-4 py-2 border-none bg-indigo-600 hover:bg-indigo-700 text-white font-bold border-round-xl cursor-pointer shadow-sm transition-all text-sm flex align-items-center gap-1"
+          >
+            <mat-icon style="font-size:1.1rem; width:1.1rem; height:1.1rem;">download</mat-icon> Descargar PNG
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>

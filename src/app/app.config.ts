@@ -1,48 +1,22 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http'; 
-import { providePrimeNG } from 'primeng/config';
-import { definePreset } from '@primeng/themes';
-import Lara from '@primeng/themes/lara';
-import { MessageService } from 'primeng/api';
-import { routes } from './app.routes';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+  LOCALE_ID,
+} from '@angular/core';
+import {provideRouter} from '@angular/router';
+import {provideHttpClient} from '@angular/common/http';
+import {provideClientHydration, withEventReplay} from '@angular/platform-browser';
 
-// Crear un preset personalizado basado en Lara
-const myCustomTheme = definePreset(Lara, {
-  semantic: {
-    primary: {
-      50: '#eff6ff',
-      100: '#dbeafe',
-      200: '#bfdbfe',
-      300: '#93c5fd',
-      400: '#60a5fa',
-      500: '#3b82f6',
-      600: '#2563eb',
-      700: '#1d4ed8',
-      800: '#1e40af',
-      900: '#1e3a8a'
-    }
-  }
-});
+import {routes} from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideZonelessChangeDetection(),
+    provideBrowserGlobalErrorListeners(), 
     provideRouter(routes),
-    provideAnimations(),
     provideHttpClient(),
-    providePrimeNG({
-      theme: {
-        preset: myCustomTheme,
-        options: {
-          darkModeSelector: '.dark-theme',
-          cssLayer: {
-            name: 'primeng',
-            order: 'theme, primeng'
-          }
-        }
-      }
-    }),
-    MessageService
-  ]
+    provideClientHydration(withEventReplay()),
+    { provide: LOCALE_ID, useValue: 'es-ES' }
+  ],
 };

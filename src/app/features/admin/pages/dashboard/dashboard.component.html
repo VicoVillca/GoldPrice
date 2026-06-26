@@ -1,0 +1,67 @@
+<div class="dashboard-content">
+  <div class="welcome-header">
+    <h1>Panel de Control</h1>
+    <p>Bienvenido, Vico Villca. Aquí tienes el resumen del mercado hoy.</p>
+  </div>
+
+  <div class="stats-grid">
+    <p-card styleClass="stat-card gold">
+      <div class="stat-content">
+        <div class="stat-info">
+          <span class="label">Precio Onza (USD)</span>
+          <h2 class="value">{{ goldService.goldPriceOnza() | number:'1.2-2' }}</h2>
+        </div>
+        <div class="stat-icon">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card styleClass="stat-card local">
+      <div class="stat-content">
+        <div class="stat-info">
+          <span class="label">Precio Gramo (BOB)</span>
+          <h2 class="value">{{ (goldService.goldPriceOnza() / 31.1035 * goldService.exchangeRate()) | number:'1.2-2' }}</h2>
+        </div>
+        <div class="stat-icon">
+          <mat-icon>payments</mat-icon>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card styleClass="stat-card rate">
+      <div class="stat-content">
+        <div class="stat-info">
+          <span class="label">Tipo de Cambio</span>
+          @if (isEditingRate()) {
+            <div class="edit-rate-form">
+              <p-inputNumber [(ngModel)]="tempRate" [minFractionDigits]="2" [maxFractionDigits]="4" class="w-full"></p-inputNumber>
+              <div class="actions">
+                <button pButton icon="pi pi-check" class="p-button-rounded p-button-text p-button-sm" (click)="saveRate()" aria-label="Guardar"></button>
+                <button pButton icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger p-button-sm" (click)="toggleEditRate()" aria-label="Cancelar"></button>
+              </div>
+            </div>
+          } @else {
+            <h2 class="value">{{ goldService.exchangeRate() }} BOB</h2>
+          }
+        </div>
+        <div class="stat-icon clickable" (click)="toggleEditRate()" (keyup.enter)="toggleEditRate()" tabindex="0" role="button" [attr.aria-label]="isEditingRate() ? 'Dejar de editar' : 'Editar tipo de cambio'">
+          <mat-icon>{{ isEditingRate() ? 'edit_off' : 'edit' }}</mat-icon>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <div class="chart-section">
+    <p-card header="Historial de Precios (Sesión)">
+      <div #chartContainer class="chart-container">
+        @if (goldService.priceHistory().length < 2) {
+          <div class="no-data">
+            <mat-icon>query_stats</mat-icon>
+            <p>Esperando más datos para generar el gráfico...</p>
+          </div>
+        }
+      </div>
+    </p-card>
+  </div>
+</div>

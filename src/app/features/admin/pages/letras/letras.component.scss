@@ -1,0 +1,323 @@
+.letras-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+// Background Preview Classes
+.bg-preview-grid {
+  background-color: #f1f5f9;
+  background-image: 
+    linear-gradient(45deg, #e2e8f0 25%, transparent 25%), 
+    linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #e2e8f0 75%), 
+    linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+  border: 1px solid #e2e8f0;
+}
+
+.bg-preview-dark {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.bg-preview-light {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+// Material Gradients - Static sharp soft dark text
+.material-silver, .material-gold, .material-rosegold, .material-dark {
+  color: #1e293b !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+  filter: none !important;
+}
+
+// Preset Chips
+.preset-chip {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.preset-active {
+  background-color: #6366f1 !important;
+  color: #ffffff !important;
+  border-color: #6366f1 !important;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+// Material Custom Selection Dot / Color circles
+.dot-silver, .dot-gold, .dot-rosegold, .dot-dark {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.dot-silver { background: linear-gradient(135deg, #ffffff, #cbd5e1); }
+.dot-gold { background: linear-gradient(135deg, #ffe066, #f59e0b); }
+.dot-rosegold { background: linear-gradient(135deg, #ffe4e6, #fb7185); }
+.dot-dark { background: linear-gradient(135deg, #475569, #0f172a); }
+
+.mat-select-btn {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #334155;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+  }
+}
+
+.active-silver {
+  border-color: #64748b !important;
+  background-color: #f8fafc !important;
+  box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.15);
+  font-weight: 700 !important;
+}
+
+.active-gold {
+  border-color: #fbbf24 !important;
+  background-color: #fffbeb !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+  font-weight: 700 !important;
+}
+
+.active-rosegold {
+  border-color: #fb7185 !important;
+  background-color: #fff1f2 !important;
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.2);
+  font-weight: 700 !important;
+}
+
+.active-dark {
+  border-color: #1e293b !important;
+  background-color: #f1f5f9 !important;
+  box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.15);
+  font-weight: 700 !important;
+}
+
+// Background selector buttons
+.bg-btn-active {
+  background-color: #6366f1 !important;
+  color: #ffffff !important;
+  border-color: #6366f1 !important;
+}
+
+// Filter Section
+.filter-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.filter-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 99px;
+}
+
+.header-banner {
+  background-color: var(--bg-card) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border);
+  box-shadow: var(--box-shadow);
+  h1 {
+    color: var(--text-main) !important;
+  }
+  p {
+    color: var(--text-muted) !important;
+  }
+}
+
+.playground-card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-main) !important;
+  box-shadow: var(--box-shadow);
+  h3 {
+    color: var(--text-main) !important;
+  }
+  p, span {
+    color: var(--text-muted) !important;
+  }
+}
+
+.playground-input {
+  background-color: var(--bg-main) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-main) !important;
+  &::placeholder {
+    color: var(--text-muted) !important;
+  }
+}
+
+.filters-panel {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--box-shadow);
+}
+
+.search-input {
+  background-color: var(--bg-main) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-main) !important;
+  &::placeholder {
+    color: var(--text-muted) !important;
+  }
+}
+
+.category-chip {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.chip-active {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.chip-inactive {
+  background-color: var(--bg-main) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border) !important;
+  &:hover {
+    background-color: var(--sidebar-active) !important;
+    color: var(--text-main) !important;
+  }
+}
+
+.icon-btn-secondary {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-main) !important;
+  &:hover {
+    background-color: var(--bg-main) !important;
+  }
+}
+
+// Modern Cards
+.font-m3-card {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  .text-slate-800 {
+    color: var(--text-main) !important;
+  }
+  .text-slate-400 {
+    color: var(--text-muted) !important;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow);
+    border-color: var(--primary) !important;
+  }
+}
+
+// Favorites heart button
+.heart-btn {
+  color: #94a3b8;
+  
+  &:hover {
+    background-color: #fce7f3;
+    color: #ec4899;
+    transform: scale(1.1);
+  }
+}
+
+.is-fav {
+  color: #db2777 !important;
+  animation: heartPulse 0.3s linear;
+}
+
+@keyframes heartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+// Buttons in M3 style
+.download-btn {
+  background-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.15);
+  
+  &:hover {
+    background-color: #4338ca;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+    transform: translateY(-1px);
+  }
+}
+
+.copied-btn-state {
+  background-color: #ecfdf5 !important;
+  border-color: #10b981 !important;
+  color: #059669 !important;
+}
+
+// Watermark label
+.font-watermark {
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  font-family: var(--font-sans) !important;
+}
+
+// Overlay animations & styling
+.inspect-overlay {
+  background-color: rgba(15, 23, 42, 0.4);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+// Custom input box focus ring
+.playground-input:focus {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+// PrimeNG overrides to look clean and modern
+::ng-deep {
+  .custom-slider {
+    .p-slider-range {
+      background: #6366f1 !important;
+    }
+    .p-slider-handle {
+      background: #6366f1 !important;
+      border: 2px solid #ffffff !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+      width: 18px !important;
+      height: 18px !important;
+      border-radius: 50% !important;
+      margin-top: -6px !important;
+      
+      &:hover {
+        background: #4f51d8 !important;
+        transform: scale(1.15);
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "Calculadora de Precios de Oro",
+  "description": "Calculadora en tiempo real de precios de oro por gramo según ley y quilates, con soporte para tipo de cambio USD/BOB.",
+  "requestFramePermissions": []
+}

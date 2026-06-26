@@ -1,0 +1,123 @@
+.dashboard-content {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-header {
+  margin-bottom: 32px;
+}
+
+.welcome-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.welcome-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-info .label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.stat-info .value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.gold .stat-icon { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+.local .stat-icon { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.rate .stat-icon { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+
+.clickable {
+  cursor: pointer;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.8; }
+}
+
+.edit-rate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+}
+
+.chart-section {
+  margin-top: 32px;
+}
+
+.chart-container {
+  height: 350px;
+  width: 100%;
+  position: relative;
+}
+
+.no-data {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.no-data mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+}

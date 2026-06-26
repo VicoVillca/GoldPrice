@@ -1,0 +1,41 @@
+<div class="login-container">
+  <div class="blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div #loginCard class="login-card">
+    <div class="login-header">
+      <div class="flex justify-content-center mb-2 md:mb-3">
+        <img src="logo.png" alt="Logo" class="login-logo" referrerpolicy="no-referrer" />
+      </div>
+      <h1>Login GoldPrice</h1>
+    </div>
+
+    <div class="login-body flex flex-column align-items-center justify-content-center">
+      @if (isLoading()) {
+        <div class="flex flex-column align-items-center justify-content-center py-4">
+          <div class="loading-spinner mb-3"></div>
+          <p class="m-0 text-sm font-semibold loading-text">Verificando acceso...</p>
+        </div>
+      } @else {
+        <div class="flex flex-column align-items-center justify-content-center gap-3 w-full">
+          <!-- Google Sign-In Button Container -->
+          <div id="google-btn" class="google-btn-container flex justify-content-center w-full" style="min-height: 44px;"></div>
+        </div>
+      }
+
+      @if (error()) {
+        <div class="error-message mt-4">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ error() }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="login-footer">
+      <p>&#64; 2026 - vicovillca</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<aside class="sidebar" [class.open]="layout.isMobileOpen()" [class.collapsed]="layout.isCollapsed()">
+  <div class="sidebar-header flex align-items-center justify-content-center relative">
+    <!-- Close button for mobile -->
+    <button class="close-sidebar-btn" (click)="closeSidebar()" aria-label="Cerrar menú">
+      <mat-icon>close</mat-icon>
+    </button>
+    
+    <img 
+      src="logo.png" 
+      alt="Logo" 
+      [style.height.px]="layout.isCollapsed() ? 50 : 144" 
+      style="max-width: 90%; width: auto; object-fit: contain; transition: height 0.3s ease;" 
+      referrerpolicy="no-referrer" 
+    />
+  </div>
+  
+  <nav class="sidebar-menu">
+    <a routerLink="/dashboard" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>dashboard</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Dashboard</span>
+    </a>
+    <a routerLink="/joyas" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>diamond</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Oro en Joyas</span>
+    </a>
+    <a routerLink="/ley" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>gavel</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Oro por Ley</span>
+    </a>
+    <a routerLink="/letras" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>text_fields</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Modelos de Letras</span>
+    </a>
+    <a routerLink="/mapa-oro" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>location_on</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Ley por Lugar</span>
+    </a>
+    <a routerLink="/usuario" routerLinkActive="active" class="menu-item" (click)="closeSidebar()">
+      <mat-icon>account_circle</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Mi Perfil</span>
+    </a>
+  </nav>
+  
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="auth.logout()" [title]="'Cerrar Sesión'">
+      <mat-icon>logout</mat-icon>
+      <span [class.hidden]="layout.isCollapsed()">Cerrar Sesión</span>
+    </button>
+  </div>
+</aside>

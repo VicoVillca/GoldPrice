@@ -1,401 +1,609 @@
-/* ===== TEMA VERDE NATURALEZA (AMIGABLE) ===== */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+@import "leaflet/dist/leaflet.css";
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Cream Cake Bold';
+  src: url('../public/assets/fonts/Cream Cake Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Script MT Bold';
+  src: url('../public/assets/fonts/2.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Original Taste';
+  src: url('../public/assets/fonts/1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Alexandra';
+  src: url('../public/assets/fonts/Alexandra Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ananda Black';
+  src: url('../public/assets/fonts/Ananda Black Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Antonellie';
+  src: url('../public/assets/fonts/Antonellie Callygraphy Demo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Awesome Season';
+  src: url('../public/assets/fonts/Awesome Season Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Best Valentina';
+  src: url('../public/assets/fonts/Best Valentina TTF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Billion Dreams';
+  src: url('../public/assets/fonts/BillionDreams_PERSONAL.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Breeze';
+  src: url('../public/assets/fonts/Breeze Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Calling Heart';
+  src: url('../public/assets/fonts/Calling Heart.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Campana Script';
+  src: url('../public/assets/fonts/CampanaScript_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Caranda';
+  src: url('../public/assets/fonts/Caranda Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Catalish Huntera';
+  src: url('../public/assets/fonts/Catalish Huntera Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Dalgona';
+  src: url('../public/assets/fonts/Dalgona.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dirtylane';
+  src: url('../public/assets/fonts/Dirtylane (Demo_Font).otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dream Flourish';
+  src: url('../public/assets/fonts/DreamFlourish.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Golden Hills';
+  src: url('../public/assets/fonts/GoldenHillsDEMO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hello Valentina';
+  src: url('../public/assets/fonts/Hello Valentina.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hestina';
+  src: url('../public/assets/fonts/Hestina Font by Keithzo (7NTypes).otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Matisan Script';
+  src: url('../public/assets/fonts/MatisanScript_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Michland Script';
+  src: url('../public/assets/fonts/Michland Script.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nature Beauty';
+  src: url('../public/assets/fonts/Nature Beauty Personal Use.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Picturama Founder';
+  src: url('../public/assets/fonts/PicturamaFounder_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Ramadhan Mubarak';
+  src: url('../public/assets/fonts/Ramadhan Mubarak.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rightland';
+  src: url('../public/assets/fonts/Rightland.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Shine in Valentine';
+  src: url('../public/assets/fonts/Shine in Valentine.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Signatra';
+  src: url('../public/assets/fonts/Signatra.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Simple Thread';
+  src: url('../public/assets/fonts/SimpleThread_PERSONAL_USE_ONLY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'The Blacklist';
+  src: url('../public/assets/fonts/The Blacklist.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'White Smith';
+  src: url('../public/assets/fonts/White Smith.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bernadette';
+  src: url('../public/assets/fonts/bernadette.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
-  /* Colores primarios - Verdes naturales y frescos */
-  --primary-50: #f0f9f1;
-  --primary-100: #d4f1d9;
-  --primary-200: #b3e8bd;
-  --primary-300: #8fde9f;
-  --primary-400: #72d689;
-  --primary-500: #56ce73;    /* Verde principal más vibrante */
-  --primary-600: #4bb967;
-  --primary-700: #3fa259;
-  --primary-800: #339b4b;
-  --primary-900: #1e8a37;
-  
-  /* Colores acento (azul cielo para contraste amigable) */
-  --accent-500: #42a5f5;
-  --accent-700: #1976d2;
-  
-  /* Colores neutros suaves */
-  --surface-ground: #f8fafc;
-  --surface-card: #ffffff;
-  --surface-border: #e2e8f0;
-  --surface-hover: #f1f5f9;
-  
-  /* Texto - más suaves */
-  --text-color: #334155;
-  --text-color-secondary: #64748b;
-  --text-color-disabled: #94a3b8;
-  
-  /* Estado con nombres amigables */
-  --success-500: #10b981;
-  --info-500: #3b82f6;
-  --warning-500: #f59e0b;
-  --danger-500: #ef4444;
-  
-  /* Sombras suaves */
-  --shadow-1: 0 2px 12px rgba(0, 0, 0, 0.05);
-  --shadow-2: 0 6px 20px rgba(0, 0, 0, 0.08);
-  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.12);
-}
-
-/* ===== TEMA CLARO (Light Mode) ===== */
-.light-theme {
-  /* Superficies con tonos cálidos */
-  --surface-ground: #f8fafc;
-  --surface-card: #ffffff;
-  --surface-border: #e2e8f0;
-  --surface-hover: #f1f5f9;
-  
-  /* Texto */
-  --text-color: #334155;
-  --text-color-secondary: #64748b;
-  
-  /* PrimeNG variables */
-  --p-primary-color: var(--primary-500);
-  --p-primary-color-dark: var(--primary-700);
-  --p-primary-color-light: var(--primary-300);
-  
-  --p-surface-ground: var(--surface-ground);
-  --p-surface-card: var(--surface-card);
-  --p-surface-border: var(--surface-border);
-  --p-surface-hover: var(--surface-hover);
-  
-  --p-text-color: var(--text-color);
-  --p-text-color-secondary: var(--text-color-secondary);
-  
-  /* Componentes específicos */
-  --p-button-primary-bg: var(--primary-500);
-  --p-button-primary-hover-bg: var(--primary-600);
-  --p-button-primary-active-bg: var(--primary-700);
-  
-  --p-highlight-bg: var(--primary-50);
-  --p-highlight-text-color: var(--primary-900);
-}
-
-/* ===== TEMA OSCURO (Dark Mode) ===== */
-.dark-theme {
-  /* Superficies - oscuro pero no demasiado */
-  --surface-ground: #0f172a;
-  --surface-card: #1e293b;
-  --surface-border: #334155;
-  --surface-hover: #2d3748;
-  
-  /* Texto */
-  --text-color: #e2e8f0;
-  --text-color-secondary: #94a3b8;
-  
-  /* Colores primarios más suaves para modo oscuro */
-  --primary-500: #56ce73;
-  --primary-600: #4bb967;
-  --primary-700: #3fa259;
-  
-  /* PrimeNG variables */
-  --p-primary-color: var(--primary-500);
-  --p-primary-color-dark: var(--primary-700);
-  --p-primary-color-light: var(--primary-300);
-  
-  --p-surface-ground: var(--surface-ground);
-  --p-surface-card: var(--surface-card);
-  --p-surface-border: var(--surface-border);
-  --p-surface-hover: var(--surface-hover);
-  
-  --p-text-color: var(--text-color);
-  --p-text-color-secondary: var(--text-color-secondary);
-  
-  /* Componentes específicos */
-  --p-button-primary-bg: var(--primary-500);
-  --p-button-primary-hover-bg: var(--primary-600);
-  --p-button-primary-active-bg: var(--primary-700);
-  
-  --p-highlight-bg: rgba(86, 206, 115, 0.16);
-  --p-highlight-text-color: var(--primary-300);
-}
-
-/* ===== ESTILOS BASE ===== */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--surface-ground);
-  color: var(--text-color);
-  transition: all 0.3s ease;
-  line-height: 1.6;
-}
-
-/* ===== COMPONENTES AMIGABLES ===== */
-
-/* Botones primarios - estilo moderno y amigable */
-.p-button-primary {
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-400));
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  letter-spacing: 0.2px;
-  font-size: 0.9rem;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(86, 206, 115, 0.25);
-  padding: 0.75rem 1.5rem;
-  
-  &:hover {
-    background: linear-gradient(135deg, var(--primary-600), var(--primary-500));
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(86, 206, 115, 0.35);
-  }
-  
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(86, 206, 115, 0.25);
-  }
-}
-
-/* Cards con bordes redondeados y sombras suaves */
-.p-card {
-  border-radius: 12px;
-  box-shadow: var(--shadow-1);
-  border: 1px solid var(--surface-border);
-  transition: all 0.3s ease;
-  overflow: hidden;
-  
-  &:hover {
-    box-shadow: var(--shadow-2);
-    transform: translateY(-3px);
-  }
-  
-  .p-card-title {
-    color: var(--text-color);
-    font-weight: 600;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    position: relative;
+    /* Light Theme Colors */
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --sidebar-bg-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.78) 100%), url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=500&auto=format&fit=crop');
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #0f172a;
+    --border: #e2e8f0;
+    --sidebar-active: #f1f5f9;
+    --sidebar-text: #475569;
+    --sidebar-text-active: #4f46e5;
     
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
-      border-radius: 2px;
-    }
-  }
+    --success: #10b981;
+    --danger: #ef4444;
+    --border-radius: 16px;
+    --box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+    --sidebar-width: 260px;
 }
 
-/* Sidebar con gradiente sutil */
-.p-sidebar {
-  background: linear-gradient(180deg, var(--surface-card), var(--surface-ground) 120%);
-  border-right: 1px solid var(--surface-border);
-  
-  .p-sidebar-header {
-    background: linear-gradient(135deg, var(--primary-600), var(--accent-500));
-    color: white;
-    padding: 1.5rem;
-    
-    h3 {
-      margin: 0;
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
-  }
+.dark {
+    /* Dark Theme Colors */
+    --bg-main: #18181b;
+    --bg-card: #27272a;
+    --bg-sidebar: #27272a;
+    --sidebar-bg-image: linear-gradient(to bottom, rgba(39, 39, 42, 0.98) 0%, rgba(39, 39, 42, 0.78) 100%), url('https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?q=80&w=500&auto=format&fit=crop');
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    --secondary: #f4f4f5;
+    --border: #3f3f46;
+    --sidebar-active: #3f3f46;
+    --sidebar-text: #a1a1aa;
+    --sidebar-text-active: #f4f4f5;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* Toolbar con estilo moderno */
-.p-toolbar {
-  background: var(--surface-card);
-  border-bottom: 1px solid var(--surface-border);
-  box-shadow: var(--shadow-1);
-  border-radius: 0 0 12px 12px;
-  
-  .p-toolbar-group-left h2 {
-    color: var(--primary-600);
-    font-weight: 600;
+* {
     margin: 0;
-    font-size: 1.5rem;
-  }
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Menús con transiciones suaves */
-.p-menu {
-  border: none;
-  background: transparent;
-  
-  .p-menuitem-link {
-    border-radius: 8px;
-    margin: 4px 0;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.5;
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Admin Layout Structure */
+.admin-layout {
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    background-image: var(--sidebar-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 100;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease, background-color 0.3s ease, background-image 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-header {
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h2 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-weight: 600;
     transition: all 0.2s ease;
-    
-    &:hover {
-      background-color: var(--surface-hover);
-      transform: translateX(4px);
-    }
-    
-    &.router-link-active {
-      background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
-      color: white;
-      
-      .p-menuitem-icon, .p-menuitem-text {
-        color: white;
-      }
-    }
-  }
+    cursor: pointer;
+    gap: 12px;
+    white-space: nowrap;
 }
 
-/* Inputs con estilo moderno */
-.p-inputtext {
-  border: 1px solid var(--surface-border);
-  border-radius: 8px;
-  transition: all 0.25s ease;
-  padding: 0.75rem 1rem;
-  
-  &:focus {
-    border-color: var(--primary-500);
-    box-shadow: 0 0 0 3px rgba(86, 206, 115, 0.1);
+.menu-item:hover {
+    background-color: var(--sidebar-active);
+    color: var(--sidebar-text-active);
+}
+
+.menu-item.active {
+    color: var(--sidebar-text-active);
+    border-right: 4px solid var(--primary);
+    background-color: var(--sidebar-active);
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+}
+
+/* Main Content Area */
+.main-wrapper {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    overflow: hidden;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Topbar */
+.topbar {
+    height: 70px;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    box-shadow: var(--box-shadow);
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Price Info in Topbar */
+.topbar-price-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg-main);
+    padding: 8px 15px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+}
+
+.price-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.price-value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    font-family: 'Courier New', monospace;
+}
+
+/* Content Area */
+.content-area {
+    padding: 30px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Cards */
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 25px;
+}
+
+.card-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+/* Tables in Admin Panel */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: var(--bg-main);
+    color: var(--text-muted);
+    text-align: left;
+    padding: 12px 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+tr:hover {
+    background-color: var(--bg-main);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--border);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-wrapper {
+        margin-left: 0;
+    }
+    
+    .mobile-toggle {
+        display: block;
+    }
+    
+    .topbar-price-info {
+        display: none; /* Hide in topbar on small screens, show elsewhere if needed */
+    }
+}
+
+@media (max-width: 640px) {
+    .content-area {
+        padding: 15px;
+    }
+    
+    .topbar {
+        padding: 0 15px;
+    }
+    
+    .card {
+        padding: 15px;
+    }
+}
+
+/* Utility Classes */
+.text-primary { color: var(--primary); }
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+.font-mono { font-family: 'Courier New', monospace; }
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(79, 70, 229, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Exchange Input in Topbar */
+.exchange-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-main);
+    padding: 4px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.exchange-box input {
+    background: transparent;
+    border: none;
+    width: 60px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-family: 'Courier New', monospace;
+    text-align: right;
+}
+
+.exchange-box input:focus {
     outline: none;
-  }
-  
-  &:hover {
-    border-color: var(--primary-300);
-  }
 }
 
-/* Badges redondeados */
-.p-badge {
-  border-radius: 12px;
-  font-weight: 500;
-  font-size: 0.75rem;
-  
-  &.p-badge-success {
-    background: var(--success-500);
-  }
-  
-  &.p-badge-info {
-    background: var(--info-500);
-  }
-  
-  &.p-badge-warning {
-    background: var(--warning-500);
-  }
-  
-  &.p-badge-danger {
-    background: var(--danger-500);
-  }
-}
-
-/* ===== TOQUES ESPECIALES ===== */
-
-/* Efecto de "card hover" mejorado */
-.hover-card {
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: var(--shadow-3) !important;
-  }
-}
-
-/* Botones con iconos */
-.btn-with-icon {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  
-  i {
-    font-size: 1.1rem;
-  }
-}
-
-/* Avatar circular */
-.avatar-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-}
-
-/* ===== UTILITARIOS MEJORADOS ===== */
-.w-full { width: 100% !important; }
-.h-full { height: 100% !important; }
-.mt-4 { margin-top: 1rem !important; }
-.mb-4 { margin-bottom: 1rem !important; }
-.p-4 { padding: 1rem !important; }
-.text-center { text-align: center !important; }
-.font-medium { font-weight: 500 !important; }
-.font-semibold { font-weight: 600 !important; }
-.rounded-lg { border-radius: 12px !important; }
-.rounded-full { border-radius: 9999px !important; }
-
-/* ===== SCROLL PERSONALIZADO SUAVE ===== */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--surface-ground);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-300);
-  border-radius: 4px;
-  transition: background 0.3s ease;
-  
-  &:hover {
-    background: var(--primary-500);
-  }
-}
-
-/* ===== ANIMACIONES SUAVES ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-.pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .p-card {
-    border-radius: 10px;
-    margin: 0.5rem;
-  }
-  
-  .p-button {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
-  }
-  
-  .p-toolbar {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-}
-
-/* Efecto de brillo sutil en elementos interactivos */
-.glow-on-hover:hover {
-  filter: drop-shadow(0 0 8px rgba(86, 206, 115, 0.3));
+.exchange-box span {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
 }

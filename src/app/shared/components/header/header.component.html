@@ -1,0 +1,25 @@
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="menu-btn" (click)="layout.toggleCollapse()" title="Colapsar menú">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <div class="app-brand flex align-items-center gap-2">
+      <img src="logo.png" alt="Logo" style="height: 28px; width: auto; object-fit: contain;" referrerpolicy="no-referrer" />
+      <span class="app-name hidden md:block">Gold Price</span>
+    </div>
+  </div>
+  
+  <div class="topbar-right">
+    <div class="p-button-sm p-button-raised price-summary-btn">{{(goldService.goldPriceOnza() | number:'1.0-0')}}USD</div>
+
+    <button class="icon-btn" (click)="goldService.fetchPrice()" [disabled]="goldService.isLoading()" title="Actualizar Precio">
+      <mat-icon [class.animate-spin]="goldService.isLoading()">refresh</mat-icon>
+    </button>
+    
+    <button class="icon-btn" (click)="goldService.toggleTheme()" [title]="goldService.isDarkMode() ? 'Modo Claro' : 'Modo Oscuro'">
+      <mat-icon>{{ goldService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+
+  </div>
+</header>
